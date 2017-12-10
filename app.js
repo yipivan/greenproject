@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const users = require('./routes/users');
+const recyclePoints = require('./routes/recycle-points');
 
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
@@ -52,6 +53,7 @@ app.get('/', (req, res) => {
 
 // use routes
 app.use('/users', users);
+app.use('/recycle-points', recyclePoints);
 
 const port = 5000;
 
