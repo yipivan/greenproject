@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       recycle_item_qty: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       recycle_times: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
