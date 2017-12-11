@@ -6,22 +6,18 @@ const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
 
 const app = express();
 
 const users = require('./routes/users');
 const recyclePoints = require('./routes/recycle-points');
 
-// Map global promise - get rid of warning
-mongoose.Promise = global.Promise;
-
-// Connect to mongoose
-mongoose.connect('mongodb://localhost/green-dev', {
-    useMongoClient: true
-})
-    .then(() => console.log('MongoDB Connected...'))
-    .catch(err => console.log(err));
+const connection = new Sequelize('greenProject', 'accelerate', 'password', {
+    host: '127.0.1.1',
+    dialect: 'postgres'
+}).then(() => console.log('SQL Connected...'))
+.catch(err => console.log(err));
 
 // Handlebars Middleware
 app.engine('handlebars', exphbs({
