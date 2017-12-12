@@ -5,22 +5,24 @@ const session = require('express-session');
 
 const path = require('path');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const mongoose = require('mongoose');
+
+const Sequelize = require('sequelize');
 
 const app = express();
+const passport = require('passport')
+require('./config/passport')(passport)
 
 const users = require('./routes/users');
 const recyclePoints = require('./routes/recycle-points');
 
-// Map global promise - get rid of warning
-mongoose.Promise = global.Promise;
-
-// Connect to mongoose
-mongoose.connect('mongodb://localhost/green-dev', {
-    useMongoClient: true
+const connection = new Sequelize('greenProject', 'chaziu', 'zxc123', {
+    host: '127.0.1.1',
+    dialect: 'postgres'
 })
-    .then(() => console.log('MongoDB Connected...'))
+
+connection
+    .authenticate()
+    .then(() => console.log('SQL Connected...'))
     .catch(err => console.log(err));
 
 // Handlebars Middleware
@@ -43,12 +45,30 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // display message
 app.use(flash());
 
 // index route
 app.get('/', (req, res) => {
     res.render('index');
+});
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname,'/login.html'));
+});
+
+app.get('/auth/facebook',
+passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+passport.authenticate('facebook', { failureRedirect: '/login' }),
+function(req, res) {
+  // Successful authentication, redirect home.
+  res.redirect(req.session.returnTo || '/');
+  delete req.session.returnTo;
 });
 
 // use routes
@@ -60,3 +80,5 @@ const port = 5000;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
+
+
