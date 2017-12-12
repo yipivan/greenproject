@@ -128,6 +128,7 @@ p {
 div[id*="errorBox"] {
   color:#F00;
   font-weight: 700;
+  margin-bottom: 10px;
 }
 
 #successmsg {
