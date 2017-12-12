@@ -122,6 +122,19 @@ p {
   margin-top: 10px;
 }
 
+/* Validation Messages  */
+
+/* apply to any id with "errorBox" */
+div[id*="errorBox"] {
+  color:#F00;
+  font-weight: 700;
+}
+
+#successmsg {
+  color:blue;
+  font-weight: 700;
+}
+
 
 
 
