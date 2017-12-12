@@ -1,6 +1,7 @@
 const FacebookStrategy = require("passport-facebook").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
-const User = require("../models/user");
+const sequelize = require('sequelize')
+const User = require("../models").user;
 require("dotenv").config();
 
 module.exports = passport => {
@@ -12,9 +13,9 @@ module.exports = passport => {
         callbackURL: "http://localhost:5000/auth/facebook/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
-        User.findOrCreate({ emailOrId: profile.id }, function(err, user) {
-          return cb(err, user);
-        });
+        User.findOrCreate({ where: {emailOrId: profile.id}, defaults:{password:"",firstName: profile.displayName}})
+        .spread((user,created) =>{return cb(null, user)})
+        .catch((err)=>{return cb(err)})
       }
     )
   );

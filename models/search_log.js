@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     location_lng: DataTypes.DECIMAL(9,6)
   });
   search_log.associate =  function(models) {
-    search_log.belongsTo(models.user);    
+    search_log.belongsTo(models.user);  
   }
   return search_log;
 };

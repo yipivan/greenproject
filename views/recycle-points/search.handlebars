@@ -1,18 +1,19 @@
 <div class="container">
     <div id="map"></div>
-    <h2 id="text-center">Enter Location: </h2>
-    <form id="location-form">
-        <input type="text" id="location-input" class="form-control form-control-lg">
-        <br>
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
-    </form>
-    <div class="card-body" id="formatted-address"></div>
-    <div class="card-body" id="address-components"></div>
-    <div class="card-body" id="geometry"></div>
+    
+    {{!-- <h2 id="text-center">Enter Location: </h2> --}}
+    <br>
+    <button id="showloc" class="btn btn-default btn-block">Show nearby recycling points</button>
+    <br>
+    <div class="input-group" id="searchloc">
+      <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">Go!</button>
+      </span>
+    </div>
 </div>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/map.js"></script>
-<script src="/js/search.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAukIcOBd5XzTyDZBhDhSOOFHqONrH_vzk&callback=initMap" async
     defer></script>

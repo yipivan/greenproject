@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     recycle_times: DataTypes.INTEGER
   });
   usage_log.associate = function(models) {
-    user_log.belongsTo(models.user);    
+    usage_log.belongsTo(models.user);    
 }
   return usage_log;
 };
