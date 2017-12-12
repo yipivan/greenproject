@@ -1,6 +1,8 @@
+var addresses = [];
 var markers = [];
 var map;
 var currentLocation;
+
 function initMap() {
 
     getPosition().then(position => {
@@ -16,7 +18,7 @@ function initMap() {
 
         //attach event listener to search button
         let searchBtn = document.getElementById('searchloc').getElementsByTagName('button')[0];
-        searchBtn.addEventListener('click', getDirection);
+        searchBtn.addEventListener('click', getLocations);
 
         //initiailize the google map and place marker on user location
         map = new google.maps.Map(document.getElementById('map'), {
@@ -27,9 +29,11 @@ function initMap() {
             position: currentLocation,
             map: map,
             title: 'Im here!',
+            draggable: true,
             animation: google.maps.Animation.DROP,
             icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
         });
+        console.log(originMarker);
     }).catch(err => {
         console.log(err);
     })
@@ -44,25 +48,7 @@ function getNearbyRecyclingPoints() {
             max: 10
         }
     }).then(response => {
-        let latlngs = [];
-        for (address of response.data.results) {
-            latlngs.push({
-                lat: address["lat-long"][0],
-                lng: address["lat-long"][1]
-            })
-        }
-        clearMarkers();
-        markers = [];
-        for (latlng of latlngs) {
-            let marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                title: 'recycling points',
-                animation: google.maps.Animation.DROP
-            });
-            markers.push(marker);
-        }
-        adjustBounds();
+        createMarkerAndInfoWindows(response);
     }).catch(err => {
         console.log(err);
     });
@@ -87,7 +73,7 @@ function getPosition() {
 };
 
 //handle user query
-function getDirection() {
+function getLocations() {
     console.log('click');
     var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
     console.log(searchQuery);
@@ -97,7 +83,6 @@ function getDirection() {
             key: 'AIzaSyAukIcOBd5XzTyDZBhDhSOOFHqONrH_vzk',
         }
     }).then(response => {
-        console.log(response);
         var lat = response.data.results[0].geometry.location.lat;
         var lng = response.data.results[0].geometry.location.lng;
         axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points', {
@@ -107,32 +92,13 @@ function getDirection() {
                 max: 10
             }
         }).then(response => {
-            let latlngs = [];
-            for (address of response.data.results) {
-                latlngs.push({
-                    lat: address["lat-long"][0],
-                    lng: address["lat-long"][1]
-                })
-            }
-            clearMarkers();
-            markers = [];
-            for (latlng of latlngs) {
-                let marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    title: 'recycling points',
-                    animation: google.maps.Animation.DROP
-                });
-                markers.push(marker);
-            }
-            adjustBounds();
+            createMarkerAndInfoWindows(response);
         }).catch(err => {
             console.log(err);
         });
+    }).catch(err => {
+        console.log(err);
     })
-        .catch(err => {
-            console.log(err);
-        })
 }
 
 // hiding the markers
@@ -140,4 +106,47 @@ function clearMarkers() {
     for (marker of markers) {
         marker.setMap(null);
     }
+}
+
+//create markers and infowindows
+function createMarkerAndInfoWindows(response) {
+    console.log(response);
+    addresses = [];
+    for (address of response.data.results) {
+        let wasteTypes = address["waste-type"].split(",");
+        address.wasteTypes = wasteTypes;
+        addresses.push(address);
+    }
+    console.log(addresses);
+    clearMarkers();
+    markers = [];
+    for (address of addresses) {
+        let marker = new google.maps.Marker({
+            position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
+            map: map,
+            title: 'recycling points',
+            animation: google.maps.Animation.DROP
+        });
+        createInfoWindow(marker, address);
+        markers.push(marker);
+    }
+    adjustBounds();
+}
+
+//create infowindow helper
+function createInfoWindow(marker, address) {
+
+    let contentString = `Address :${address["address1-en"]} <br>
+                        Recycling Type: ${address["waste-type"]}`;
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+    marker.addListener('click', () => {
+        infowindow.open(map, marker);
+    })
+}
+
+//get direction
+function getDirection(origin, destination) {
+
 }
