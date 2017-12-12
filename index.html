@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-    
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -8,28 +8,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Landing Page</title>
   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
 
 </head>
 
 <body>
   <header>
 
-      <nav class="navbar">
-          <div class="container-fluid navbar-right">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#">Recycle HK</a>
-              <!-- <button class="btn btn-primary navbar-btn">Login</button> -->
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                
-            </ul>
-          </div>
-        </nav>
+    <nav class="navbar">
+      <div class="container-fluid navbar-right">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Recycle HK</a>
+          <!-- <button class="btn btn-primary navbar-btn">Login</button> -->
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+        </ul>
+      </div>
+    </nav>
 
   </header>
 
@@ -54,22 +56,20 @@
           <button id="resultlist">Show 5 recyclable locations</button>
 
           <div id="list"></div>
-          
+
           <script id="template" type="text/x-handlebars-template">
             {{#each results}}
-              <p><br>This Recyclable point is located in {{district}} district<br>
-              and is located in {{address1-en}}<br>
-              and the address in Chinese is {{address1-zh-hant}}<br>
-              and recyclable/accepted waste-type is {{waste-type}} <br>
-              Latitude and Longitude for Google Map are {{lat-long}}<br><br></p> 
+            <p><br>This Recyclable point is located in {{district}} district<br> and is located in {{address1-en}}<br> and the
+              address in Chinese is {{address1-zh-hant}}<br> and recyclable/accepted waste-type is {{waste-type}} <br> Latitude
+              and Longitude for Google Map are {{lat-long}}<br><br></p>
             {{/each}}
           </script>
-          
+
 
         </div>
         <div id="type" class="tab-pane">
-            <p>Search Box for Type preferred location - get the user to type the preferred search location<br>
-            Use Geocoding service to convert address into geographical coordinates of long and lat</p>
+          <p>Search Box for Type preferred location - get the user to type the preferred search location<br> Use Geocoding service
+            to convert address into geographical coordinates of long and lat</p>
         </div>
         <div id="district" class="tab-pane">
           <p>Search List/Pulldown for chosen district</p>
@@ -80,14 +80,13 @@
     </div>
   </section>
 
-  <!-- Optional JavaScript -->
   <!-- jQuery first, then Bootstrap JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- handlebar MUST BE before the custom JS file -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <script src="public/js/main.js"></script>
-  </body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
 
 </html>
