@@ -15,15 +15,15 @@ require('./config/passport')(passport)
 const users = require('./routes/users');
 const recyclePoints = require('./routes/recycle-points');
 
-const connection = new Sequelize('greenProject', 'chaziu', 'zxc123', {
-    host: '127.0.1.1',
-    dialect: 'postgres'
-})
+// const connection = new Sequelize('greenProject', 'chaziu', 'zxc123', {
+//     host: '127.0.1.1',
+//     dialect: 'postgres'
+// })
 
-connection
-    .authenticate()
-    .then(() => console.log('SQL Connected...'))
-    .catch(err => console.log(err));
+// connection
+//     .authenticate()
+//     .then(() => console.log('SQL Connected...'))
+//     .catch(err => console.log(err));
 
 // Handlebars Middleware
 app.engine('handlebars', exphbs({

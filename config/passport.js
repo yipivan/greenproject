@@ -1,6 +1,6 @@
 const FacebookStrategy = require("passport-facebook").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
-const sequelize = require('sequelize')
+const sequelize = require('sequelize');
 const User = require("../models").user;
 require("dotenv").config();
 
@@ -14,7 +14,9 @@ module.exports = passport => {
       },
       function(accessToken, refreshToken, profile, cb) {
         User.findOrCreate({ where: {emailOrId: profile.id}, defaults:{password:"",firstName: profile.displayName}})
-        .spread((user,created) =>{return cb(null, user)})
+        .spread((user,created) =>{
+          console.log(user)
+          return cb(null, user)})
         .catch((err)=>{return cb(err)})
       }
     )
