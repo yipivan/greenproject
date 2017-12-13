@@ -1,0 +1,15 @@
+#map {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#current,
+#search {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.input-group-btn {
+    vertical-align: bottom;
+}
