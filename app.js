@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
@@ -15,8 +16,8 @@ require('./config/passport')(passport)
 const users = require('./routes/users');
 const recyclePoints = require('./routes/recycle-points');
 
-const connection = new Sequelize('greenProject', 'chaziu', 'zxc123', {
-    host: '127.0.1.1',
+const connection = new Sequelize('ellqmtpo', 'ellqmtpo', 'v7RYEcj5f1GIvXKMpxDUxoVzPldXYmB4', {
+    host: 'baasu.db.elephantsql.com',
     dialect: 'postgres'
 })
 
