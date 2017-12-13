@@ -3,6 +3,7 @@ var addresses = [];
 var markers = [];
 var origin;
 var destination;
+var directionsDisplay;
 
 function initMap() {
     
@@ -152,7 +153,10 @@ function getDirection() {
         travelMode: "WALKING"
     }, (response, status) => {
         if (status === "OK") {
-            var directionsDisplay = new google.maps.DirectionsRenderer({
+            if (directionsDisplay) {
+                directionsDisplay.setMap(null);
+            }
+            directionsDisplay = new google.maps.DirectionsRenderer({
                 map: map,
                 directions: response,
                 draggable: true,
