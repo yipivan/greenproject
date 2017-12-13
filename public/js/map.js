@@ -1,16 +1,15 @@
+var map;
 var addresses = [];
 var markers = [];
-var map;
-var currentLocation;
+var origin;
+var destination;
+var directionsDisplay;
 
 function initMap() {
-
+    
     getPosition().then(position => {
         //first to run to set current location
-        currentLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
+        origin = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
 
         //attach event listener to show location button
         let showLocBtn = document.getElementById('showloc');
@@ -22,18 +21,17 @@ function initMap() {
 
         //initiailize the google map and place marker on user location
         map = new google.maps.Map(document.getElementById('map'), {
-            center: currentLocation,
+            center: origin,
             zoom: 15
         });
         let originMarker = new google.maps.Marker({
-            position: currentLocation,
+            position: origin,
             map: map,
             title: 'Im here!',
             draggable: true,
             animation: google.maps.Animation.DROP,
             icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
         });
-        console.log(originMarker);
     }).catch(err => {
         console.log(err);
     })
@@ -43,8 +41,8 @@ function initMap() {
 function getNearbyRecyclingPoints() {
     axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points', {
         params: {
-            lat: currentLocation.lat,
-            long: currentLocation.lng,
+            lat: origin.lat(),
+            long: origin.lng(),
             max: 10
         }
     }).then(response => {
@@ -74,9 +72,7 @@ function getPosition() {
 
 //handle user query
 function getLocations() {
-    console.log('click');
     var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
-    console.log(searchQuery);
     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
             address: searchQuery,
@@ -101,7 +97,7 @@ function getLocations() {
     })
 }
 
-// hiding the markers
+// clearing the markers
 function clearMarkers() {
     for (marker of markers) {
         marker.setMap(null);
@@ -110,21 +106,19 @@ function clearMarkers() {
 
 //create markers and infowindows
 function createMarkerAndInfoWindows(response) {
-    console.log(response);
     addresses = [];
     for (address of response.data.results) {
         let wasteTypes = address["waste-type"].split(",");
         address.wasteTypes = wasteTypes;
         addresses.push(address);
     }
-    console.log(addresses);
     clearMarkers();
     markers = [];
     for (address of addresses) {
         let marker = new google.maps.Marker({
             position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
             map: map,
-            title: 'recycling points',
+            title: address["address1-zh-hant"],
             animation: google.maps.Animation.DROP
         });
         createInfoWindow(marker, address);
@@ -136,17 +130,42 @@ function createMarkerAndInfoWindows(response) {
 //create infowindow helper
 function createInfoWindow(marker, address) {
 
-    let contentString = `Address :${address["address1-en"]} <br>
-                        Recycling Type: ${address["waste-type"]}`;
-    var infowindow = new google.maps.InfoWindow({
+    let contentString = `
+                        Address :${address["address1-en"]} <br>
+                        Recycling Type: ${address["waste-type"]} <br>
+                        <input type="button" value="Show route" onclick="getDirection()"></input>
+                        `;
+    let infowindow = new google.maps.InfoWindow({
         content: contentString
     });
-    marker.addListener('click', () => {
+    google.maps.event.addListener(marker, "click", function (event) {
+        destination = this.position;
         infowindow.open(map, marker);
-    })
+    }); //end addListener
 }
 
 //get direction
-function getDirection(origin, destination) {
-
+function getDirection() {
+    let directionsService = new google.maps.DirectionsService;
+    directionsService.route({
+        origin: origin,
+        destination: destination,
+        travelMode: "WALKING"
+    }, (response, status) => {
+        if (status === "OK") {
+            if (directionsDisplay) {
+                directionsDisplay.setMap(null);
+            }
+            directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map,
+                directions: response,
+                draggable: true,
+                polylineOptions: {
+                    strokeColor: 'blue'
+                }
+            });
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    })
 }
