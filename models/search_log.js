@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     query: DataTypes.STRING,
     location_lat: DataTypes.DECIMAL(9,6),
     location_lng: DataTypes.DECIMAL(9,6),
-    user_id: DATATypes.STRING
+    user_id: DataTypes.STRING
   });
   search_log.associate =  function(models) {
     search_log.belongsTo(models.user);  
