@@ -1,6 +1,5 @@
 <div class="text-center">
-    <!-- move style descriptions to css file when test done -->
-    <h1 style="color:green; font-weight: 800">Recyclable Points Finder</h1>
+    <h1>Recyclable Points Finder</h1>
     <p>Search for Recyclable collection points<br>near where you are or for your preferred location<br> for where and what you
         can recycle to make Hong Kong a greener place!</p>
 </div>
@@ -10,10 +9,19 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <ul class="nav nav-tabs nav-justified">
-                <li class="active"><a data-toggle="tab" href="#current"><i class="fa fa-search" aria-hidden="true"></i> Recycling Locator</a></li>
+<<<<<<< HEAD
+                <li class="active" id="pagelink"><a data-toggle="tab" href="#current"><i class="fa fa-search" aria-hidden="true"></i> Recycling Locator</a></li>
                 <li><a data-toggle="tab" href="#type"><i class="fa fa-map-marker" aria-hidden="true"></i> Leave this tab for now</a></li>
-
-
+=======
+                <li class="active">
+                    <a data-toggle="tab" href="#current">
+                        <i class="fa fa-search" aria-hidden="true"></i> Recycling Locator</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#type">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> Leave this tab for now</a>
+                </li>
+>>>>>>> 0dc397f5c7f4491d3ea0899c6d37df02e21940cb
 
                 <!-- <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
             <li><a data-toggle="tab" href="#menu3">Menu 3</a></li> -->
@@ -24,27 +32,115 @@
     <div class="tab-content text-center">
         <div id="current" class="tab-pane fade in active">
             <h3>Your current location is:</h3>
-            <div id="map"></div>
+            <div class="container" id="map-container">
+                <div id="map-menu">
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                                    aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Waste Type
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <input type="checkbox" id="waste-type-1" value="Barbeque Fork">
+                                                <label for="waste-type-1">Barbeque Fork</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-2" value="Clothes">
+                                                <label for="waste-type-2">Clothes</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-3" value="Electrical and Electronic Equipment">
+                                                <label for="waste-type-3">Electrical and Electronic Equipment</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-4" value="Fluorescent Lamp">
+                                                <label for="waste-type-4">Fluorescent Lamp</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-5" value="Glass Bottles">
+                                                <label for="waste-type-5">Glass Bottles</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-6" value="Metals">
+                                                <label for="waste-type-6">Metals</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-7" value="Paper">
+                                                <label for="waste-type-7">Paper</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-8" value="Plastics">
+                                                <label for="waste-type-8">Plastics</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-9" value="Rechargeable Batteries">
+                                                <label for="waste-type-9">Rechargeable Batteries</label>
+                                            </li>
+                                        </ul>
+                                    </li>
 
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Travel mode
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">Driving</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Walking</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Public Transport</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.nav-collapse -->
+                        </div>
+                        <!--/.container-fluid -->
+                    </nav>
+                </div>
+                <div id="map"></div>
+            </div>
             <div id="search" class="container">
 
-                <!-- {{!
-                                <h2 id="text-center">Enter Location: </h2> }} -->
+                <!-- {{! <h2 id="text-center">Enter Location: </h2> }} -->
 
-                <button id="showloc" class="btn btn-default btn-block">Search for nearest Recycling Points</button>
+                <button id="showloc" class="btn btn-green btn-default btn-block">or Search for nearest Recycling Points</button>
                 <br>
                 <div class="input-group" id="searchloc">
                     <div>
                         <h4>Search for Recycling points near...</h4>
                     </div>
+
                     <input type="text" class="form-control" placeholder="District, Street Name or Building" aria-label="Search for...">
-                    <span class="input-group-btn">
+                    <span class="input-group-btn">  
                         <button class="btn btn-secondary" type="button">Go!</button>
-                        </span>
+                    </span>
                 </div>
+
+                <div id="list"></div>
+
             </div>
 
         </div>
+
         <div id="type" class="tab-pane fade">
             <h3>Leave this tab and section for now for optional/additional function</h3>
 

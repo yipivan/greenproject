@@ -1,15 +1,106 @@
+#map-container {
+    width: 100%;
+}
+
+#map-menu {
+    z-index: 5;
+    width: 100%;
+}
+
+#map-container .navbar-default {
+    background-color: white;
+}
+
+#map-container .navbar {
+    padding:0;
+    margin-bottom: 0;
+}
+
+#map-container .dropdown, #map-container .dropdown-menu {
+    width: 300px;
+}
+
+/* Map and search query section */
 #map {
     height: 400px;
     width: 100%;
     margin-bottom: 20px;
 }
 
+h1 {
+    color:green; 
+    font-weight: 800;
+}
+
 #current,
 #search {
     width: 70%;
     margin: 0 auto;
+    padding-bottom: 20px;
 }
 
 .input-group-btn {
-    vertical-align: bottom;
+   height: 34px;
+   vertical-align: bottom;
+   padding-top: 0;
 }
+
+
+/* Current Location Search Button */
+.btn-green,
+.btn-secondary {
+    background: green;
+    border: none;
+    color: white;
+    font-weight: 700;
+}
+
+.btn-secondary {
+    padding-top: 8px;
+}
+
+.btn-green:hover, 
+.btn-green:focus {
+    background:#8BC63E;
+}
+
+.btn-green:active {
+background:lightgreen;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 700;
+} 
+
+
+/* Search Result List */
+
+h3, h5 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#listBox {
+    margin: 20px 0;
+    background-color: lightgreen; 
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+#listBox:hover,
+#listBox a:hover,
+#listBox:focus {
+    background:#8BC63E;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+#listBox:active {
+    background:lightgreen;
+}
+
+
+
