@@ -16,7 +16,7 @@ router.get('/', (req,res) => {
 //         location_lat: //lat,
 //         location_lng: //lng,
 //         user_id: //user
-//     })
+//     }) 
 
 //     // find usage_log, if not exist, create one
 //     Usage_log.findOrCreate({
