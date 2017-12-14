@@ -9,8 +9,19 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <ul class="nav nav-tabs nav-justified">
+<<<<<<< HEAD
                 <li class="active" id="pagelink"><a data-toggle="tab" href="#current"><i class="fa fa-search" aria-hidden="true"></i> Recycling Locator</a></li>
                 <li><a data-toggle="tab" href="#type"><i class="fa fa-map-marker" aria-hidden="true"></i> Leave this tab for now</a></li>
+=======
+                <li class="active">
+                    <a data-toggle="tab" href="#current">
+                        <i class="fa fa-search" aria-hidden="true"></i> Recycling Locator</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#type">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> Leave this tab for now</a>
+                </li>
+>>>>>>> 0dc397f5c7f4491d3ea0899c6d37df02e21940cb
 
                 <!-- <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
             <li><a data-toggle="tab" href="#menu3">Menu 3</a></li> -->
@@ -21,8 +32,92 @@
     <div class="tab-content text-center">
         <div id="current" class="tab-pane fade in active">
             <h3>Your current location is:</h3>
-            <div id="map"></div>
+            <div class="container" id="map-container">
+                <div id="map-menu">
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                                    aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Waste Type
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <input type="checkbox" id="waste-type-1" value="Barbeque Fork">
+                                                <label for="waste-type-1">Barbeque Fork</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-2" value="Clothes">
+                                                <label for="waste-type-2">Clothes</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-3" value="Electrical and Electronic Equipment">
+                                                <label for="waste-type-3">Electrical and Electronic Equipment</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-4" value="Fluorescent Lamp">
+                                                <label for="waste-type-4">Fluorescent Lamp</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-5" value="Glass Bottles">
+                                                <label for="waste-type-5">Glass Bottles</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-6" value="Metals">
+                                                <label for="waste-type-6">Metals</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-7" value="Paper">
+                                                <label for="waste-type-7">Paper</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-8" value="Plastics">
+                                                <label for="waste-type-8">Plastics</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="waste-type-9" value="Rechargeable Batteries">
+                                                <label for="waste-type-9">Rechargeable Batteries</label>
+                                            </li>
+                                        </ul>
+                                    </li>
 
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Travel mode
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">Driving</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Walking</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Public Transport</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.nav-collapse -->
+                        </div>
+                        <!--/.container-fluid -->
+                    </nav>
+                </div>
+                <div id="map"></div>
+            </div>
             <div id="search" class="container">
 
                 <!-- {{! <h2 id="text-center">Enter Location: </h2> }} -->
