@@ -47,9 +47,45 @@ function getNearbyRecyclingPoints() {
         }
     }).then(response => {
         createMarkerAndInfoWindows(response);
+        
+        // For Search result list rendering
+        //console.log(response.data.results);
+
+        var resultData = response.data.results;
+        console.log(resultData);
+
+        clearResult();
+        renderHTML(resultData);
+        
     }).catch(err => {
         console.log(err);
     });
+}
+
+// For Search result list rendering
+var resultDisplay = document.getElementById("list");
+
+// clear results list displayed for new search query
+function clearResult(){
+    resultDisplay.innerHTML = "";
+}
+
+function renderHTML(data) {
+    var listResult = "";
+    var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
+
+    //console.log("TEST RESULT:" + data);
+
+    for (i=0; i<data.length; i++){
+        listResult += "<div id='listBox'>" +
+        "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
+        "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
+        + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+        + data[i]["waste-type"] + "</p>" + "</div>";
+    }
+
+    resultDisplay.insertAdjacentHTML('beforeend', listHeading);
+    resultDisplay.insertAdjacentHTML('beforeend', listResult);
 }
 
 //adjust the map boundary
