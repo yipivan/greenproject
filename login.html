@@ -178,6 +178,7 @@
       // Registration Form valiadtion
 
       function Register() {
+        console.log("register");
         var fname = document.registerform.Firstname.value,
           emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/,
           email = document.registerform.Email.value,
@@ -230,7 +231,7 @@
           //console.log(['registerform']);
           return true;
         }
-
+        $.ajax.post
       }
     </script>
 </body>
