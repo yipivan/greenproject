@@ -41,6 +41,7 @@ function initMap() {
 
 // function to fetching the recycling points
 function getNearbyRecyclingPoints() {
+    clearRoutes();
     axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points', {
         params: {
             lat: origin.lat(),
@@ -74,6 +75,7 @@ function getPosition() {
 
 //handle user query
 function getLocations() {
+    clearRoutes();
     var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
@@ -117,7 +119,6 @@ function createMarkerAndInfoWindows(response) {
     clearMarkers();
     markers = [];
     infoWindows = [];
-    addresses = [];
     for (address of addresses) {
         let marker = new google.maps.Marker({
             position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
@@ -128,6 +129,7 @@ function createMarkerAndInfoWindows(response) {
         createInfoWindow(marker, address);
         markers.push(marker);
     }
+    addresses = [];
     adjustBounds();
 }
 
@@ -180,5 +182,11 @@ function getDirection() {
 function closeInfoWindows() {
     for (infoWindow of infowindows){
         infoWindow.close();
+    }
+}
+
+function clearRoutes() {
+    if (directionsDisplay) {
+        directionsDisplay.setMap(null);
     }
 }
