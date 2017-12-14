@@ -1,11 +1,18 @@
 <nav class="navbar">
     <div class="container-fluid navbar-right">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Recycle HK</a>
+            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-tree-conifer"></span> Recycle HK</a>
             <!-- <button class="btn btn-primary navbar-btn">Login</button> -->
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+            {{#if user}}
+            <li><a href="/users/"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+            <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            {{else}}
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+            {{/if}}
+
 
         </ul>
     </div>

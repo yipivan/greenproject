@@ -6,6 +6,13 @@ var destination;
 var directionsDisplay;
 var infowindows = [];
 
+//prevent dropdown menu from closing itself by clicking
+$('.dropdown-menu').on('click', function(e){
+    if($(this).hasClass('dropdown-menu-form')){
+        e.stopPropagation();
+    }
+});
+
 function initMap() {
     
     getPosition().then(position => {
