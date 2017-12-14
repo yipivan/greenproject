@@ -1,9 +1,7 @@
 <div class="text-center">
-    <!-- move style descriptions to css file when test done -->
-    <h1 style="color:green; font-weight: 800">Recyclable Points Finder</h1>
-    <p>Search for Recyclable collection points
-        <br>near where you are or for your preferred location
-        <br> for where and what you can recycle to make Hong Kong a greener place!</p>
+    <h1>Recyclable Points Finder</h1> 
+    <p>Search for Recyclable collection points<br>near where you are or for your preferred location<br> for where and what you
+    can recycle to make Hong Kong a greener place!</p>
 </div>
 
 <div class="container">
@@ -19,8 +17,6 @@
                     <a data-toggle="tab" href="#type">
                         <i class="fa fa-map-marker" aria-hidden="true"></i> Leave this tab for now</a>
                 </li>
-
-
 
                 <!-- <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
             <li><a data-toggle="tab" href="#menu3">Menu 3</a></li> -->
@@ -119,22 +115,31 @@
             </div>
             <div id="search" class="container">
 
-                <!-- {{!
-                                <h2 id="text-center">Enter Location: </h2> }} -->
+                <!-- {{! <h2 id="text-center">Enter Location: </h2> }} -->
 
+<<<<<<< HEAD
                 <button id="showloc" class="btn btn-default btn-block">Search for nearest Recycling Points</button>
+=======
+                <button id="showloc" class="btn btn-green btn-default btn-block">or Search for nearest Recycling Points</button>
+                <br>
+>>>>>>> 4c34ce34bef956ccc4d3713642fcead78334e641
                 <div class="input-group" id="searchloc">
                     <div>
                         <h4>Search for Recycling points near...</h4>
                     </div>
+
                     <input type="text" class="form-control" placeholder="District, Street Name or Building" aria-label="Search for...">
-                    <span class="input-group-btn">
+                    <span class="input-group-btn">  
                         <button class="btn btn-secondary" type="button">Go!</button>
                     </span>
                 </div>
+
+                <div id="list"></div>
+
             </div>
 
         </div>
+
         <div id="type" class="tab-pane fade">
             <h3>Leave this tab and section for now for optional/additional function</h3>
 
