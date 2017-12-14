@@ -162,13 +162,17 @@
           return false;
         } else {
           document.getElementById("errorBox5").innerHTML = "";
+    
         } if (password == "") {
           document.loginform.UserPassword.focus();
           document.getElementById("errorBox6").innerHTML = "Please enter the password";
           return false;
         } else {
           document.getElementById("errorBox6").innerHTML = "";
+
         }
+        document.forms['loginform'].submit();
+        return true;
       }
 
       // Registration Form valiadtion
@@ -222,6 +226,9 @@
           document.getElementById("errorBox4").innerHTML = "";
         } if (fname != "" && email != "" && password != "" && confirmPassword != "") {
           document.getElementById("successmsg").innerHTML = "Your User Registration is complete!";
+          document.forms['registerform'].submit();
+          //console.log(['registerform']);
+          return true;
         }
 
       }
