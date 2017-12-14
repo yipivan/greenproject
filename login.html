@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <form name="loginform" action="/login" method="post">
+      <form name="loginform" action="/login" method="post" onsubmit="event.preventDefault(); Login();">
 
         <div class="row login-form">
           <div class="main text-center">
@@ -58,7 +58,7 @@
             <div id="errorBox5"></div>
             <input type="password" class="form-control" name="UserPassword" value="" placeholder="Password">
             <div id="errorBox6"></div>
-            <button type="button" class="btn btn-primary" onClick="Login()">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
             <p>OR</p>
             <span class="clearfix"></span>
           </div>
@@ -80,7 +80,7 @@
         </div>
       </form>
 
-      <form name="registerform" action="/register" method="post">
+      <form name="registerform" action="/users/register" method="post" onsubmit="event.preventDefault(); Register();">
 
         <div class="row register-form">
           <div class="main text-center">
@@ -93,7 +93,7 @@
             <div id="errorBox3"></div>
             <input type="password" class="form-control" name="ConfirmPassword" value="" placeholder="Confirm Password">
             <div id="errorBox4"></div>
-            <button type="button" class="btn btn-primary" onClick="Register()">Register</button>
+            <button type="submit" class="btn btn-primary">Register</button>
             <div id="successmsg"></div>
 
             <span class="clearfix"></span>
