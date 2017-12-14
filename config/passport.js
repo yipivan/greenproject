@@ -20,7 +20,7 @@ module.exports = passport => {
           defaults: { password: "", firstName: profile.displayName }
         })
           .spread((user, created) => {
-            //console.log(user)
+            created == true? console.log('new user'):console.log('existing user')
             return cb(null, user);
           })
           .catch(err => {
