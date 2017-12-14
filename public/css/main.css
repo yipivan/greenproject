@@ -59,8 +59,26 @@ h3, h5 {
     font-weight: 700;
 }
 
-#list div {
+#listBox {
     margin: 20px 0;
     background-color: lightgreen; 
-    padding: 10px 0;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
 }
+
+#listBox:hover,
+#listBox a:hover,
+#listBox:focus {
+    background:#8BC63E;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+#listBox:active {
+    background:lightgreen;
+}
+
+
+
