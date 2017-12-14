@@ -4,6 +4,7 @@ var markers = [];
 var origin;
 var destination;
 var directionsDisplay;
+var infowindows = [];
 
 function initMap() {
     
@@ -22,7 +23,8 @@ function initMap() {
         //initiailize the google map and place marker on user location
         map = new google.maps.Map(document.getElementById('map'), {
             center: origin,
-            zoom: 15
+            zoom: 15,
+            disableDefaultUI: true
         });
         let originMarker = new google.maps.Marker({
             position: origin,
@@ -114,6 +116,8 @@ function createMarkerAndInfoWindows(response) {
     }
     clearMarkers();
     markers = [];
+    infoWindows = [];
+    addresses = [];
     for (address of addresses) {
         let marker = new google.maps.Marker({
             position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
@@ -133,13 +137,15 @@ function createInfoWindow(marker, address) {
     let contentString = `
                         Address :${address["address1-en"]} <br>
                         Recycling Type: ${address["waste-type"]} <br>
-                        <input type="button" value="Show route" onclick="getDirection()"></input>
+                        <input type="button" value="Show route" onclick="getDirection(); closeInfoWindows()"></input>
                         `;
     let infowindow = new google.maps.InfoWindow({
         content: contentString
     });
+    infowindows.push(infowindow);
     google.maps.event.addListener(marker, "click", function (event) {
         destination = this.position;
+        closeInfoWindows();
         infowindow.open(map, marker);
     }); //end addListener
 }
@@ -168,4 +174,11 @@ function getDirection() {
             window.alert('Directions request failed due to ' + status);
         }
     })
+}
+
+//close all infowindows
+function closeInfoWindows() {
+    for (infoWindow of infowindows){
+        infoWindow.close();
+    }
 }

@@ -1,3 +1,25 @@
+#map-container {
+    width: 100%;
+}
+
+#map-menu {
+    z-index: 5;
+    width: 100%;
+}
+
+#map-container .navbar-default {
+    background-color: white;
+}
+
+#map-container .navbar {
+    padding:0;
+    margin-bottom: 0;
+}
+
+#map-container .dropdown, #map-container .dropdown-menu {
+    width: 300px;
+}
+
 #map {
     height: 400px;
     width: 100%;
