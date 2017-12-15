@@ -6,6 +6,21 @@
     border-radius: 0;
 }
 
+.navbar a {
+    color: white;
+    font-weight: 800;
+    
+}
+
+.navbar-nav li a {
+    /* border: 2px solid white;  */
+    
+}
+
+.navbar-brand {
+    pointer-events:none;
+}
+
 #wrap {
     border: 1px solid lightgray;
     background: #EDE8DF;  

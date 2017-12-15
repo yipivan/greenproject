@@ -1,6 +1,29 @@
+/* navbar */
+
+.navbar {
+margin-bottom: 0;
+background:green;
+border-radius: 0;
+}
+
+.navbar a {
+color: white;
+font-weight: 800;
+
+}
+
+.navbar-nav li a {
+/* border: 2px solid white;  */
+
+}
+
+.navbar-brand {
+pointer-events:none;
+}
+
 body {
   padding-bottom: 40px;
-  background-color:#32CD32;
+  background-color:#8BC63E;
 }
 .form-signin {
   max-width: 400px;  
