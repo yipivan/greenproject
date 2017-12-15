@@ -26,9 +26,13 @@
     background: #EDE8DF;  
 }
 
-
 body > div {
     background: #8BC63E; 
+}
+
+/* only apply to p right after h1 */
+h1+p {
+    color: green;
 }
 
 #tabs {
@@ -70,7 +74,12 @@ h1 {
     font-weight: 800;
 }
 
-#current,
+#current {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
 #search {
     width: 70%;
     margin: 0 auto;
