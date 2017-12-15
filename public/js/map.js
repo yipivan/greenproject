@@ -7,6 +7,7 @@ var directionsDisplay;
 var infowindows = [];
 var center;
 var originMarker;
+var travelMode;
 
 //prevent dropdown menu from closing itself by clicking
 $('.dropdown-menu').on('click', function (e) {
@@ -15,8 +16,14 @@ $('.dropdown-menu').on('click', function (e) {
     }
 });
 
-function initMap() {
+//add evnet handler for travel-mode menu
+$('#travel-mode li').on('click', function() {
+    $('#travel-mode li').removeClass("active");
+    $(this).addClass('active');
+});
 
+
+function initMap() {
     getPosition().then(position => {
         //first to run to set current location
         origin = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
@@ -27,7 +34,7 @@ function initMap() {
 
         //attach event listener to search button
         let searchBtn = document.getElementById('searchloc').getElementsByTagName('button')[0];
-        searchBtn.addEventListener('click', getLocations);
+        searchBtn.addEventListener('click', searchLocationsFromUserInput);
 
         //initiailize the google map and place marker on user location
         map = new google.maps.Map(document.getElementById('map'), {
@@ -163,7 +170,7 @@ function getPosition() {
 };
 
 //handle user query
-function getLocations() {
+function searchLocationsFromUserInput() {
     clearRoutes();
     var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -286,11 +293,12 @@ function createInfoWindow(marker, address) {
 
 //get direction
 function getDirection() {
+    travelMode  = $('#travel-mode li[class="active"]').attr('data-id').toUpperCase();
     let directionsService = new google.maps.DirectionsService;
     directionsService.route({
         origin: origin,
         destination: destination,
-        travelMode: "WALKING"
+        travelMode: travelMode
     }, (response, status) => {
         if (status === "OK") {
             if (directionsDisplay) {
@@ -304,6 +312,7 @@ function getDirection() {
                     strokeColor: 'blue'
                 }
             });
+            console.log(travelMode);
         } else {
             window.alert('Directions request failed due to ' + status);
         }
