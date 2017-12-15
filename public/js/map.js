@@ -94,8 +94,30 @@ function renderHTML(data) {
         var wasteData = data[i]["waste-type"];
         console.log(wasteData);
 
-        var waste = data[i]["waste-type"].split(",");
+        var waste = wasteData.replace(/,/g, "             ");  
         console.log(waste);
+
+        var wasteTest = "<p id='wastetype'>" + waste + "</p>";
+
+        var input = document.getElementById('wastetype');
+        console.log(input);
+
+
+        var n = waste.includes("Paper");
+        let paper = "Paper"
+        console.log(n);
+
+        function colorWasteType(paper){
+            if (n = true) {
+                // return "<span style='background-color: green;'>" + paper + "</span>";
+            }
+            else {
+                return true;
+            }
+        }
+
+
+        
 
 
         listResult += "<div id='listBox' >" +
@@ -108,7 +130,7 @@ function renderHTML(data) {
         // + "<br><br>" + waste + "</p>" + "</div>";
     }
 
-    resultDisplay.insertAdjacentHTML('beforeend', wasteData);
+    resultDisplay.insertAdjacentHTML('beforeend', wasteTest);
 
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
