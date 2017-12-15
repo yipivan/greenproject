@@ -45,6 +45,9 @@ module.exports = passport => {
           where: { emailOrId: email }
         })
           .then(user => {
+
+            console.log(`registered password: ${password}`)
+
             if (!user) {
               const newUser = new User({
                 emailOrId: req.body.Email,
@@ -73,11 +76,10 @@ module.exports = passport => {
     new LocalStrategy(
       {
         //setup to use non default form name field
-        usernameField: "Email",
-        passwordField: "Password"
+        usernameField: "UserEmail",
+        passwordField: "UserPassword"
       },
       function(email, password, done) {
-        console.log("I am fucking trying")
         User.findOne({
           where: { emailOrId: email }
         })
@@ -89,6 +91,11 @@ module.exports = passport => {
             }
             // check if password match hash
             bcrypt.compare(password, user.password, (err, isMatch) => {
+              console.log(`input password${password}`)
+              bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(password, salt, (err, hash) => {console.log(`hashedInputpw${hash}`)})
+              })
+              console.log(`databasepw ${user.password}`)
               if (isMatch) {
                 console.log('user and pw match')
                 return done(null, user);
