@@ -90,19 +90,54 @@ function clearResult() {
 function renderHTML(data) {
     var listResult = "";
     var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
+    var backToMap = "<h6 onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</h6>";
 
+    
+    
     //console.log("TEST RESULT:" + data);
 
-    for (i = 0; i < data.length; i++) {
-        listResult += "<div id='listBox'>" +
-            "<strong>" + data[i]["address1-en"] + "</strong><br>" +
-            "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
-            + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
-            + data[i]["waste-type"] + "</p>" + "</div>";
+    for (i=0; i<data.length; i++){
+
+        var wasteData = data[i]["waste-type"];
+        console.log(wasteData);
+
+
+        var waste = wasteData.replace(/,/g, "             ");  
+        // console.log(waste);
+
+        var wasteTest = "<p id='wastetype'>" + waste + "</p>";
+
+        
+        // wasteTest.style.backgroundColor = 'green';
+
+        // var n = waste.includes("Paper");
+        // let paper = "Paper"
+        // console.log(n);
+
+        // function colorWasteType(paper){
+        //     if (n = true) {
+        //         // return "<span style='background-color: green;'>" + paper + "</span>";
+        //     }
+        //     else {
+        //         return true;
+        //     }
+        // }
+
+        listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+        "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
+        "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
+        + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+        + "<div id='test'>" + data[i]["waste-type"] + "</div>" + "</p>" + "</div>";
+        
     }
+
+    resultDisplay.insertAdjacentHTML('beforeend', wasteTest);
 
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
+
+    //to add Back to Map link at the end of the search result list
+    resultDisplay.insertAdjacentHTML('beforeend', backToMap);
 }
 
 //adjust the map boundary
@@ -174,18 +209,22 @@ function getLocations() {
 function renderData(data, location) {
     var listResult = "";
     var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + location + "</h5>";
+    var backToMap = "<h6 onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</h6>";
 
     //console.log("TEST RESULT:" + data);
 
-    for (i = 0; i < data.length; i++) {
-        listResult += "<div id='listBox'>" +
-            "<strong>" + data[i]["address1-en"] + "</strong><br>" +
-            "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
-            + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
-            + data[i]["waste-type"] + "</p>" + "</div>";
+    for (i=0; i<data.length; i++){
+        listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+        "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
+        "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
+        + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+        + data[i]["waste-type"] + "</p>" + "</div>";
     }
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
+
+    //to add Back to Map link at the end of the search result list
+    resultDisplay.insertAdjacentHTML('beforeend', backToMap);
 }
 
 // clearing the markers
