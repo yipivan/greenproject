@@ -90,9 +90,8 @@ function clearResult() {
 function renderHTML(data) {
     var listResult = "";
     var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
-    var backToMap = "<h6 onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</h6>";
+    var backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
 
-    
     
     //console.log("TEST RESULT:" + data);
 
@@ -209,7 +208,7 @@ function getLocations() {
 function renderData(data, location) {
     var listResult = "";
     var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + location + "</h5>";
-    var backToMap = "<h6 onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</h6>";
+    var backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
 
     //console.log("TEST RESULT:" + data);
 
