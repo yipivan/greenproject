@@ -5,16 +5,18 @@ var origin;
 var destination;
 var directionsDisplay;
 var infowindows = [];
+var center;
+var originMarker;
 
 //prevent dropdown menu from closing itself by clicking
-$('.dropdown-menu').on('click', function(e){
-    if($(this).hasClass('dropdown-menu-form')){
+$('.dropdown-menu').on('click', function (e) {
+    if ($(this).hasClass('dropdown-menu-form')) {
         e.stopPropagation();
     }
 });
 
 function initMap() {
-    
+
     getPosition().then(position => {
         //first to run to set current location
         origin = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
@@ -33,7 +35,7 @@ function initMap() {
             zoom: 15,
             disableDefaultUI: true
         });
-        let originMarker = new google.maps.Marker({
+            originMarker = new google.maps.Marker({
             position: origin,
             map: map,
             title: 'Im here!',
@@ -48,6 +50,10 @@ function initMap() {
 
 // function to fetching the recycling points
 function getNearbyRecyclingPoints() {
+    var selectedOptions = $('#waste-type input[type="checkbox"]:checked').map(function () {
+        return $(this).val();
+    }).get();
+
     clearRoutes();
     axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points', {
         params: {
@@ -56,8 +62,9 @@ function getNearbyRecyclingPoints() {
             max: 10
         }
     }).then(response => {
-        createMarkerAndInfoWindows(response);
-        
+        center = origin;
+        createMarkerAndInfoWindows(response, selectedOptions);
+
         // For Search result list rendering
         //console.log(response.data.results);
 
@@ -66,7 +73,7 @@ function getNearbyRecyclingPoints() {
 
         clearResult();
         renderHTML(resultData);
-        
+
     }).catch(err => {
         console.log(err);
     });
@@ -76,7 +83,7 @@ function getNearbyRecyclingPoints() {
 var resultDisplay = document.getElementById("list");
 
 // clear results list displayed for new search query
-function clearResult(){
+function clearResult() {
     resultDisplay.innerHTML = "";
 }
 
@@ -86,12 +93,12 @@ function renderHTML(data) {
 
     //console.log("TEST RESULT:" + data);
 
-    for (i=0; i<data.length; i++){
+    for (i = 0; i < data.length; i++) {
         listResult += "<div id='listBox'>" +
-        "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
-        "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
-        + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
-        + data[i]["waste-type"] + "</p>" + "</div>";
+            "<strong>" + data[i]["address1-en"] + "</strong><br>" +
+            "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
+            + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+            + data[i]["waste-type"] + "</p>" + "</div>";
     }
 
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
@@ -103,11 +110,15 @@ function adjustBounds() {
     var bounds = new google.maps.LatLngBounds();
     // Extend the boundaries of the map for each marker and display the marker
     for (marker of markers) {
-        marker.setMap(map);
         bounds.extend(marker.position);
     }
+    bounds.extend(originMarker.position);
     map.fitBounds(bounds);
 }
+// function adjustBounds(center,zoom=15) {
+//     map.setCenter(center);
+//     map.setZoom(zoom);
+// }
 
 // function getting geolocation from browser
 function getPosition() {
@@ -126,6 +137,7 @@ function getLocations() {
             key: 'AIzaSyAukIcOBd5XzTyDZBhDhSOOFHqONrH_vzk',
         }
     }).then(response => {
+        center = response.data.results[0].geometry.location;
         var lat = response.data.results[0].geometry.location.lat;
         var lng = response.data.results[0].geometry.location.lng;
         axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points', {
@@ -135,7 +147,10 @@ function getLocations() {
                 max: 10
             }
         }).then(response => {
-            createMarkerAndInfoWindows(response);
+            var selectedOptions = $('#waste-type input[type="checkbox"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            createMarkerAndInfoWindows(response, selectedOptions);
 
             // render the results list
             console.log(searchQuery);
@@ -143,10 +158,10 @@ function getLocations() {
 
             var resultData = response.data.results;
             console.log(resultData);
-    
+
             clearResult();
             renderData(resultData, searchQuery);
-            
+
         }).catch(err => {
             console.log(err);
         });
@@ -162,14 +177,13 @@ function renderData(data, location) {
 
     //console.log("TEST RESULT:" + data);
 
-    for (i=0; i<data.length; i++){
+    for (i = 0; i < data.length; i++) {
         listResult += "<div id='listBox'>" +
-        "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
-        "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
-        + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
-        + data[i]["waste-type"] + "</p>" + "</div>";
+            "<strong>" + data[i]["address1-en"] + "</strong><br>" +
+            "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
+            + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+            + data[i]["waste-type"] + "</p>" + "</div>";
     }
-
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
 }
@@ -182,7 +196,7 @@ function clearMarkers() {
 }
 
 //create markers and infowindows
-function createMarkerAndInfoWindows(response) {
+function createMarkerAndInfoWindows(response, selectedOptions) {
     addresses = [];
     for (address of response.data.results) {
         let wasteTypes = address["waste-type"].split(",");
@@ -192,15 +206,21 @@ function createMarkerAndInfoWindows(response) {
     clearMarkers();
     markers = [];
     infoWindows = [];
+    console.log(addresses);
     for (address of addresses) {
-        let marker = new google.maps.Marker({
-            position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
-            map: map,
-            title: address["address1-zh-hant"],
-            animation: google.maps.Animation.DROP
-        });
-        createInfoWindow(marker, address);
-        markers.push(marker);
+        //filter out user selection
+        if (selectedOptions.every(option => {
+            return address["wasteTypes"].includes(option);
+        })) {
+            let marker = new google.maps.Marker({
+                position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
+                map: map,
+                title: address["address1-zh-hant"],
+                animation: google.maps.Animation.DROP
+            });
+            createInfoWindow(marker, address);
+            markers.push(marker);
+        }
     }
     addresses = [];
     adjustBounds();
@@ -253,11 +273,11 @@ function getDirection() {
 
 //close all infowindows
 function closeInfoWindows() {
-    for (infoWindow of infowindows){
+    for (infoWindow of infowindows) {
         infoWindow.close();
     }
 }
-
+//clear route display
 function clearRoutes() {
     if (directionsDisplay) {
         directionsDisplay.setMap(null);

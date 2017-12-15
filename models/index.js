@@ -41,5 +41,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 console.log(config.database)
+console.log(env);
 
 module.exports = db;

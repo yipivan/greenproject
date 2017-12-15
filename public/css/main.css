@@ -17,7 +17,7 @@
 }
 
 #map-container .dropdown, #map-container .dropdown-menu {
-    width: 300px;
+    min-width: 24vw;
 }
 
 /* Map and search query section */
