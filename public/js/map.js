@@ -94,40 +94,33 @@ function renderHTML(data) {
         var wasteData = data[i]["waste-type"];
         console.log(wasteData);
 
+
         var waste = wasteData.replace(/,/g, "             ");  
-        console.log(waste);
+        // console.log(waste);
 
         var wasteTest = "<p id='wastetype'>" + waste + "</p>";
 
-        var input = document.getElementById('wastetype');
-        console.log(input);
-
-
-        var n = waste.includes("Paper");
-        let paper = "Paper"
-        console.log(n);
-
-        function colorWasteType(paper){
-            if (n = true) {
-                // return "<span style='background-color: green;'>" + paper + "</span>";
-            }
-            else {
-                return true;
-            }
-        }
-
-
         
+        // wasteTest.style.backgroundColor = 'green';
 
+        // var n = waste.includes("Paper");
+        // let paper = "Paper"
+        // console.log(n);
 
-        listResult += "<div id='listBox' >" +
+        // function colorWasteType(paper){
+        //     if (n = true) {
+        //         // return "<span style='background-color: green;'>" + paper + "</span>";
+        //     }
+        //     else {
+        //         return true;
+        //     }
+        // }
+
+        listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
         "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
         "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
         + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
-        + data[i]["waste-type"] + "</p>" + "</div>";
-
-        // + data[i]["waste-type"] + 
-        // + "<br><br>" + waste + "</p>" + "</div>";
+        + "<div id='test'>" + data[i]["waste-type"] + "</div>" + "</p>" + "</div>";
     }
 
     resultDisplay.insertAdjacentHTML('beforeend', wasteTest);
