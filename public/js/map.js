@@ -121,6 +121,7 @@ function renderHTML(data) {
         "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
         + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
         + "<div id='test'>" + data[i]["waste-type"] + "</div>" + "</p>" + "</div>";
+        
     }
 
     resultDisplay.insertAdjacentHTML('beforeend', wasteTest);
