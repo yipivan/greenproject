@@ -1,13 +1,15 @@
+<div id="wrap" class="container">
+
 <div class="text-center">
     <h1>Recyclable Points Finder</h1>
     <p>Search for Recyclable collection points<br>near where you are or for your preferred location<br> for where and what you
         can recycle to make Hong Kong a greener place!</p>
 </div>
 
-<div class="container">
+
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div id="tabs" class="col-md-6 col-md-offset-3">
             <ul class="nav nav-tabs nav-justified">
                 <li class="active" id="pagelink"><a data-toggle="tab" href="#current"><i class="fa fa-search" aria-hidden="true"></i> Recycling Locator</a></li>
                 <li><a data-toggle="tab" href="#type"><i class="fa fa-map-marker" aria-hidden="true"></i> Leave this tab for now</a></li>
@@ -20,13 +22,12 @@
     </div>
     <div class="tab-content text-center">
         <div id="current" class="tab-pane fade in active">
-            <h3>Your current location is:</h3>
             {{>_map}}
             <div id="search" class="container">
 
                 <!-- {{! <h2 id="text-center">Enter Location: </h2> }} -->
 
-                <button id="showloc" class="btn btn-green btn-default btn-block">or Search for nearest Recycling Points</button>
+                <button id="showloc" class="btn btn-green btn-default btn-block">Search for nearest Recycling Points</button>
                 <br>
                 <div class="input-group" id="searchloc">
                     <div>

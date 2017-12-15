@@ -1,3 +1,26 @@
+/* navbar */
+
+.navbar {
+    margin-bottom: 0;
+    background:green;
+    border-radius: 0;
+}
+
+#wrap {
+    border: 1px solid lightgray;
+    background: #EDE8DF;  
+}
+
+
+body > div {
+    background: #8BC63E; 
+}
+
+#tabs {
+    margin-bottom: 20px;
+}
+
+
 #map-container {
     width: 100%;
 }
@@ -68,7 +91,7 @@ h1 {
 background:lightgreen;
 }
 
-h4 {
+h4, h5 {
     font-size: 16px;
     font-weight: 700;
 } 
@@ -76,7 +99,7 @@ h4 {
 
 /* Search Result List */
 
-h3, h5, h6 {
+h3 {
     font-size: 20px;
     font-weight: 700;
 }
