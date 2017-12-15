@@ -5,7 +5,10 @@ const router = express.Router();
 const User = require("../models").user;
 
 router.post(
-  "/login",
+  "/login", 
+  // (req, res) => {
+  //   console.log(req.body.UserEmail);
+  // }
   passport.authenticate("local-login", {
     successRedirect: "/",
     failureRedirect: "/login"
