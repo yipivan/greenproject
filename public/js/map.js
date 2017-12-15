@@ -83,19 +83,38 @@ function clearResult(){
 function renderHTML(data) {
     var listResult = "";
     var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
+    var backToMap = "<h6 onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</h6>";
 
+    
+    
     //console.log("TEST RESULT:" + data);
 
     for (i=0; i<data.length; i++){
-        listResult += "<div id='listBox'>" +
+
+        var wasteData = data[i]["waste-type"];
+        console.log(wasteData);
+
+        var waste = data[i]["waste-type"].split(",");
+        console.log(waste);
+
+
+        listResult += "<div id='listBox' >" +
         "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
         "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
         + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
         + data[i]["waste-type"] + "</p>" + "</div>";
+
+        // + data[i]["waste-type"] + 
+        // + "<br><br>" + waste + "</p>" + "</div>";
     }
+
+    resultDisplay.insertAdjacentHTML('beforeend', wasteData);
 
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
+
+    //to add Back to Map link at the end of the search result list
+    resultDisplay.insertAdjacentHTML('beforeend', backToMap);
 }
 
 //adjust the map boundary
@@ -159,11 +178,12 @@ function getLocations() {
 function renderData(data, location) {
     var listResult = "";
     var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + location + "</h5>";
+    var backToMap = "<h6 onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</h6>";
 
     //console.log("TEST RESULT:" + data);
 
     for (i=0; i<data.length; i++){
-        listResult += "<div id='listBox'>" +
+        listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
         "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
         "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
         + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
@@ -172,6 +192,9 @@ function renderData(data, location) {
 
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
+
+    //to add Back to Map link at the end of the search result list
+    resultDisplay.insertAdjacentHTML('beforeend', backToMap);
 }
 
 // clearing the markers
