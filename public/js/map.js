@@ -61,6 +61,8 @@ function getNearbyRecyclingPoints() {
         return $(this).val();
     }).get();
 
+    console.log("selectedOptions:" + selectedOptions);
+
     clearRoutes();
     axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points', {
         params: {
@@ -76,7 +78,7 @@ function getNearbyRecyclingPoints() {
         //console.log(response.data.results);
 
         var resultData = response.data.results;
-        console.log(resultData);
+        //console.log(resultData);
 
         clearResult();
         renderHTML(resultData);
@@ -105,7 +107,7 @@ function renderHTML(data) {
     for (i=0; i<data.length; i++){
 
         var wasteData = data[i]["waste-type"];
-        console.log(wasteData);
+        //console.log(wasteData);
 
 
         var waste = wasteData.replace(/,/g, "             ");  
@@ -264,6 +266,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
                 animation: google.maps.Animation.DROP
             });
             createInfoWindow(marker, address);
+            console.log(marker);
             markers.push(marker);
         }
     }
