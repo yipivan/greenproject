@@ -61,6 +61,7 @@ function getNearbyRecyclingPoints() {
         return $(this).val();
     }).get();
 
+    // selectedOptions = wastetypes selected in droplist
     console.log("selectedOptions:" + selectedOptions);
 
     clearRoutes();
@@ -78,15 +79,23 @@ function getNearbyRecyclingPoints() {
         //console.log(response.data.results);
 
         var resultData = response.data.results;
-        //console.log(resultData);
+        //console.log(resultData[0]["waste-type"]);
 
-        clearResult();
-        renderHTML(resultData);
+        if (selectedOptions == 0){
+            clearResult();
+            renderHTML(resultData);
+            //renderResult(response, selectedOptions);
+        } else {
+            console.log("perform function renderResult");
+            renderResult(response, selectedOptions);
+        }
+        
 
     }).catch(err => {
         console.log(err);
     });
 }
+
 
 // For Search result list rendering
 var resultDisplay = document.getElementById("list");
@@ -94,50 +103,49 @@ var resultDisplay = document.getElementById("list");
 // clear results list displayed for new search query
 function clearResult() {
     resultDisplay.innerHTML = "";
+    //console.log("result cleared");
 }
 
 function renderHTML(data) {
     var listResult = "";
-    var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
-    var backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
+     listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>",
+     backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
 
-    
-    //console.log("TEST RESULT:" + data);
+        for (i=0; i<data.length; i++){
+            
+                    var wasteData = data[i]["waste-type"];
+                    //console.log(wasteData);
+            
+            
+                    var waste = wasteData.replace(/,/g, "             ");  
+                    // console.log(waste);
+            
+                    var wasteTest = "<p id='wastetype'>" + waste + "</p>";
+            
+                    
+                    // wasteTest.style.backgroundColor = 'green';
+            
+                    // var n = waste.includes("Paper");
+                    // let paper = "Paper"
+                    // console.log(n);
+            
+                    // function colorWasteType(paper){
+                    //     if (n = true) {
+                    //         // return "<span style='background-color: green;'>" + paper + "</span>";
+                    //     }
+                    //     else {
+                    //         return true;
+                    //     }
+                    // }
+            
+                    listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+                    "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
+                    "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
+                    + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+                    + "<div id='test'>" + data[i]["waste-type"] + "</div>" + "</p>" + "</div>";
 
-    for (i=0; i<data.length; i++){
-
-        var wasteData = data[i]["waste-type"];
-        //console.log(wasteData);
-
-
-        var waste = wasteData.replace(/,/g, "             ");  
-        // console.log(waste);
-
-        var wasteTest = "<p id='wastetype'>" + waste + "</p>";
-
-        
-        // wasteTest.style.backgroundColor = 'green';
-
-        // var n = waste.includes("Paper");
-        // let paper = "Paper"
-        // console.log(n);
-
-        // function colorWasteType(paper){
-        //     if (n = true) {
-        //         // return "<span style='background-color: green;'>" + paper + "</span>";
-        //     }
-        //     else {
-        //         return true;
-        //     }
-        // }
-
-        listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
-        "<strong>" + data[i]["address1-en"] + "</strong><br>" + 
-        "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
-        + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
-        + "<div id='test'>" + data[i]["waste-type"] + "</div>" + "</p>" + "</div>";
-        
     }
+    
 
     resultDisplay.insertAdjacentHTML('beforeend', wasteTest);
 
@@ -250,10 +258,10 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
         address.wasteTypes = wasteTypes;
         addresses.push(address);
     }
+
     clearMarkers();
     markers = [];
     infoWindows = [];
-    console.log(addresses);
     for (address of addresses) {
         //filter out user selection
         if (selectedOptions.every(option => {
@@ -266,8 +274,12 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
                 animation: google.maps.Animation.DROP
             });
             createInfoWindow(marker, address);
-            console.log(marker);
+            //console.log("markers:" + markers);
+            console.log("address:" + address);
             markers.push(marker);
+
+            clearResult();
+            //renderResult(address);
         }
     }
     addresses = [];
@@ -320,6 +332,61 @@ function getDirection() {
         }
     })
 }
+
+// render result list according to wastetype filter 
+function renderResult(response, selectedOptions){
+    addresses = [];
+    for (address of response.data.results) {
+        let wasteTypes = address["waste-type"].split(",");
+        address.wasteTypes = wasteTypes;
+        addresses.push(address);
+    }
+
+    for (address of addresses) {
+        //filter out user selection
+        if (selectedOptions.every(option => {
+            return address["wasteTypes"].includes(option);
+        }));
+    }
+    console.log(address);
+}
+// function renderResult(address){
+//     var listResult = "";
+//     listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>",
+//     backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
+
+//     for (i=0; i<address.length; i++){
+//         listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+//         "<strong>" + address[i]["address1-en"] + "</strong><br>" + 
+//         "<p>" + address[i]["address1-zh-hant"] + "<br><br>"
+//         + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+//         + address[i]["waste-type"] + "</p>" + "</div>";
+//     }
+//     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
+//     resultDisplay.insertAdjacentHTML('beforeend', listResult);
+
+//     //to add Back to Map link at the end of the search result list
+//     resultDisplay.insertAdjacentHTML('beforeend', backToMap);
+    
+
+//     // for (address of addresses) {
+//     //     //filter out user selection
+//     //     if (selectedOptions.every(option => {
+//     //         return address["wasteTypes"].includes(option);
+//     //     })); //{
+//     //     //     let marker = new google.maps.Marker({
+//     //     //         position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
+//     //     //         map: map,
+//     //     //         title: address["address1-zh-hant"],
+//     //     //         animation: google.maps.Animation.DROP
+//     //     //     });
+//     //     //     createInfoWindow(marker, address);
+//     //     //     markers.push(marker);
+//     // }
+//     // //console.log(address);
+//     // //console.log(address[0]);
+  
+// }
 
 //close all infowindows
 function closeInfoWindows() {
