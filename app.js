@@ -50,27 +50,30 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// display message
-app.use(flash());
+// Global variables
+app.use(function (req, res, next) {
+    res.locals.user = req.user || null;
+    next();
+});
 
 // index route
 app.get('/', (req, res) => {
     res.render('index');
 });
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname,'/login.html'));
+    res.sendFile(path.join(__dirname, '/login.html'));
 });
 
 app.get('/auth/facebook',
-passport.authenticate('facebook'));
+    passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-passport.authenticate('facebook', { failureRedirect: '/login' }),
-function(req, res) {
-  // Successful authentication, redirect home.
-  res.redirect(req.session.returnTo || '/');
-  delete req.session.returnTo;
-});
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect(req.session.returnTo || '/');
+        delete req.session.returnTo;
+    });
 
 // use routes
 app.use('/users', users);

@@ -22,18 +22,23 @@ $('#travel-mode li').on('click', function () {
     $(this).addClass('active');
 });
 
-$('#recycle-form button[type="submit"]').on('click', function (e) {
-    var form = $('#recycle-form');
-    submitForm(form);
+//submit user search form to server
+$('#recycle-form').on('submit', function (e) {
+    e.preventDefault();
+    var formData = $('#recycle-form').serializeArray();
+    var data = {
+        data: formData,
+        origin: {
+            lat: origin.lat(),
+            lng: origin.lng()
+        }
+    }
+    $.post('/users/search', data).catch(err => {
+        alert(err);
+    })
+    $('#modal-form').modal('hide');
 });
 
-function submitForm(form) {
-    var url = form.attr("action");
-    var formData = $(form).serializeArray();
-    $.post(url, formData).done(function (data) {
-        alert(data);
-    });
-}
 
 function initMap() {
     getPosition().then(position => {
@@ -74,7 +79,7 @@ function getNearbyRecyclingPoints() {
     }).get();
 
     // selectedOptions = wastetypes selected in droplist
-    console.log("selectedOptions:" + selectedOptions);
+    // console.log("selectedOptions:" + selectedOptions);
 
     clearRoutes();
     axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points', {
@@ -101,8 +106,6 @@ function getNearbyRecyclingPoints() {
             console.log("perform function renderResult");
             renderResult(response, selectedOptions);
         }
-
-
     }).catch(err => {
         console.log(err);
     });
@@ -287,7 +290,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
             });
             createInfoWindow(marker, address);
             //console.log("markers:" + markers);
-            console.log("address:" + address);
+            // console.log("address:" + address);
             markers.push(marker);
 
             clearResult();
