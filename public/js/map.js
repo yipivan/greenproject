@@ -235,7 +235,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     // to enter searchQuery into the listHeading
     if (searchQuery != 0) {
         console.log("has SearchQuery");
-        var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + searchQuery + "</h5>";
+        var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + "<h7>" + searchQuery + "</h7></h5>";
     } else {
         console.log("no SearchQuery");
     }
@@ -254,6 +254,8 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
         clearResult();   
         resultDisplay.insertAdjacentHTML('beforeend', noSearchResult);   
         console.log("there is no result that matches search criteria to render");
+        // clear location/places user typed in as searchQuery
+        clearField();
         // clear selectedOptions to default status (nothing selected)
         clearSelectedOptions();
         return;
@@ -297,9 +299,8 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
 
 // to reset selectedOptions to default if no search result to display
 function clearSelectedOptions(){
-
+   $('#waste-type input[type="checkbox"]:checked').prop('checked', false);
 }
-
 
 //create infowindow helper
 function createInfoWindow(marker, address) {
@@ -380,7 +381,7 @@ function renderResult(address) {
     listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
         "<strong>" + addressEn + "</strong><br>" +
         "<p>" + addressCh + "<br><br>" +
-        "<strong>" + "recyclable waste-type accepted:" + "</strong><br>" +
+        "<strong>" + "recyclable waste-type accepted:" + "</strong><br><br>" +
         wasteColoredType.join(" ") + "</p>" + "</div>";
     return listResult;
    /* if (address != 0) {
