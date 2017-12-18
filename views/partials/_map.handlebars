@@ -14,7 +14,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Waste Type
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class='glyphicon glyphicon-trash'></span> Waste Type
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-form" id="waste-type">
@@ -59,7 +59,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Travel mode
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class='glyphicon glyphicon-road'></span> Travel mode
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-form" id="travel-mode">
@@ -92,17 +92,17 @@
                     <h4 class="modal-title">Please tell us what are you recycling:</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="recycle-form" class="form-horizontal" action="/users/search" method="post">
+                    <form id="recycle-form" class="form-horizontal" action="/users/search">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Waste</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Enter a waste type">
+                                <input name="waste-type" type="text" class="form-control" placeholder="Enter a waste type">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Quantity</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" placeholder="quantity">
+                                <input name="quantity" type="number" class="form-control" placeholder="quantity">
                             </div>
                         </div>
                         <div class="form-group">

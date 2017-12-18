@@ -95,6 +95,20 @@ router.get("/:id",isLoggedIn,(req,res)=>{
 })
 
 //logout 
+router.post("/search", (req,res) => {
+  console.log(req.body);
+  var data = {
+    "wasteType": req.body['data[0][value]'],
+    "quantity": req.body['data[1][value]'],
+    "location": {
+      "lat": req.body['origin[lat]'],
+      "lng": req.body['origin[lng]']
+    }
+  }
+
+  var searchLog = new SearchLog();
+})
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
