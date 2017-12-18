@@ -4,7 +4,8 @@ const passport = require("passport");
 const router = express.Router();
 const User = require("../models").user;
 const Search_log = require("../models").search_log;
-const Usage_log = require("../models").usage_log
+const Usage_log = require("../models").usage_log;
+const {isLoggedIn} = require("../helpers/auth");
 
 //user login
 router.post("/login",
@@ -22,20 +23,25 @@ router.post("/register",
   })
 );
 
-//loggined user search action
-
-router.post("/search", (req, res) => {
+//loggined user search action (search_log + usage_log)
+router.post(":id/search", (req, res) => {
   
   // create new search_log for every search.
+  // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
   User.findOne({
     where: { emailOrId: req.session.passport.user.id }
   }).then(user => {
-    Search_log.create({
-      userId: req.session.passport.user.id,
-      query: "search_input",
-      location_lat: "location_lat",
-      location_lng: "location_lng"
-    });
+    if(req.params.id !== user.emailOrId){
+      console.log('Not Authorised')
+      res.redirect('/login')  
+    } else {
+      Search_log.create({
+        userId: req.session.passport.user.id,
+        query: "search_input",
+        location_lat: "location_lat",
+        location_lng: "location_lng"
+      });
+    } 
   });
 
   //create or update recycle_times data whenever confirm recycle
@@ -53,6 +59,42 @@ router.post("/search", (req, res) => {
   });
 });
 
+  //retrieve user profile data
+router("/:id",(req,res)=>{
+  User.findOne({
+    where:{
+      emailOrId: req.session.passport.user.id
+    }
+  }).then(user=>{
+    if(req.params.id !== user.emailOrId){
+      console.log('Not Authorised')
+      res.redirect('/login')  
+    } else { 
+
+      //retrieve usage_log
+      Usage_log.findOne({
+        where:{
+          userId: req.session.passport.user.id
+        }
+      }).then(usage_log=>{
+        return usage_log
+      })
+
+      //retrieve latest 10 pieces of search_log
+      Search_log.findAll({
+        where: {
+          userId: req.session.passport.user.id
+        },
+        limit: 10,
+        order: [ [ 'createdAt', 'DESC' ]]
+      }).then(search_log => {
+        return search_log;
+      });  
+    } 
+  }) 
+})
+
+//logout 
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
