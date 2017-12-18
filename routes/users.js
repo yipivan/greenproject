@@ -3,59 +3,61 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const router = express.Router();
 const User = require("../models").user;
+const Search_log = require("../models").search_log;
+const Usage_log = require("../models").usage_log
 
-router.post(
-  "/login", 
-  // (req, res) => {
-  //   console.log(req.body.UserEmail);
-  // }
+//user login
+router.post("/login",
   passport.authenticate("local-login", {
     successRedirect: "/",
     failureRedirect: "/login"
   })
 );
 
-router.post(
-  "/register",
+//user register (if register success, user is automatically loggedin)
+router.post("/register",
   passport.authenticate("local-signup", {
     successRedirect: "/",
     failureRedirect: "/login"
   })
 );
 
-//   User.findOne({
-//     where: { emailOrId: req.body.Email }
-//   })
-//     .then(user => {
-//       if (!user) {
-//         const newUser = new User({
-//           emailOrId: req.body.Email,
-//           password: req.body.Password,
-//           firstName: req.body.Firstname
-//         });
-//         bc/pt.genSalt(10, (err, salt) => {
-//           bcrypt.hash(newUser.password, salt, (err, hash) => {
-//             if (err) throw err;
-//             newUser.password = hash;
-//             newUser.save();
-//           });
-//         });
-//         // Should add log-in function
-//         console.log(user)
-//         res.redirect('/')
-//         //res.render("login", { message: "You are now logged in" });
-//       } else {
-//         res.render("login", { message: "This e-mail is already registered" });
-//       }
-//     })
-//     .catch(err => {
-//       res.send(err);
-//     });
-// });
+//loggined user search action
+
+router.post("/search", (req, res) => {
+  
+  // create new search_log for every search.
+  User.findOne({
+    where: { emailOrId: req.session.passport.user.id }
+  }).then(user => {
+    Search_log.create({
+      userId: req.session.passport.user.id,
+      query: "search_input",
+      location_lat: "location_lat",
+      location_lng: "location_lng"
+    });
+  });
+
+  //create or update recycle_times data whenever confirm recycle
+  Usage_log.findOrCreate({
+    where: {
+      userId: req.session.passport.user.id
+    },
+    defaults:{
+      recycle_item_qty: 0,
+      recycle_times: 0
+    }
+  })
+  .then(usage_log => {
+    usage_log.increment("recycle_times", { by: 1 });
+  });
+});
 
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+
 
 module.exports = router;

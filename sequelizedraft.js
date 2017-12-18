@@ -1,9 +1,7 @@
 // create search_log & usage_log with user_id, only if user is loggedin
 if (req.session.passport.user) {
   User.findOne({
-    where: { emailOrId: req.session.passport.user.id }
-    //should i store current user as global var when logged in
-  }).then(user => {
+    where: { emailOrId: req.session.passport.user.id }  }).then(user => {
     Search_log.create({
       userId: req.session.passport.user.id,
       query: "search_input",
@@ -13,12 +11,14 @@ if (req.session.passport.user) {
   });
 }
 
-//retrieve search_log data at user profile
+//retrieve search_log data (latest 10) at user profile
 
 Search_log.findAll({
   where: {
     userId: req.session.passport.user.id
-  }
+  },
+  limit: 10,
+  order: [ [ 'createdAt', 'DESC' ]]
 }).then(search_log => {
   return search_log;
 });
