@@ -3,13 +3,9 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const router = express.Router();
 const User = require("../models").user;
-<<<<<<< HEAD
 const Search_log = require("../models").search_log;
 const Usage_log = require("../models").usage_log;
 const {isLoggedIn} = require("../helpers/auth");
-=======
-const SearchLog = require("../models").search_log;
->>>>>>> routing
 
 //user login
 router.post("/login",
