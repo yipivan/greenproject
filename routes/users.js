@@ -24,14 +24,14 @@ router.post("/register",
 );
 
 //loggined user search action (search_log + usage_log)
-router.post(":id/search",isLoggedIn, (req, res) => {
+router.post("/:id/search",isLoggedIn, (req, res) => {
   
   // create new search_log for every search.
   // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
   User.findOne({
-    where: { emailOrId: req.session.passport.user.id }
+    where: {emailOrId: req.session.passport.user.emailOrId}
   }).then(user => {
-    if(req.params.id !== user.emailOrId){
+    if(req.params.id !== user.id){
       console.log('Not Authorised')
       res.redirect('/login')  
     } else {
@@ -41,7 +41,7 @@ router.post(":id/search",isLoggedIn, (req, res) => {
         location_lat: "location_lat",
         location_lng: "location_lng"
       });
-    } 
+    }
   });
 
   //create or update recycle_times data whenever confirm recycle
@@ -63,10 +63,10 @@ router.post(":id/search",isLoggedIn, (req, res) => {
 router.get("/:id",isLoggedIn,(req,res)=>{
   User.findOne({
     where:{
-      emailOrId: req.session.passport.user.id
+      emailOrId: req.session.passport.user.emailOrId
     }
   }).then(user=>{
-    if(req.params.id !== user.emailOrId){
+    if(req.params.id !== user.id){
       console.log('Not Authorised')
       res.redirect('/login')  
     } else { 

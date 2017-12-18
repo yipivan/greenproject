@@ -70,9 +70,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/search',(req,res)=>{
-    
 })
-
 
 app.get('/auth/facebook',
 passport.authenticate('facebook'));

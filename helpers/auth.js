@@ -4,6 +4,6 @@ module.exports = {
         return next();
       }
       console.log("user is not logged in");
-      res.redirect('/users/login');
+      res.redirect('/login');
     }
   }
