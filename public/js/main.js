@@ -37,5 +37,6 @@ function createHTML(data){
     resultsContainer.innerHTML = ourGeneratedHTML;
 }
 
-
-
+$('#recycle-form').on('submit', function() {
+    window.alert('form submit!');
+})
