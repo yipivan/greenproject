@@ -145,16 +145,9 @@ function searchLocationsFromUserInput() {
             }).get();
             createMarkerAndInfoWindows(response, selectedOptions);
 
-            // render the results list
+            // for testing
             console.log(searchQuery);
-            //console.log(response.data.results);
-
-            var resultData = response.data.results;
-            console.log(resultData);
-
-            clearResult();
-            renderData(resultData, searchQuery);
-
+            
         }).catch(err => {
             console.log(err);
         });
@@ -166,12 +159,10 @@ function searchLocationsFromUserInput() {
 // For Search result list rendering
 var resultDisplay = document.getElementById("list");
 
-
 // clear results list displayed for new search query
 function clearResult() {
     resultDisplay.innerHTML = "";
 }
-
 
 // For Search result list rendering
 function renderData(data, location) {
@@ -217,7 +208,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
 
     // for search result list rendering
     const listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
-    const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
+    const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'><span class='glyphicon glyphicon-map-marker'></span> Back to Map</button>";
     let listResult = "";
 
     for (address of addresses) {
@@ -237,8 +228,13 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
             //render the address/result filtered into the list
             clearResult();
             listResult += renderResult(address);
-            console.log("address:" + address);
-
+            //console.log("address:" + address);
+            
+            if (address != 0){
+                //console.log("has results to render");
+            } else {
+                console.log("no result to render");
+            }
         }
     }
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
@@ -300,6 +296,7 @@ function getDirection() {
 
 // render search result list - current location search
 function renderResult(address) {
+    var errorMessage = "<p> Sorry there is no search result for your search selection </p>";
     var listResult = "",
         // listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>",
         // backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>",
@@ -313,7 +310,13 @@ function renderResult(address) {
         "<strong>" + "recyclable waste-type accepted:" + "</strong><br>" +
         wasteType + "</p>" + "</div>";
 
-    return listResult;
+    if (address != 0) {
+        return listResult;
+    } else {
+        return errorMessage;
+        console.log("return error message");
+    }
+   
 }
 
 //close all infowindows
