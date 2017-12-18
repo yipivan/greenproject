@@ -352,15 +352,15 @@ function getDirection() {
 }
 
 let wasteTypeColor = {
-    "Barbeque Fork"                        : "#111111",
-    "Clothes"                              : "#222222",
-    "Electrical and Electronic Equipment"  : "#333333",
-    "Fluorescent Lamp"                     : "#444444",
-    "Glass Bottles"                        : "#555555",
-    "Metals"                               : "#666666",
-    "Paper"                                : "#777777",
-    "Plastics"                             : "#888888",
-    "Rechargeable Batteries"               : "#999999"
+    "Barbeque Fork"                        : "#FF0000", // red
+    "Clothes"                              : "#FFA500", // orange
+    "Electrical and Electronic Equipment"  : "#800080", // purple
+    "Fluorescent Lamp"                     : "#ADD8E6", // light blue
+    "Glass Bottles"                        : "#008000", // green
+    "Metals"                               : "#FFFF00", // yellow
+    "Paper"                                : "#0000FF", // blue
+    "Plastics"                             : "#8B4513", // brown
+    "Rechargeable Batteries"               : "#999999"  // grey
 }
 
 // render search result list - current location search
