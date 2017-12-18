@@ -3,9 +3,13 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const router = express.Router();
 const User = require("../models").user;
+<<<<<<< HEAD
 const Search_log = require("../models").search_log;
 const Usage_log = require("../models").usage_log;
 const {isLoggedIn} = require("../helpers/auth");
+=======
+const SearchLog = require("../models").search_log;
+>>>>>>> routing
 
 //user login
 router.post("/login",
@@ -95,6 +99,20 @@ router.get("/:id",isLoggedIn,(req,res)=>{
 })
 
 //logout 
+router.post("/search", (req,res) => {
+  console.log(req.body);
+  var data = {
+    "wasteType": req.body['data[0][value]'],
+    "quantity": req.body['data[1][value]'],
+    "location": {
+      "lat": req.body['origin[lat]'],
+      "lng": req.body['origin[lng]']
+    }
+  }
+
+  var searchLog = new SearchLog();
+})
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
