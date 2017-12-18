@@ -22,6 +22,18 @@ $('#travel-mode li').on('click', function () {
     $(this).addClass('active');
 });
 
+$('#recycle-form button[type="submit"]').on('click', function (e) {
+    var form = $('#recycle-form');
+    submitForm(form);
+});
+
+function submitForm(form) {
+    var url = form.attr("action");
+    var formData = $(form).serializeArray();
+    $.post(url, formData).done(function (data) {
+        alert(data);
+    });
+}
 
 function initMap() {
     getPosition().then(position => {
@@ -243,8 +255,9 @@ function createInfoWindow(marker, address) {
     let contentString = `
                         Address :${address["address1-en"]} <br>
                         Recycling Type: ${address["waste-type"]} <br>
-                        <input type="button" value="Show route" onclick="getDirection(); closeInfoWindows()"></input>
+                        <input type="button" value="Show route" onclick="getDirection(); closeInfoWindows()" data-toggle="modal" data-target="#modal-form"></input>
                         `;
+    // data-toggle="modal" data-target="#myModal"
     let infowindow = new google.maps.InfoWindow({
         content: contentString
     });
@@ -253,6 +266,7 @@ function createInfoWindow(marker, address) {
         destination = this.position;
         closeInfoWindows();
         infowindow.open(map, marker);
+
     }); //end addListener
 }
 
