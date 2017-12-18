@@ -53,6 +53,14 @@ app.use(passport.session());
 // display message
 app.use(flash());
 
+// function to check if logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        res.redircet('/login')
+    }
+}
 // index route
 app.get('/', (req, res) => {
     res.render('index');
@@ -60,6 +68,11 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname,'/login.html'));
 });
+
+app.post('/search',(req,res)=>{
+    
+})
+
 
 app.get('/auth/facebook',
 passport.authenticate('facebook'));
@@ -75,6 +88,7 @@ function(req, res) {
 // use routes
 app.use('/users', users);
 app.use('/recycle-points', recyclePoints);
+
 
 const port = 5000;
 

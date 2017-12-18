@@ -8,7 +8,7 @@ router.get('/', (req,res) => {
     res.render('recycle-points/search');
 });
 
-// //When search, save log (mock up)
+// // When search, save log (mock up)
 
 // router.post('/search_route',(req,res)=>{
 //     Search_log.create({
