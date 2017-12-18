@@ -73,6 +73,9 @@ function getNearbyRecyclingPoints() {
         return $(this).val();
     }).get();
 
+    // to reset searchQuery field if the user is search via current location
+    clearField();
+
     // selectedOptions = wastetypes selected in droplist
     console.log("selectedOptions:" + selectedOptions);
 
@@ -96,6 +99,11 @@ function getNearbyRecyclingPoints() {
     }).catch(err => {
         console.log(err);
     });
+}
+
+function clearField(){
+    var reset_input = document.getElementById("location");
+    reset_input.value= "";
 }
 
 //adjust the map boundary
@@ -146,7 +154,7 @@ function searchLocationsFromUserInput() {
             createMarkerAndInfoWindows(response, selectedOptions);
 
             // for testing
-            console.log(searchQuery);
+            //console.log(searchQuery);
             
         }).catch(err => {
             console.log(err);
@@ -155,6 +163,7 @@ function searchLocationsFromUserInput() {
         console.log(err);
     })
 }
+
 
 // For Search result list rendering
 var resultDisplay = document.getElementById("list");
@@ -207,9 +216,20 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     infoWindows = [];
 
     // for search result list rendering
-    const listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
+    var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
     const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'><span class='glyphicon glyphicon-map-marker'></span> Back to Map</button>";
     let listResult = "";
+
+    var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
+    console.log("searchQuery is " + searchQuery);
+
+    // to enter searchQuery into the listHeading
+    if (searchQuery != 0){
+        console.log("has SearchQuery");
+        var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + searchQuery + "</h5>";
+    } else {
+        console.log("no SearchQuery");
+    }
 
     for (address of addresses) {
         //filter out user selection
@@ -227,14 +247,11 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
 
             //render the address/result filtered into the list
             clearResult();
+           
             listResult += renderResult(address);
             //console.log("address:" + address);
             
-            if (address != 0){
-                //console.log("has results to render");
-            } else {
-                console.log("no result to render");
-            }
+            
         }
     }
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
