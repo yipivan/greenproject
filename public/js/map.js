@@ -101,9 +101,9 @@ function getNearbyRecyclingPoints() {
     });
 }
 
-function clearField(){
+function clearField() {
     var reset_input = document.getElementById("location");
-    reset_input.value= "";
+    reset_input.value = "";
 }
 
 //adjust the map boundary
@@ -155,7 +155,7 @@ function searchLocationsFromUserInput() {
 
             // for testing
             //console.log(searchQuery);
-            
+
         }).catch(err => {
             console.log(err);
         });
@@ -174,26 +174,26 @@ function clearResult() {
 }
 
 // For Search result list rendering
-function renderData(data, location) {
-    var listResult = "";
-    var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + location + "</h5>";
-    var backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
+// function renderData(data, location) {
+//     var listResult = "";
+//     var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + location + "</h5>";
+//     var backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>Back to Map</button>";
 
-    //console.log("TEST RESULT:" + data);
+//     //console.log("TEST RESULT:" + data);
 
-    for (i = 0; i < data.length; i++) {
-        listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
-            "<strong>" + data[i]["address1-en"] + "</strong><br>" +
-            "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
-            + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
-            + data[i]["waste-type"] + "</p>" + "</div>";
-    }
-    resultDisplay.insertAdjacentHTML('beforeend', listHeading);
-    resultDisplay.insertAdjacentHTML('beforeend', listResult);
+//     for (i = 0; i < data.length; i++) {
+//         listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+//             "<strong>" + data[i]["address1-en"] + "</strong><br>" +
+//             "<p>" + data[i]["address1-zh-hant"] + "<br><br>"
+//             + "<strong>" + "recyclable waste-type accepted:" + "</strong><br>"
+//             + data[i]["waste-type"] + "</p>" + "</div>";
+//     }
+//     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
+//     resultDisplay.insertAdjacentHTML('beforeend', listResult);
 
-    //to add Back to Map link at the end of the search result list
-    resultDisplay.insertAdjacentHTML('beforeend', backToMap);
-}
+//     //to add Back to Map link at the end of the search result list
+//     resultDisplay.insertAdjacentHTML('beforeend', backToMap);
+// }
 
 // clearing the markers
 function clearMarkers() {
@@ -218,24 +218,48 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     // for search result list rendering
     var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
     const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'><span class='glyphicon glyphicon-map-marker'></span> Back to Map</button>";
+    let noSearchResult = "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+    "<strong>There is currently no Recyclable Points available<br>that accept the waste types you have selected</strong><br>" +
+    "<br><br>" +
+    "<strong>Search again with different waste-type</strong><br>" + "</div>";
     let listResult = "";
 
     var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
     console.log("searchQuery is " + searchQuery);
 
     // to enter searchQuery into the listHeading
-    if (searchQuery != 0){
+    if (searchQuery != 0) {
         console.log("has SearchQuery");
         var listHeading = "<br><h5>" + "Recycling Points near <br> your entered location: " + searchQuery + "</h5>";
     } else {
         console.log("no SearchQuery");
     }
+    // if (addresses.length === 0) {
 
-    for (address of addresses) {
+    // }
+    
+    // .filter returns the address that matches the wasteTypes selected
+    // .every returns true/false 
+    let filteredList = addresses.filter((e) => selectedOptions.every(option => {
+            return e["wasteTypes"].includes(option);
+        }));
+    //console.log("filteredList.length: ", filteredList.length);
+    // if no search result that matches the condition of the search criteria
+    if (filteredList.length === 0) {
+        clearResult();   
+        resultDisplay.insertAdjacentHTML('beforeend', noSearchResult);   
+        console.log("there is no result that matches search criteria to render");
+        // clear selectedOptions to default status (nothing selected)
+        clearSelectedOptions();
+        return;
+    }
+
+    for (address of filteredList) {
         //filter out user selection
-        if (selectedOptions.every(option => {
-            return address["wasteTypes"].includes(option);
-        })) {
+        // if (selectedOptions.every(option => {
+        //     return address["wasteTypes"].includes(option);
+        // })) {
+            
             let marker = new google.maps.Marker({
                 position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
                 map: map,
@@ -246,13 +270,17 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
             markers.push(marker);
 
             //render the address/result filtered into the list
+
             clearResult();
-           
             listResult += renderResult(address);
             //console.log("address:" + address);
-            
-            
-        }
+            //console.log(Object.keys(addresses).length);
+            //console.log(Object.keys(address).length);
+            console.log(address);  // 3 objects returned
+            //var length = Object.keys(address).length;
+
+
+        //}
     }
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
@@ -261,6 +289,12 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     addresses = [];
     adjustBounds();
 }
+
+// to reset selectedOptions to default if no search result to display
+function clearSelectedOptions(){
+
+}
+
 
 //create infowindow helper
 function createInfoWindow(marker, address) {
@@ -311,6 +345,18 @@ function getDirection() {
     })
 }
 
+let wasteTypeColor = {
+    "Barbeque Fork"                        : "#111111",
+    "Clothes"                              : "#222222",
+    "Electrical and Electronic Equipment"  : "#333333",
+    "Fluorescent Lamp"                     : "#444444",
+    "Glass Bottles"                        : "#555555",
+    "Metals"                               : "#666666",
+    "Paper"                                : "#777777",
+    "Plastics"                             : "#888888",
+    "Rechargeable Batteries"               : "#999999"
+}
+
 // render search result list - current location search
 function renderResult(address) {
     var errorMessage = "<p> Sorry there is no search result for your search selection </p>";
@@ -321,19 +367,25 @@ function renderResult(address) {
         addressCh = address["address1-zh-hant"],
         wasteType = address["waste-type"];
 
+    let wasteColoredType = wasteType.split(",").map(type => {
+        return "<span style='padding: 5px; background-color: " + wasteTypeColor[type] + "'>" + type+ "</span>"; ;
+    });
+    console.log(wasteColoredType);
+
     listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
         "<strong>" + addressEn + "</strong><br>" +
         "<p>" + addressCh + "<br><br>" +
         "<strong>" + "recyclable waste-type accepted:" + "</strong><br>" +
-        wasteType + "</p>" + "</div>";
-
-    if (address != 0) {
-        return listResult;
+        wasteColoredType.join(" ") + "</p>" + "</div>";
+    return listResult;
+   /* if (address != 0) {
+        
+        console.log("there is result matched to render");
     } else {
         return errorMessage;
         console.log("return error message");
-    }
-   
+    }*/
+
 }
 
 //close all infowindows
