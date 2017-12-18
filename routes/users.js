@@ -24,7 +24,7 @@ router.post("/register",
 );
 
 //loggined user search action (search_log + usage_log)
-router.post(":id/search", (req, res) => {
+router.post(":id/search",isLoggedIn, (req, res) => {
   
   // create new search_log for every search.
   // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
@@ -60,7 +60,7 @@ router.post(":id/search", (req, res) => {
 });
 
   //retrieve user profile data
-router("/:id",(req,res)=>{
+router.get("/:id",isLoggedIn,(req,res)=>{
   User.findOne({
     where:{
       emailOrId: req.session.passport.user.id
