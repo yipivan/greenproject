@@ -80,8 +80,9 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-//retrieve user profile data
-router.get("/:id", isLoggedIn, (req, res) => {
+  //retrieve user profile data
+router.get("/:id",isLoggedIn,(req,res)=>{
+  const p1 = 
   User.findOne({
     where: {
       emailOrId: req.session.passport.user.emailOrId
@@ -89,9 +90,8 @@ router.get("/:id", isLoggedIn, (req, res) => {
   }).then(user => {
     if (req.params.id !== user.id) {
       console.log('get /:id Not Authorised')
-      res.redirect('/login')
-    } else {
-
+      res.redirect('/login')  
+    } else { 
       //retrieve usage_log
       Usage_log.findOne({
         where: {
@@ -100,20 +100,21 @@ router.get("/:id", isLoggedIn, (req, res) => {
       }).then(usage_log => {
         return usage_log
       })
-
-      //retrieve latest 10 pieces of search_log
-      Search_log.findAll({
-        where: {
-          userId: req.session.passport.user.id
-        },
-        limit: 10,
-        order: [['createdAt', 'DESC']]
-      }).then(search_log => {
-        return search_log;
-      });
-    }
+  //retrieve latest 10 pieces of search_log
+  const p2 = 
+  Search_log.findAll({
+    where: {
+      userId: req.session.passport.user.id
+    },
+    limit: 10,
+    order: [ [ 'createdAt', 'DESC' ]]
+  }).then(search_log => {
+    return search_log;
+      });  
+    } 
   })
+  //res.render(template,{usage_log: value[0], search_log: value[1]})
+  Promise.all ([p1,p2]).then(value=>{})
 })
-
 
 module.exports = router;

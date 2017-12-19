@@ -25,6 +25,11 @@ body {
   padding-bottom: 40px;
   background-color:#8BC63E;
 }
+
+h3 {
+  color: green;
+}
+
 .form-signin {
   max-width: 400px;  
   margin: 0 auto;
@@ -93,7 +98,7 @@ body {
 }
 .login-footer .left-section a{
 	font-weight:bold;
-	color:#8a8a8a;
+	color: green;
 	line-height:19px;
 }
 
@@ -126,6 +131,7 @@ body {
 .show-login-form:hover,
 .show-register-form:hover {
   opacity: 1;
+  color: green;
 }
 
 .show-forms {
@@ -143,6 +149,7 @@ body {
 p {
   font-weight: 700;
   margin-top: 10px;
+  color: green;
 }
 
 /* Validation Messages  */
@@ -169,8 +176,11 @@ div[id*="errorBox"] {
   padding: 9px 18px;
 }
 
-
-
+/* tootip for password validation  */
+.tooltip-inner {
+  max-width: 100% !important;
+  background-color: green;
+}
 
 
 
