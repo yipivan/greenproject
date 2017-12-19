@@ -56,14 +56,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// function to check if logged in
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        res.redircet('/login')
-    }
-}
 // index route
 app.get('/', (req, res) => {
     res.render('index');
@@ -90,12 +82,6 @@ app.get('/auth/facebook/callback',
 app.use('/users', users);
 app.use('/recycle-points', recyclePoints);
 
-
-app.get("/logout", (req, res) => {
-    req.logout();
-    console.log("im logged out");
-    res.redirect("/");
-  });
 
 const port = 5000;
 
