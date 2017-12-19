@@ -32,7 +32,7 @@ router.post("/:id/search",isLoggedIn, (req, res) => {
     where: {emailOrId: req.session.passport.user.emailOrId}
   }).then(user => {
     if(req.params.id !== user.id){
-      console.log('Not Authorised')
+      console.log('Post /:id/search Not Authorised')
       res.redirect('/login')  
     } else {
       Search_log.create({
@@ -59,6 +59,12 @@ router.post("/:id/search",isLoggedIn, (req, res) => {
   });
 });
 
+router.get("/logout", (req, res) => {
+  req.logout();
+  console.log("im logged out");
+  res.redirect("/");
+});
+
   //retrieve user profile data
 router.get("/:id",isLoggedIn,(req,res)=>{
   User.findOne({
@@ -67,7 +73,7 @@ router.get("/:id",isLoggedIn,(req,res)=>{
     }
   }).then(user=>{
     if(req.params.id !== user.id){
-      console.log('Not Authorised')
+      console.log('get /:id Not Authorised')
       res.redirect('/login')  
     } else { 
 
@@ -109,10 +115,7 @@ router.post("/search", (req,res) => {
   var searchLog = new SearchLog();
 })
 
-router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
+
 
 
 

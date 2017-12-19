@@ -91,6 +91,12 @@ app.use('/users', users);
 app.use('/recycle-points', recyclePoints);
 
 
+app.get("/logout", (req, res) => {
+    req.logout();
+    console.log("im logged out");
+    res.redirect("/");
+  });
+
 const port = 5000;
 
 app.listen(port, () => {
