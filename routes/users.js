@@ -24,16 +24,16 @@ router.post("/register",
 );
 
 //loggined user search action (search_log + usage_log)
-router.post(":id/search", isLoggedIn, (req, res) => {
-
+router.post("/:id/search",isLoggedIn, (req, res) => {
+  
   // create new search_log for every search.
   // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
   User.findOne({
-    where: { emailOrId: req.session.passport.user.id }
+    where: {emailOrId: req.session.passport.user.emailOrId}
   }).then(user => {
-    if (req.params.id !== user.emailOrId) {
-      console.log('Not Authorised')
-      res.redirect('/login')
+    if(req.params.id !== user.id){
+      console.log('Post /:id/search Not Authorised')
+      res.redirect('/login')  
     } else {
       Search_log.create({
         userId: req.session.passport.user.id,
@@ -59,17 +59,23 @@ router.post(":id/search", isLoggedIn, (req, res) => {
     });
 });
 
-//retrieve user profile data
-router.get("/:id", isLoggedIn, (req, res) => {
+router.get("/logout", (req, res) => {
+  req.logout();
+  console.log("im logged out");
+  res.redirect("/");
+});
+
+  //retrieve user profile data
+router.get("/:id",isLoggedIn,(req,res)=>{
   User.findOne({
-    where: {
-      emailOrId: req.session.passport.user.id
+    where:{
+      emailOrId: req.session.passport.user.emailOrId
     }
-  }).then(user => {
-    if (req.params.id !== user.emailOrId) {
-      console.log('Not Authorised')
-      res.redirect('/login')
-    } else {
+  }).then(user=>{
+    if(req.params.id !== user.id){
+      console.log('get /:id Not Authorised')
+      res.redirect('/login')  
+    } else { 
 
       //retrieve usage_log
       Usage_log.findOne({
@@ -113,10 +119,5 @@ router.post("/search", (req, res) => {
 
 })
 
-//logout 
-router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
 
 module.exports = router;
