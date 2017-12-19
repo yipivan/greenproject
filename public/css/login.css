@@ -12,10 +12,9 @@ font-weight: 800;
 
 }
 
-.navbar-nav li a {
-/* border: 2px solid white;  */
-
-}
+/* .navbar-nav li a {
+/* border: 2px solid white;  
+} */
 
 .navbar-brand {
 pointer-events:none;
@@ -140,6 +139,7 @@ h3 {
 
 .left-section a {
   font-size: 14px;
+  color: green;
 }
 
 .left-section {

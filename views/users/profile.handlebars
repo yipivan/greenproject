@@ -28,7 +28,16 @@ section when routing/test is DONE --}}
     <div id="wrap-inner">
 
       <div id="userinfo">
-        <h8>Welcome back to Recycle HK(to be updated later), FIRSTNAME (from DB)</h8>
+        <h8>Welcome back to Recycle HK, FIRSTNAME (from DB)</h8>
+
+        <div class="text-center">
+
+          <p>Search for Recyclable points?</p>
+
+          <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"\#pagelink\"' style='cursor:pointer;'><i class="fa fa-search" aria-hidden="true"></i>  Go to Recycling finder</button>
+
+        </div>
+
       </div>
 
       <div id="randomgenerator">
@@ -36,42 +45,38 @@ section when routing/test is DONE --}}
         <p>TEST</p> --}}
       </div>
 
-      <div id="searchhistory">
+      <div id="searchhistory" class="text-center">
         <h9>Your latest Recyclable Points search history</h9>
-        
-        <p>move this to the side bar</p>
 
-        <p>address in English</p>
+        <p>move this to the side bar<br> from Usage log record model</p>
 
-        <p>date it was searched on </p>
-
-        <p> retrieve the data but do not show on UI<br>
-        long 
-        lat</p>
-
+        <div id="mocklist">
+        </div>
       </div>
 
-      <div id="actionhistory">
+      <div id="actionhistory" class="text-center">
         <h10>Your Recycling activity recorded:</h10>
 
-        <p>waste-type recycled                 quantity recycled</p>
+        <p>waste-type recycled quantity recycled</p>
 
-        <p>clothes                                         1 </p>
+        <p>clothes 1 </p>
+
+      </div>
+
+
+
+      <div id="panel-wrapper">
+        <div id='panel'>
+          <p>More user details or another user history section or overall usage data</p>
+
+        </div>
+        <div class='open'>
+          <p>Open</p>
+        </div>
 
       </div>
 
-    
-
-    <div id="panel-wrapper">
-      <div id='panel'>
-        <p>More user details or another user history section or overall usage data</p>
-
-      </div>
-      <div class='open'>
-        Open
-      </div>
-
-      </div>
+      <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'><span class='glyphicon glyphicon-home'></span>  Back to Home/Search Page</button>
     </div>
 
   </div>
@@ -95,6 +100,10 @@ section when routing/test is DONE --}}
   (function () {
 
     window.onload = function () {
+
+      // for result render until db is ready
+      renderMockData();
+
       var n = Math.floor(Math.random() * 3);
       console.log(n);
       if (n === 0) {     // can use switch instead of if
@@ -133,6 +142,32 @@ section when routing/test is DONE --}}
 
     function clearDisplay() {
       resultDisplay.innerHTML = "";
+    }
+
+
+    // delete once db data is ready and rendered
+    var mockDataDisplay = document.getElementById("mocklist");
+
+    function renderMockData() {
+
+      var listResult = "";
+
+      var mockData = {
+        "Address": "Junction of Hollywood Road and Aberdeen Street",
+        "Searched on": "19 December 2017",
+        "Longitude": "XXX",
+        "Latitude": "YYY"
+      };
+
+      for (i = 0; i < 5; i++) {
+        listResult += "<div id='searcheddata'>" +
+          "Searched on: " + mockData["Searched on"] + "<br><br>" +
+          "<strong>" + mockData.Address + "</strong><br>" +
+          "<id='hiddendata'><br>this data will not be shown:<br><br>Longitude:" + mockData.Longitude + "<br>Latitude:" +
+          mockData.Latitude + "</div>";
+      }
+
+      mockDataDisplay.insertAdjacentHTML('beforeend', listResult);
     }
 
   })();
