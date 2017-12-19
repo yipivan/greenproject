@@ -1,7 +1,8 @@
 {{#each users}}
 
-<p>Your Searched Recyclable Points history:</p>
-
+<div>
+  <p>Your Searched Recyclable Points history:</p>
+</div>
 {{!--
 <div class="card card-body mb-2">
   <h4>{{title}}</h4>
@@ -18,31 +19,64 @@
 --}} {{!-- This is what logged in user will see as their profile/dashboard page copy below section to under {{#each users}}
 section when routing/test is DONE --}}
 
-<div id="wrap" class="container">
+<div>
+  <div id="wrap" class="container">
 
-  <p><strong>IGNORE</strong> the nabvar above, different version of navbar is already set for logged in user with Profile and
-    Logout buttons!</p>
+    <p><strong>IGNORE</strong> the nabvar above, different version of navbar is already set for logged in user with Profile
+      and Logout buttons!</p>
 
-  <div id="userinfo">
-    <h8>Welcome back to Recycle HK(to be updated later), FIRSTNAME (from DB)</h8>
+    <div id="wrap-inner">
+
+      <div id="userinfo">
+        <h8>Welcome back to Recycle HK(to be updated later), FIRSTNAME (from DB)</h8>
+      </div>
+
+      <div id="randomgenerator">
+        {{!--
+        <p>TEST</p> --}}
+      </div>
+
+      <div id="searchhistory">
+        <h9>Your latest Recyclable Points search history</h9>
+        
+        <p>move this to the side bar</p>
+
+        <p>address in English</p>
+
+        <p>date it was searched on </p>
+
+        <p> retrieve the data but do not show on UI<br>
+        long 
+        lat</p>
+
+      </div>
+
+      <div id="actionhistory">
+        <h10>Your Recycling activity recorded:</h10>
+
+        <p>waste-type recycled                 quantity recycled</p>
+
+        <p>clothes                                         1 </p>
+
+      </div>
+
+    
+
+    <div id="panel-wrapper">
+      <div id='panel'>
+        <p>More user details or another user history section or overall usage data</p>
+
+      </div>
+      <div class='open'>
+        Open
+      </div>
+
+      </div>
+    </div>
+
   </div>
-
-  <div id="randomgenerator">
-    {{!-- <p>TEST</p> --}}
-  </div>
-
-  <div id="searchhistory">
-    <h9>Your latest Recyclable Points search history</h9>
-  </div>
-
-  <div id="actionhistory">
-    <h10>Your Recycling activity recorded:</h10>
-
-    <p>waste-type recycled<br> quantity recycled</p>
-
-  </div>
-
 </div>
+
 
 {{/each}}
 
@@ -51,10 +85,18 @@ section when routing/test is DONE --}}
   crossorigin="anonymous"></script>
 
 <script>
+  // for left side panel
+  $('.open').click(function () {
+    $("#panel").animate({
+      width: 'toggle'
+    }, 300);
+  });
+
   (function () {
 
     window.onload = function () {
       var n = Math.floor(Math.random() * 3);
+      console.log(n);
       if (n === 0) {     // can use switch instead of if
         renderResult(n);
         // this.textContent = 'result here';
@@ -67,31 +109,32 @@ section when routing/test is DONE --}}
 
     var resultDisplay = document.getElementById("randomgenerator");
 
-  function renderResult(n){
-    var htmlString = "";
+    function renderResult(n) {
+      var htmlString = "";
 
-    if (n == 0) {
-      htmlString += "<p>For saving more paper in HK....</p>" + 
-      "<p><a href = 'http://www.gocup.hk/' target='_blank'><img src='/images/gocup.jpg' height='250' width='250'/></a></p>" +
-      "<p>" +  "Check out Go Cup HK for more information" +  "</p>"
-    } else if (n == 1) {
-      htmlString += "<p>For recycling Rechageable Battery....</p>" +
-      "<p><a href = 'https://www.wastereduction.gov.hk/en/workplace/rechargebattery_intro.htm' target='_blank'><img src='/images/poster_rb.jpg' height='250' width='180'/></a></p>" +
-      "<p>" +  "Check out government site for more details" +  "</p>"
-    } else {
-      htmlString += "<p>For helpful guide on recycling glass bottles...</p>" +
-      "<p><a href = 'http://www.glass-recycling.com.hk/recycling-steps' target='_blank'><img src='/images/glassrecycle.jpg' height='250' width='180'/></a></p>" +
-      "<p>" +  "Check out step-by-step guide on glass bottle recycling" +  "</p>"
+      if (n == 0) {
+        htmlString += "<p>For saving more paper in HK....</p>" +
+          "<p><a href = 'http://www.gocup.hk/' target='_blank'><img src='/images/gocup.jpg' height='250' width='250'/></a></p>" +
+          "<p>" + "Check out Go Cup HK for more information" + "</p>"
+      } else if (n == 1) {
+        htmlString += "<p>For recycling Rechageable Battery....</p>" +
+          "<p><a href = 'https://www.wastereduction.gov.hk/en/workplace/rechargebattery_intro.htm' target='_blank'><img src='/images/poster_rb.jpg' height='250' width='180'/></a></p>" +
+          "<p>" + "Check out government site for more details" + "</p>"
+      } else {
+        htmlString += "<p>For helpful guide on recycling glass bottles...</p>" +
+          "<p><a href = 'http://www.glass-recycling.com.hk/recycling-steps' target='_blank'><img src='/images/glassrecycle.jpg' height='250' width='180'/></a></p>" +
+          "<p>" + "Check out step-by-step guide on glass bottle recycling" + "</p>"
+      }
+
+      clearDisplay();
+      resultDisplay.insertAdjacentHTML('beforeend', htmlString);
+
     }
-    
-    clearDisplay();
-    resultDisplay.insertAdjacentHTML('beforeend', htmlString);
-    
-  }
 
-  function clearDisplay(){
-    resultDisplay.innerHTML = "";
-  }
+    function clearDisplay() {
+      resultDisplay.innerHTML = "";
+    }
 
   })();
+
 </script>

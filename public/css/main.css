@@ -12,10 +12,9 @@
     
 }
 
-.navbar-nav li a {
-    /* border: 2px solid white;  */
-    
-}
+/* .navbar-nav li a {
+    /* border: 2px solid white;  
+} */
 
 .navbar-brand {
     pointer-events:none;
@@ -213,7 +212,7 @@ h8, h9, h10 {
 #actionhistory {
     background-color: lightgreen;
     margin: 20px 0;
-    padding-bottom: 80px;
+    padding: 10px 0 80px 10px;
 }
 
 /* CSS for profile/dashboard page - Random display section */
@@ -228,6 +227,47 @@ h8, h9, h10 {
   
 img {
     margin: 0 auto;
+}
+
+/* CSS for profile/dashboard page - overlap of two divs */
+
+#wrap-inner {
+    position: relative; /* do not change this */
+    z-index:1;
+}
+
+#panel-wrapper {
+    position: absolute; /* do not change this */
+    z-index:2;
+    /* Below CSS will get the exact anchor point as the #wrap-inner
+    as well as change its height according to its parent element which is #wrap-inner */
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+/* CSS for profile/dashboard page - panel section */
+
+#panel
+{
+     height: 800px;
+     width: 200px;
+    padding:20px;
+     background: #eee;
+     float: left;
+     display: none;    
+     color: #666;
+     font-size: 1vw;
+}
+.open
+{
+     height: 20px;
+     width: 70px;
+     background: green;
+    padding:20px;
+     float: left; 
+     margin-top: 200px;
+    color:#fff;
 }
 
 
