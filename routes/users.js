@@ -67,10 +67,13 @@ router.post("/search", isLoggedIn, (req, res) => {
         recycle_item_name: wasteType,
         recycle_times: 0
       }
+    }).then(usage => {
+      usage[0]["recycle_times"] += 1;
+      usage[0].save();
     })
-      .then(() => {
-        Usage_log.increment("recycle_times", { by: 1, where: { userId: req.user.id, recycle_item_name: wasteType } });
-      })
+      // .then(() => {
+      //   Usage_log.increment("recycle_times", { by: 1, where: { userId: req.user.id, recycle_item_name: wasteType } });
+      // })
       .catch(err => {
         console.log(err)
       }))
