@@ -14,44 +14,45 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class='glyphicon glyphicon-trash'></span> Waste Type
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class='glyphicon glyphicon-trash'></span> Waste Type
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-form" id="waste-type">
                                 <li>
-                                    <input type="checkbox" id="waste-type-1" value="Barbeque Fork">
+                                    <input type="checkbox" id="waste-type-1" value="Barbeque Fork" name="waste-type">
                                     <label for="waste-type-1">Barbeque Fork</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-2" value="Clothes">
+                                    <input type="checkbox" id="waste-type-2" value="Clothes" name="waste-type">
                                     <label for="waste-type-2">Clothes</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-3" value="Electrical and Electronic Equipment">
+                                    <input type="checkbox" id="waste-type-3" value="Electrical and Electronic Equipment" name="waste-type">
                                     <label for="waste-type-3">Electrical and Electronic Equipment</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-4" value="Fluorescent Lamp">
+                                    <input type="checkbox" id="waste-type-4" value="Fluorescent Lamp" name="waste-type">
                                     <label for="waste-type-4">Fluorescent Lamp</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-5" value="Glass Bottles">
+                                    <input type="checkbox" id="waste-type-5" value="Glass Bottles" name="waste-type">
                                     <label for="waste-type-5">Glass Bottles</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-6" value="Metals">
+                                    <input type="checkbox" id="waste-type-6" value="Metals" name="waste-type">
                                     <label for="waste-type-6">Metals</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-7" value="Paper">
+                                    <input type="checkbox" id="waste-type-7" value="Paper" name="waste-type">
                                     <label for="waste-type-7">Paper</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-8" value="Plastics">
+                                    <input type="checkbox" id="waste-type-8" value="Plastics" name="waste-type">
                                     <label for="waste-type-8">Plastics</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="waste-type-9" value="Rechargeable Batteries">
+                                    <input type="checkbox" id="waste-type-9" value="Rechargeable Batteries" name="waste-type">
                                     <label for="waste-type-9">Rechargeable Batteries</label>
                                 </li>
                             </ul>
@@ -59,7 +60,8 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class='glyphicon glyphicon-road'></span> Travel mode
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class='glyphicon glyphicon-road'></span> Travel mode
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-form" id="travel-mode">
@@ -85,6 +87,7 @@
     <div id="modal-form" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -92,17 +95,43 @@
                     <h4 class="modal-title">Please tell us what are you recycling:</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="recycle-form" class="form-horizontal" action="/users/search">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Waste</label>
-                            <div class="col-sm-10">
-                                <input name="waste-type" type="text" class="form-control" placeholder="Enter a waste type">
+                    <form id="recycle-form">
+                        <div class="form-group align-left">
+                            <div class="checkbox">
+                                <input type="checkbox" value="Barbeque Fork" name="waste-type">
+                                <label>Barbeque Fork</label>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Quantity</label>
-                            <div class="col-sm-10">
-                                <input name="quantity" type="number" class="form-control" placeholder="quantity">
+                            <div class="checkbox">
+                                <input type="checkbox" value="Clothes" name="waste-type">
+                                <label>Clothes</label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" value="Electrical and Electronic Equipment" name="waste-type">
+                                <label>Electrical and Electronic Equipment</label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" value="Fluorescent Lamp" name="waste-type">
+                                <label>Fluorescent Lamp</label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" value="Glass Bottles" name="waste-type">
+                                <label>Glass Bottles</label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" value="Metals" name="waste-type">
+                                <label>Metals</label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" value="Paper" name="waste-type">
+                                <label>Paper</label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" value="Plastics" name="waste-type">
+                                <label>Plastics</label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" value="Rechargeable Batteries" name="waste-type">
+                                <label>Rechargeable Batteries</label>
                             </div>
                         </div>
                         <div class="form-group">

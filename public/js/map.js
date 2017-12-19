@@ -10,6 +10,15 @@ var originMarker;
 var travelMode;
 var destinationAddress;
 
+//sync waste-types to user submit form
+$('#waste-type input').each(function() {
+    $(this).on('change', function() {
+        let wasteType = $(this).val();
+        let x = this.checked;
+        $(`#recycle-form input[value="${wasteType}"]`).prop('checked', x);
+    })
+})
+
 //prevent dropdown menu from closing itself by clicking
 $('.dropdown-menu').on('click', function (e) {
     if ($(this).hasClass('dropdown-menu-form')) {
@@ -26,9 +35,12 @@ $('#travel-mode li').on('click', function () {
 //submit user search form to server
 $('#recycle-form').on('submit', function (e) {
     e.preventDefault();
-    var formData = $('#recycle-form').serializeArray();
+    // var formData = $('#recycle-form').serializeArray();
+    var wasteTypes = $('#recycle-form input[type="checkbox"]:checked').map(function () {
+        return $(this).val();
+    }).get();
     var data = {
-        formData: formData,
+        wasteTypes: wasteTypes,
         query: destinationAddress,
         latlng: [destination.lat(), destination.lng()]
     }
@@ -298,6 +310,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
 // to reset selectedOptions to default if no search result to display
 function clearSelectedOptions(){
    $('#waste-type input[type="checkbox"]:checked').prop('checked', false);
+   $('#recycle-form input').prop('checked',false);
 }
 
 //create infowindow helper
@@ -405,5 +418,3 @@ function clearRoutes() {
         directionsDisplay.setMap(null);
     }
 }
-
-
