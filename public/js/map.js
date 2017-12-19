@@ -8,6 +8,7 @@ var infowindows = [];
 var center;
 var originMarker;
 var travelMode;
+var destinationAddress;
 
 //prevent dropdown menu from closing itself by clicking
 $('.dropdown-menu').on('click', function (e) {
@@ -27,18 +28,15 @@ $('#recycle-form').on('submit', function (e) {
     e.preventDefault();
     var formData = $('#recycle-form').serializeArray();
     var data = {
-        data: formData,
-        origin: {
-            lat: origin.lat(),
-            lng: origin.lng()
-        }
+        formData: formData,
+        query: destinationAddress,
+        latlng: [destination.lat(), destination.lng()]
     }
-    $.post('/users/search', data).catch(err => {
+    $.post('/users/:id/search', data).catch(err => {
         alert(err);
     })
     $('#modal-form').modal('hide');
 });
-
 
 function initMap() {
     getPosition().then(position => {
@@ -72,7 +70,7 @@ function initMap() {
     })
 }
 
-// function to fetching the recycling points
+// function to fetch the nearby recycling points
 function getNearbyRecyclingPoints() {
     var selectedOptions = $('#waste-type input[type="checkbox"]:checked').map(function () {
         return $(this).val();
@@ -94,7 +92,6 @@ function getNearbyRecyclingPoints() {
     }).then(response => {
         center = origin;
         createMarkerAndInfoWindows(response, selectedOptions);
-
         // For Search result list rendering
         //console.log(response.data.results);
 
@@ -157,7 +154,6 @@ function searchLocationsFromUserInput() {
                 return $(this).val();
             }).get();
             createMarkerAndInfoWindows(response, selectedOptions);
-
             // for testing
             //console.log(searchQuery);
 
@@ -266,7 +262,6 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
         // if (selectedOptions.every(option => {
         //     return address["wasteTypes"].includes(option);
         // })) {
-            
             let marker = new google.maps.Marker({
                 position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
                 map: map,
@@ -283,7 +278,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
             //console.log("address:" + address);
             //console.log(Object.keys(addresses).length);
             //console.log(Object.keys(address).length);
-            console.log(address);  // 3 objects returned
+            // console.log(address);  // 3 objects returned
             //var length = Object.keys(address).length;
 
 
@@ -309,17 +304,18 @@ function createInfoWindow(marker, address) {
                         Address :${address["address1-en"]} <br>
                         Recycling Type: ${address["waste-type"]} <br>
                         <input type="button" value="Show route" onclick="getDirection(); closeInfoWindows()" data-toggle="modal" data-target="#modal-form"></input>
-                        `;
+                        `; 
     // data-toggle="modal" data-target="#myModal"
     let infowindow = new google.maps.InfoWindow({
         content: contentString
     });
     infowindows.push(infowindow);
+    
     google.maps.event.addListener(marker, "click", function (event) {
+        destinationAddress = address['address1-en'];
         destination = this.position;
         closeInfoWindows();
         infowindow.open(map, marker);
-
     }); //end addListener
 }
 
@@ -344,7 +340,7 @@ function getDirection() {
                     strokeColor: 'blue'
                 }
             });
-            console.log(travelMode);
+            // console.log(travelMode);
         } else {
             window.alert('Directions request failed due to ' + status);
         }
@@ -376,7 +372,7 @@ function renderResult(address) {
     let wasteColoredType = wasteType.split(",").map(type => {
         return "<span style='padding: 5px; background-color: " + wasteTypeColor[type] + "'>" + type+ "</span>"; ;
     });
-    console.log(wasteColoredType);
+    // console.log(wasteColoredType);
 
     listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
         "<strong>" + addressEn + "</strong><br>" +
