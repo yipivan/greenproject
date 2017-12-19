@@ -62,6 +62,10 @@ h1+p {
     min-width: 24vw;
 }
 
+.dropdown-menu {
+    padding: 0;
+}
+
 /* Map and search query section */
 #map {
     height: 400px;
@@ -92,6 +96,43 @@ h1 {
    padding-top: 0;
 }
 
+/* Waste Type filter section */
+
+#waste-type > li:first-child {
+    background-color: #FF0000;
+}
+
+#waste-type > li:nth-child(2) {
+    background-color: #FFA500;
+}
+
+#waste-type > li:nth-child(3) {
+    background-color: #800080;
+}
+
+#waste-type > li:nth-child(4) {
+    background-color: #ADD8E6;
+}
+
+#waste-type > li:nth-child(5) {
+    background-color: #008000;
+}
+
+#waste-type > li:nth-child(6) {
+    background-color: #FFFF00;
+}
+
+#waste-type > li:nth-child(7) {
+    background-color: #0000FF;
+}
+
+#waste-type > li:nth-child(8) {
+    background-color: #8B4513;
+}
+
+#waste-type > li:nth-child(9) {
+    background-color: #999999;
+}
 
 /* Current Location Search Button */
 .btn-green,
