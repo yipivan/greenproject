@@ -73,9 +73,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/search',(req,res)=>{
-    
 })
-
 
 app.get('/auth/facebook',
     passport.authenticate('facebook'));
@@ -92,6 +90,12 @@ app.get('/auth/facebook/callback',
 app.use('/users', users);
 app.use('/recycle-points', recyclePoints);
 
+
+app.get("/logout", (req, res) => {
+    req.logout();
+    console.log("im logged out");
+    res.redirect("/");
+  });
 
 const port = 5000;
 
