@@ -43,28 +43,17 @@ router.post("/:id/search", isLoggedIn, (req, res) => {
   // create new search_log for every search.
   // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
   User.findOne({
-<<<<<<< HEAD
     where: {emailOrId: req.user.emailOrId}
-=======
-    where: { emailOrId: req.session.passport.user.emailOrId }
->>>>>>> 52b600af219e88b6dc7513810a07d1fc75022c36
   }).then(user => {
     if (req.params.id !== user.id) {
       console.log('Post /:id/search Not Authorised')
       res.redirect('/login')
     } else {
       Search_log.create({
-<<<<<<< HEAD
         userId: req.user.id,
         query: "search_input",
         location_lat: "location_lat",
         location_lng: "location_lng"
-=======
-        userId: req.session.passport.user.id,
-        query: data.query,
-        location_lat: data.latlng[0],
-        location_lng: data.latlng[1]
->>>>>>> 52b600af219e88b6dc7513810a07d1fc75022c36
       });
     }
   }).catch(err=> console.log(err));
