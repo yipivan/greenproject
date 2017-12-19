@@ -94,40 +94,42 @@ router.get("/logout", (req, res) => {
 });
 
 //retrieve user profile data
-router.get("/:id", isLoggedIn, (req, res) => {
+router.get("/profile", isLoggedIn, (req, res) => {
   const p1 =
     User.findOne({
       where: {
         emailOrId: req.user.emailOrId
       }
     }).then(user => {
-      if (req.params.id !== user.id) {
-        console.log('get /:id Not Authorised')
+      if (req.user.id !== user.id) {
+        console.log('get user Not Authorised')
         res.redirect('/login')
       } else {
         //retrieve usage_log
-        Usage_log.findOne({
+        return Usage_log.findAll({
           where: {
-            userId: req.user.id
+            userId: user.id
           }
-        }).then(usage_log => {
-          return usage_log
         })
         //retrieve latest 10 pieces of search_log
-        const p2 =
-          Search_log.findAll({
-            where: {
-              userId: req.user.id
-            },
-            limit: 10,
-            order: [['createdAt', 'DESC']]
-          }).then(search_log => {
-            return search_log;
-          });
       }
     })
+  const p2 =
+    Search_log.findAll({
+      where: {
+        userId: req.user.id
+      },
+      limit: 10,
+      order: [['createdAt', 'DESC']]
+    })
   //res.render(template,{usage_log: value[0], search_log: value[1]})
-  Promise.all([p1, p2]).then(value => { })
+  Promise.all([p1, p2]).then(values => {
+    console.log(values.length);
+    res.render('users/profile', {
+      usageLogs: values[0],
+      searchLogs: values[1]
+    });
+  })
 })
 
 module.exports = router;

@@ -118,9 +118,9 @@ module.exports = passport => {
   );
   //change to convention setup user -> user.id -> user
   passport.serializeUser((user, done) => {
-    console.log("serializing user");
-    console.log(`user's id: ${user}`);
-    console.log(user)
+    // console.log("serializing user");
+    // console.log(`user's id: ${user}`);
+    // console.log(user)
     done(null, user.id);
   });
 
