@@ -32,7 +32,10 @@ $('#recycle-form').on('submit', function (e) {
         query: destinationAddress,
         latlng: [destination.lat(), destination.lng()]
     }
-    $.post('/users/search', data).catch(err => {
+    $.post('/users/search', data).then((data) => {
+        alert(data); 
+    })
+    .catch(err => {
         alert(err);
     })
     $('#modal-form').modal('hide');
@@ -402,3 +405,6 @@ function clearRoutes() {
         directionsDisplay.setMap(null);
     }
 }
+
+
+

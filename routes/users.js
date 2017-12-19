@@ -42,8 +42,9 @@ router.post("/search", isLoggedIn, (req, res) => {
 
   // create new search_log for every search.
   // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
+  let p1 = 
   User.findOne({
-    where: { emailOrId: req.session.passport.user.emailOrId }
+    where: {emailOrId: req.user.emailOrId}
   }).then(user => {
     // if (req.params.id !== user.id) {
     //   console.log('Post /search Not Authorised')
@@ -57,12 +58,11 @@ router.post("/search", isLoggedIn, (req, res) => {
       });
     // }
   })
-  .catch(err=> console.log(err));
-
   //create or update recycle_times data whenever confirm recycle
+  let p2 =
   Usage_log.findOrCreate({
     where: {
-      userId: req.session.passport.user.id
+      userId: req.user.id
     },
     defaults: {
       recycle_item_qty: 0,
@@ -72,21 +72,25 @@ router.post("/search", isLoggedIn, (req, res) => {
     .then(() => {
       Usage_log.increment("recycle_times", { by: 1, where: {userId : req.session.passport.user.id} });
     })
-    .catch(err => console.log(err));
+
+    Promise.all([p1, p2]).then(() => {
+      res.sendStatus(200);
+    });
 });
 
+//Logout is placed here to prevent program misread as /:id
 router.get("/logout", (req, res) => {
   req.logout();
   console.log("im logged out");
   res.redirect("/");
 });
 
-  //retrieve user profile data
+//retrieve user profile data
 router.get("/:id",isLoggedIn,(req,res)=>{
   const p1 = 
   User.findOne({
-    where: {
-      emailOrId: req.session.passport.user.emailOrId
+    where:{
+      emailOrId: req.user.emailOrId
     }
   }).then(user => {
     if (req.params.id !== user.id) {
@@ -95,8 +99,8 @@ router.get("/:id",isLoggedIn,(req,res)=>{
     } else { 
       //retrieve usage_log
       Usage_log.findOne({
-        where: {
-          userId: req.session.passport.user.id
+        where:{
+          userId: req.user.id
         }
       }).then(usage_log => {
         return usage_log
@@ -105,7 +109,7 @@ router.get("/:id",isLoggedIn,(req,res)=>{
   const p2 = 
   Search_log.findAll({
     where: {
-      userId: req.session.passport.user.id
+      userId: req.user.id
     },
     limit: 10,
     order: [ [ 'createdAt', 'DESC' ]]
