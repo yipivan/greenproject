@@ -20,7 +20,9 @@ module.exports = passport => {
           defaults: { password: "", firstName: profile.displayName }
         })
           .spread((user, created) => {
-            created == true? console.log('new user'):console.log('existing user')
+            created == true
+              ? console.log("new user")
+              : console.log("existing user");
             return cb(null, user);
           })
           .catch(err => {
@@ -38,15 +40,14 @@ module.exports = passport => {
         //setup to use non default form name field
         usernameField: "Email",
         passwordField: "Password",
-        passReqToCallback: true,
+        passReqToCallback: true
       },
       function(req, email, password, done) {
         User.findOne({
           where: { emailOrId: email }
         })
           .then(user => {
-
-            console.log(`registered password: ${password}`)
+            console.log(`registered password: ${password}`);
 
             if (!user) {
               const newUser = new User({
@@ -56,10 +57,11 @@ module.exports = passport => {
               });
               bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
-                  if (err) return done (err);
+                  if (err) return done(err);
                   newUser.password = hash;
-                  newUser.save();
-                  return done(null, newUser)
+                  newUser
+                    .save()
+                    .then(newUser=>{done(null,newUser)})
                 });
               });
             }
@@ -72,7 +74,8 @@ module.exports = passport => {
   );
 
   //Log-in
-  passport.use("local-login",
+  passport.use(
+    "local-login",
     new LocalStrategy(
       {
         //setup to use non default form name field
@@ -86,39 +89,49 @@ module.exports = passport => {
           .then(user => {
             // check if user exist
             if (!user) {
-              console.log('user not exist')
-              return done(null, false, {message: 'user not exist'});
+              console.log("user not exist");
+              return done(null, false, { message: "user not exist" });
             }
             // check if password match hash
             bcrypt.compare(password, user.password, (err, isMatch) => {
-              console.log(`input password${password}`)
+              console.log(`input password${password}`);
               bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(password, salt, (err, hash) => {console.log(`hashedInputpw${hash}`)})
-              })
-              console.log(`databasepw ${user.password}`)
+                bcrypt.hash(password, salt, (err, hash) => {
+                  console.log(`hashedInputpw${hash}`);
+                });
+              });
+              console.log(`databasepw ${user.password}`);
               if (isMatch) {
-                console.log('user and pw match')
+                console.log("user and pw match");
                 return done(null, user);
               } else {
-                console.log('user and pw DOES NOT match')
+                console.log("user and pw DOES NOT match");
                 return done(null, false);
               }
             });
           })
           .catch(err => {
-            return done(err)
+            return done(err);
           });
       }
     )
   );
-
+  //change to convention setup user -> user.id -> user
   passport.serializeUser((user, done) => {
-    done(null, user);
+    console.log("serializing user");
+    console.log(`user's id: ${user}`);
+    console.log(user)
+    done(null, user.id);
   });
 
-  passport.deserializeUser((user, done) => {
-    done(null, user);
-    console.log(user)
+  passport.deserializeUser((id, done) => {
+    console.log("deserializing user");
+    User.findById(id).then(user => {
+      if (user) {
+        done(null, user.get());
+      } else {
+        done(user.errors, null);
+      }
+    });
   });
 };
-
