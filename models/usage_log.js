@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var usage_log = sequelize.define('usage_log', {
-    recycle_item_qty: DataTypes.INTEGER,
+    recycle_item_name: DataTypes.STRING,
     recycle_times: DataTypes.INTEGER,
     userId: DataTypes.STRING
   });

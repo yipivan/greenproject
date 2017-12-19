@@ -8,8 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      recycle_item_qty: {
-        type: Sequelize.INTEGER
+      recycle_item_name: {
+        type: Sequelize.STRING
       },
       recycle_times: {
         type: Sequelize.INTEGER,

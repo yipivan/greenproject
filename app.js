@@ -16,15 +16,15 @@ require('./config/passport')(passport)
 const users = require('./routes/users');
 const recyclePoints = require('./routes/recycle-points');
 
-const connection = new Sequelize('ellqmtpo', 'ellqmtpo', 'v7RYEcj5f1GIvXKMpxDUxoVzPldXYmB4', {
-    host: 'baasu.db.elephantsql.com',
-    dialect: 'postgres'
-})
+// const connection = new Sequelize('ellqmtpo', 'ellqmtpo', 'v7RYEcj5f1GIvXKMpxDUxoVzPldXYmB4', {
+//     host: 'baasu.db.elephantsql.com',
+//     dialect: 'postgres'
+// })
 
-connection
-    .authenticate()
-    .then(() => console.log('SQL Connected...'))
-    .catch(err => console.log(err));
+// connection
+//     .authenticate()
+//     .then(() => console.log('SQL Connected...'))
+//     .catch(err => console.log(err));
 
 // Handlebars Middleware
 app.engine('handlebars', exphbs({

@@ -26,56 +26,61 @@ router.post("/register",
 //loggined user search action (search_log + usage_log)
 router.post("/search", isLoggedIn, (req, res) => {
   /*
-  { 'formData[0][name]': 'waste-type',
-  'formData[0][value]': 'metal',
-  'formData[1][name]': 'quantity',
-  'formData[1][value]': '1',
-  query: 'Sheung Wan Civic Centre',
-  'latlng[]': [ '22.285954', '114.14980800000001' ] }
+  { 'wasteTypes[]': [ 'Metals', 'Paper' ],
+  query: '155 Hollywood Road (opposite to Man Mo Miu)',
+  'latlng[]': [ '22.284153', '114.15022999999997' ] }
   */
   data = {
-    wastType: req.body['formData[0][value]'],
-    quantity: req.body['formData[1][value]'],
+    wasteTypes: req.body['wasteTypes[]'],
     query: req.body.query,
     latlng: [parseFloat(req.body['latlng[]'][0]), parseFloat(req.body['latlng[]'][1])]
   }
 
   // create new search_log for every search.
   // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
-  let p1 = 
-  User.findOne({
-    where: {emailOrId: req.user.emailOrId}
-  }).then(user => {
-    // if (req.params.id !== user.id) {
-    //   console.log('Post /search Not Authorised')
-    //   res.redirect('/login')
-    // } else {
+  let promises = [];
+  promises.push(
+    User.findOne({
+      where: { emailOrId: req.user.emailOrId }
+    }).then(user => {
+      // if (req.params.id !== user.id) {
+      //   console.log('Post /search Not Authorised')
+      //   res.redirect('/login')
+      // } else {
       Search_log.create({
         userId: user.id,
         query: data.query,
         location_lat: data.latlng[0],
         location_lng: data.latlng[1]
       });
-    // }
-  })
+      // }
+    }))
   //create or update recycle_times data whenever confirm recycle
-  let p2 =
-  Usage_log.findOrCreate({
-    where: {
-      userId: req.user.id
-    },
-    defaults: {
-      recycle_item_qty: 0,
-      recycle_times: 0
-    }
-  })
-    .then(() => {
-      Usage_log.increment("recycle_times", { by: 1, where: {userId : req.session.passport.user.id} });
+  wasteTypes = data.wasteTypes;
+  for (wasteType of wasteTypes) {
+    promises.push(Usage_log.findOrCreate({
+      where: {
+        userId: req.user.id,
+        recycle_item_name: wasteType
+      },
+      defaults: {
+        recycle_item_name: wasteType,
+        recycle_times: 0
+      }
     })
+      .then(() => {
+        Usage_log.increment("recycle_times", { by: 1, where: { userId: req.user.id, recycle_item_name: wasteType } });
+      })
+      .catch(err => {
+        console.log(err)
+      }))
+  }
 
-    Promise.all([p1, p2]).then(() => {
-      res.sendStatus(200);
-    });
+  Promise.all(promises).then(() => {
+    res.sendStatus(200);
+  }).catch(err => {
+    console.log(err);
+  });
 });
 
 //Logout is placed here to prevent program misread as /:id
@@ -86,40 +91,40 @@ router.get("/logout", (req, res) => {
 });
 
 //retrieve user profile data
-router.get("/:id",isLoggedIn,(req,res)=>{
-  const p1 = 
-  User.findOne({
-    where:{
-      emailOrId: req.user.emailOrId
-    }
-  }).then(user => {
-    if (req.params.id !== user.id) {
-      console.log('get /:id Not Authorised')
-      res.redirect('/login')  
-    } else { 
-      //retrieve usage_log
-      Usage_log.findOne({
-        where:{
-          userId: req.user.id
-        }
-      }).then(usage_log => {
-        return usage_log
-      })
-  //retrieve latest 10 pieces of search_log
-  const p2 = 
-  Search_log.findAll({
-    where: {
-      userId: req.user.id
-    },
-    limit: 10,
-    order: [ [ 'createdAt', 'DESC' ]]
-  }).then(search_log => {
-    return search_log;
-      });  
-    } 
-  })
+router.get("/:id", isLoggedIn, (req, res) => {
+  const p1 =
+    User.findOne({
+      where: {
+        emailOrId: req.user.emailOrId
+      }
+    }).then(user => {
+      if (req.params.id !== user.id) {
+        console.log('get /:id Not Authorised')
+        res.redirect('/login')
+      } else {
+        //retrieve usage_log
+        Usage_log.findOne({
+          where: {
+            userId: req.user.id
+          }
+        }).then(usage_log => {
+          return usage_log
+        })
+        //retrieve latest 10 pieces of search_log
+        const p2 =
+          Search_log.findAll({
+            where: {
+              userId: req.user.id
+            },
+            limit: 10,
+            order: [['createdAt', 'DESC']]
+          }).then(search_log => {
+            return search_log;
+          });
+      }
+    })
   //res.render(template,{usage_log: value[0], search_log: value[1]})
-  Promise.all ([p1,p2]).then(value=>{})
+  Promise.all([p1, p2]).then(value => { })
 })
 
 module.exports = router;
