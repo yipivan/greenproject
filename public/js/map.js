@@ -226,7 +226,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     let noSearchResult = "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
     "<strong>There is currently no Recyclable Points available<br>that accept the waste types you have selected</strong><br>" +
     "<br><br>" +
-    "<strong>Search again with different waste-type</strong><br>" + "</div>";
+    "<strong>Search again with different waste-type selection</strong><br>" + "</div>";
     let listResult = "";
 
     var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
