@@ -72,6 +72,11 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '/login.html'));
 });
 
+// test route only added for test, to be deleted once test done
+app.get('/profiletest', (req, res) => {
+    res.render('users/profile');
+});
+
 app.post('/search',(req,res)=>{
 })
 

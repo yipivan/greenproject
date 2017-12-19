@@ -406,3 +406,6 @@ function clearRoutes() {
         directionsDisplay.setMap(null);
     }
 }
+
+
+
