@@ -205,19 +205,33 @@ h7 {
 
 /* CSS for profile/dashboard page */
 
+#wrap-inner > div {
+    margin-left: 10px;
+}
+
 /* CSS for profile/dashboard page - User greeting/info */
 
 h8, h9, h10 {
-    font-size: 2vw;
+    font-size: 3vw;
     font-weight: 700;
 }
 
-#userinfo,
+#userinfo > div {
+    width: 40%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
 #searchhistory,
 #actionhistory {
     background-color: lightgreen;
     margin: 20px 0;
     padding: 10px 0 80px 10px;
+}
+
+#userinfo {
+    margin: 20px 0;
+    padding: 10px 0 20px 10px;
 }
 
 /* CSS for profile/dashboard page - Random display section */
@@ -269,10 +283,23 @@ img {
      height: 20px;
      width: 70px;
      background: green;
-    padding:20px;
+    padding:20px 55px 40px 20px;
      float: left; 
-     margin-top: 200px;
+     margin: 200px 0 20px 0;
     color:#fff;
+    cursor: pointer;
+}
+
+/* CSS for profile/dashboard page - search history section */
+#mocklist {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#searcheddata {
+    background:#8BC63E;
+    margin: 20px 10px;
+    padding: 10px 20px;
 }
 
 
