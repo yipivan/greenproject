@@ -1,16 +1,97 @@
 {{#each users}}
 
-    <p>Your Searched Recyclable Points history:</p>
+<p>Your Searched Recyclable Points history:</p>
 
-  {{!-- <div class="card card-body mb-2">
-    <h4>{{title}}</h4>
-    <p>{{details}}</p>
-    <a class="btn btn-dark btn-block mb-2" href="/ideas/edit/{{id}}">Edit</a>
-    <form method="post" action="/ideas/{{id}}?_method=DELETE">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" class="btn btn-danger btn-block" value="Delete">
-    </form>
-  </div> --}}
-{{else}}
-  <p>Currently there is no search history/results stored for you</p>
+{{!--
+<div class="card card-body mb-2">
+  <h4>{{title}}</h4>
+  <p>{{details}}</p>
+  <a class="btn btn-dark btn-block mb-2" href="/ideas/edit/{{id}}">Edit</a>
+  <form method="post" action="/ideas/{{id}}?_method=DELETE">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" class="btn btn-danger btn-block" value="Delete">
+  </form>
+</div> --}} {{else}} {{!-- what will be rendered for logged in user with no hisotry to render
+
+<p>Currently there is no search history/results stored for you</p>
+
+--}} {{!-- This is what logged in user will see as their profile/dashboard page copy below section to under {{#each users}}
+section when routing/test is DONE --}}
+
+<div id="wrap" class="container">
+
+  <p><strong>IGNORE</strong> the nabvar above, different version of navbar is already set for logged in user with Profile and
+    Logout buttons!</p>
+
+  <div id="userinfo">
+    <h8>Welcome back to Recycle HK(to be updated later), FIRSTNAME (from DB)</h8>
+  </div>
+
+  <div id="randomgenerator">
+    {{!-- <p>TEST</p> --}}
+  </div>
+
+  <div id="searchhistory">
+    <h9>Your latest Recyclable Points search history</h9>
+  </div>
+
+  <div id="actionhistory">
+    <h10>Your Recycling activity recorded:</h10>
+
+    <p>waste-type recycled<br> quantity recycled</p>
+
+  </div>
+
+</div>
+
 {{/each}}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
+
+<script>
+  (function () {
+
+    window.onload = function () {
+      var n = Math.floor(Math.random() * 3);
+      if (n === 0) {     // can use switch instead of if
+        renderResult(n);
+        // this.textContent = 'result here';
+      } else if (n === 1) {
+        renderResult(n);
+      } else {
+        renderResult(n);
+      }
+    };
+
+    var resultDisplay = document.getElementById("randomgenerator");
+
+  function renderResult(n){
+    var htmlString = "";
+
+    if (n == 0) {
+      htmlString += "<p>For saving more paper in HK....</p>" + 
+      "<p><a href = 'http://www.gocup.hk/' target='_blank'><img src='/images/gocup.jpg' height='250' width='250'/></a></p>" +
+      "<p>" +  "Check out Go Cup HK for more information" +  "</p>"
+    } else if (n == 1) {
+      htmlString += "<p>For recycling Rechageable Battery....</p>" +
+      "<p><a href = 'https://www.wastereduction.gov.hk/en/workplace/rechargebattery_intro.htm' target='_blank'><img src='/images/poster_rb.jpg' height='250' width='180'/></a></p>" +
+      "<p>" +  "Check out government site for more details" +  "</p>"
+    } else {
+      htmlString += "<p>For helpful guide on recycling glass bottles...</p>" +
+      "<p><a href = 'http://www.glass-recycling.com.hk/recycling-steps' target='_blank'><img src='/images/glassrecycle.jpg' height='250' width='180'/></a></p>" +
+      "<p>" +  "Check out step-by-step guide on glass bottle recycling" +  "</p>"
+    }
+    
+    clearDisplay();
+    resultDisplay.insertAdjacentHTML('beforeend', htmlString);
+    
+  }
+
+  function clearDisplay(){
+    resultDisplay.innerHTML = "";
+  }
+
+  })();
+</script>

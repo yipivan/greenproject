@@ -197,3 +197,37 @@ h7 {
 
 
 
+
+
+/* CSS for profile/dashboard page */
+
+/* CSS for profile/dashboard page - User greeting/info */
+
+h8, h9, h10 {
+    font-size: 2vw;
+    font-weight: 700;
+}
+
+#userinfo,
+#searchhistory,
+#actionhistory {
+    background-color: lightgreen;
+    margin: 20px 0;
+    padding-bottom: 80px;
+}
+
+/* CSS for profile/dashboard page - Random display section */
+
+#randomgenerator p {
+    color: black;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5vw;
+    font-weight: 700;
+}
+  
+img {
+    margin: 0 auto;
+}
+
+
