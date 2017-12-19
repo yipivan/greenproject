@@ -50,7 +50,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Global variables
+// Create user object for global access
 app.use(function (req, res, next) {
     res.locals.user = req.user || null;
     next();
@@ -98,5 +98,3 @@ const port = 5000;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
-
-

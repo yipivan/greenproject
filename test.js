@@ -9,3 +9,8 @@ axios.get('https://api.data.gov.hk/v1/nearest-recyclable-collection-points',  {
     let data = response.data.results;
     console.log(data.length);
 })
+
+//routing
+// post /users/:id/search
+// post /users/:id/usage
+// get /users/:id/

@@ -26,18 +26,21 @@ $('#travel-mode li').on('click', function () {
 $('#recycle-form').on('submit', function (e) {
     e.preventDefault();
     var formData = $('#recycle-form').serializeArray();
+    var query = $('#location').val();
     var data = {
         data: formData,
-        origin: {
-            lat: origin.lat(),
-            lng: origin.lng()
-        }
     }
     $.post('/users/search', data).catch(err => {
         alert(err);
     })
     $('#modal-form').modal('hide');
 });
+
+function submitLocation() {
+    data = {
+        query: $('#location').val(),
+    }
+}
 
 
 function initMap() {
