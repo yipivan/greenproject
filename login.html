@@ -89,7 +89,7 @@
             <div id="errorBox1"></div>
             <input type="text" class="form-control" name="Email" value="" placeholder="Email">
             <div id="errorBox2"></div>
-            <input type="password" class="form-control" name="Password" value="" placeholder="Password">
+            <input type="password" class="form-control" name="Password" value="" placeholder="Password" data-toggle="tooltip" data-container="body" title="Password must be more than 6 characters and contain at least 1 number and a Capital letter">
             <div id="errorBox3"></div>
             <input type="password" class="form-control" name="ConfirmPassword" value="" placeholder="Confirm Password">
             <div id="errorBox4"></div>
@@ -143,6 +143,12 @@
           });
         }
       });
+
+      // tooltip message for password condition
+      $(document).tooltip({ selector: "[title]",
+                              placement: "bottom",
+                              trigger: "focus",
+                              animation: false}); 
 
       // Login Form valiadtion
 
