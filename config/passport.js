@@ -111,14 +111,18 @@ module.exports = passport => {
       }
     )
   );
-
+//change to convention setup user -> user.id -> user
   passport.serializeUser((user, done) => {
-    done(null, user);
+    console.log(user)
+    console.log(`userID is ${user.id}`)
+    done(null, user.id);
+    
   });
 
-  passport.deserializeUser((user, done) => {
-    done(null, user);
-    console.log(user)
+  passport.deserializeUser((id, done) => {
+    User.findById(id,(err,user)=>{
+      done(null, user);
+    })
   });
 };
 

@@ -29,14 +29,14 @@ router.post("/:id/search",isLoggedIn, (req, res) => {
   // create new search_log for every search.
   // authenticate by user_mailOrId == req.session.passpot.user.id == req.params.id
   User.findOne({
-    where: {emailOrId: req.session.passport.user.emailOrId}
+    where: {emailOrId: req.user.emailOrId}
   }).then(user => {
     if(req.params.id !== user.id){
       console.log('Post /:id/search Not Authorised')
       res.redirect('/login')  
     } else {
       Search_log.create({
-        userId: req.session.passport.user.id,
+        userId: req.user.id,
         query: "search_input",
         location_lat: "location_lat",
         location_lng: "location_lng"
@@ -47,7 +47,7 @@ router.post("/:id/search",isLoggedIn, (req, res) => {
   //create or update recycle_times data whenever confirm recycle
   Usage_log.findOrCreate({
     where: {
-      userId: req.session.passport.user.id
+      userId: req.user.id
     },
     defaults:{
       recycle_item_qty: 0,
@@ -59,18 +59,19 @@ router.post("/:id/search",isLoggedIn, (req, res) => {
   });
 });
 
+//Logout is placed here to prevent program misread as /:id
 router.get("/logout", (req, res) => {
   req.logout();
   console.log("im logged out");
   res.redirect("/");
 });
 
-  //retrieve user profile data
+//retrieve user profile data
 router.get("/:id",isLoggedIn,(req,res)=>{
   const p1 = 
   User.findOne({
     where:{
-      emailOrId: req.session.passport.user.emailOrId
+      emailOrId: req.user.emailOrId
     }
   }).then(user=>{
     if(req.params.id !== user.id){
@@ -80,7 +81,7 @@ router.get("/:id",isLoggedIn,(req,res)=>{
       //retrieve usage_log
       Usage_log.findOne({
         where:{
-          userId: req.session.passport.user.id
+          userId: req.user.id
         }
       }).then(usage_log=>{
         return usage_log
@@ -89,7 +90,7 @@ router.get("/:id",isLoggedIn,(req,res)=>{
   const p2 = 
   Search_log.findAll({
     where: {
-      userId: req.session.passport.user.id
+      userId: req.user.id
     },
     limit: 10,
     order: [ [ 'createdAt', 'DESC' ]]
