@@ -50,7 +50,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Global variables
+// Create user object for global access
 app.use(function (req, res, next) {
     res.locals.user = req.user || null;
     next();
@@ -62,6 +62,11 @@ app.get('/', (req, res) => {
 });
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '/login.html'));
+});
+
+// test route only added for test, to be deleted once test done
+app.get('/profiletest', (req, res) => {
+    res.render('users/profile');
 });
 
 app.post('/search',(req,res)=>{
@@ -88,5 +93,3 @@ const port = 5000;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
-
-
