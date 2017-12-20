@@ -216,7 +216,7 @@ h7 {
 
 /* CSS for profile/dashboard page - User greeting/info */
 
-h8, h9, h10 {
+h8, h9, h10, h11 {
     font-size: 2vw;
     font-weight: 700;
 }
@@ -233,10 +233,6 @@ h8, h9, h10 {
     margin: 20px 0;
     padding: 20px 10px 20px 10px;
 }
-
-/* #userinfo {
-    padding: 10px 0 20px 10px;
-} */
 
 /* CSS for profile/dashboard page - Random display section */
 
@@ -274,7 +270,7 @@ img {
 
 #panel
 {
-     height: 800px;
+     height: 1000px;
      width: 300px;
     padding:20px;
      background: #eee;
@@ -294,6 +290,23 @@ img {
      margin: 200px 0 20px 0;
     color:#fff;
     cursor: pointer;
+}
+
+#panelresult {
+    margin-top: 20px;
+}
+
+.panelitem,
+#usersince {
+    font-size: 3vh;
+    padding: 10px 0;
+    font-weight: 700;
+    color: white;
+    margin: 20px 0;
+}
+
+#usersince {
+    background-color: green;
 }
 
 #inner {

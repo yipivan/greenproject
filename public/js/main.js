@@ -10,6 +10,5 @@ let wasteTypeColor = {
     "Rechargeable Batteries"               : "#999999"  // grey
 }
 
-// for profile page side panel current locatin search if using the function
 
  
