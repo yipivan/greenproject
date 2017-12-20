@@ -23,6 +23,7 @@
 #wrap {
     border: 1px solid lightgray;
     background: #EDE8DF;  
+    padding-top: 10px;
 }
 
 body > div {
@@ -205,9 +206,9 @@ h7 {
 
 /* CSS for profile/dashboard page */
 
-#wrap-inner > div {
+/* #wrap-inner > div {
     margin-left: 10px;
-}
+} */
 
 /* CSS for profile/dashboard page - User greeting/info */
 
@@ -226,11 +227,10 @@ h8, h9, h10 {
 #actionhistory {
     background-color: lightgreen;
     margin: 20px 0;
-    padding: 10px 0 80px 10px;
+    padding: 10px 10px 80px 10px;
 }
 
 #userinfo {
-    margin: 20px 0;
     padding: 10px 0 20px 10px;
 }
 
@@ -253,6 +253,7 @@ img {
 #wrap-inner {
     position: relative; /* do not change this */
     z-index:1;
+    /* width: 80%; */
 }
 
 #panel-wrapper {
@@ -270,7 +271,7 @@ img {
 #panel
 {
      height: 800px;
-     width: 200px;
+     width: 300px;
     padding:20px;
      background: #eee;
      float: left;
@@ -288,6 +289,11 @@ img {
      margin: 200px 0 20px 0;
     color:#fff;
     cursor: pointer;
+}
+
+#inner {
+    width: 80%;
+    margin: 0 auto;
 }
 
 /* CSS for profile/dashboard page - search history section */
