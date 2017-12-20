@@ -63,8 +63,8 @@ function initMap() {
         showLocBtn.addEventListener('click', getNearbyRecyclingPoints);
 
         // TESTING
-        let openBtn = document.getElementById('open');
-        openBtn.addEventListener('click', getNearbyRecyclingPoints);
+        // let openBtn = document.getElementById('open');
+        // openBtn.addEventListener('click', getNearbyRecyclingPoints);
 
 
 
