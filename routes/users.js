@@ -12,7 +12,8 @@ const dateformat = require('helper-dateformat');
 router.post("/login",
   passport.authenticate("local-login", {
     successRedirect: "/",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
+    failureFlash: true
   })
 );
 
@@ -20,8 +21,9 @@ router.post("/login",
 router.post("/register",
   passport.authenticate("local-signup", {
     successRedirect: "/",
-    failureRedirect: "/login"
-  })
+    failureRedirect: "/login",
+    failureFlash: true
+  }),
 );
 
 //loggined user search action (search_log + usage_log)
@@ -104,7 +106,7 @@ router.get("/profile", isLoggedIn, (req, res) => {
     })
       .then(user => {
         if (req.user.id !== user.id) {
-          console.log('get user Not Authorised')
+          req.flash('error','Access Not Authorised')
           res.redirect('/login')
         } else {
           //retrieve usage_log

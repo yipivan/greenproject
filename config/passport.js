@@ -12,7 +12,7 @@ module.exports = passport => {
       {
         clientID: process.env.FACEBOOK_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/auth/facebook/callback"
+        callbackURL: "/auth/facebook/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
         User.findOrCreate({
@@ -47,7 +47,6 @@ module.exports = passport => {
           where: { emailOrId: email }
         })
           .then(user => {
-            console.log(`registered password: ${password}`);
 
             if (!user) {
               const newUser = new User({
@@ -64,6 +63,8 @@ module.exports = passport => {
                     .then(newUser=>{done(null,newUser)})
                 });
               });
+            } else {
+              done(null , false,{message: "This e-mail is already registered"})
             }
           })
           .catch(err => {
@@ -89,8 +90,7 @@ module.exports = passport => {
           .then(user => {
             // check if user exist
             if (!user) {
-              console.log("user not exist");
-              return done(null, false, { message: "user not exist" });
+              return done(null, false, { message: "User does not exist" });
             }
             // check if password match hash
             bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -105,8 +105,7 @@ module.exports = passport => {
                 console.log("user and pw match");
                 return done(null, user);
               } else {
-                console.log("user and pw DOES NOT match");
-                return done(null, false);
+                return done(null, false,{message: "User or Password invalid"})
               }
             });
           })

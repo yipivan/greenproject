@@ -49,10 +49,11 @@ app.use(session({
 //passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash())
 // Create user object for global access
 app.use(function (req, res, next) {
     res.locals.user = req.user || null;
+    res.locals.error = req.flash("error");
     next();
 });
 
