@@ -62,6 +62,12 @@ function initMap() {
         let showLocBtn = document.getElementById('showloc');
         showLocBtn.addEventListener('click', getNearbyRecyclingPoints);
 
+        // TESTING
+        // let openBtn = document.getElementById('open');
+        // openBtn.addEventListener('click', getNearbyRecyclingPoints);
+
+
+
         //attach event listener to search button
         let searchBtn = document.getElementById('searchloc').getElementsByTagName('button')[0];
         searchBtn.addEventListener('click', searchLocationsFromUserInput);
@@ -302,6 +308,13 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
     resultDisplay.insertAdjacentHTML('beforeend', backToMap);
+
+    //TESTING
+    // var resultOpen = document.getElementById("panelresult");
+    
+    // var testResult = "TESTING";
+    // resultOpen.insertAdjacentHTML('beforeend', testResult);
+    // console.log("test success");
 
     addresses = [];
     adjustBounds();
