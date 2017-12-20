@@ -1,18 +1,9 @@
-{{#each usageLogs}}
-<div>{{this.recycle_item_name}}</div>
-{{/each}} 
-
-{{#each searchLogs}}
-<div>{{this.query}}</div>
-{{/each}}
+{{!-- {{#each users}} --}}
 
 
-{{#each users}}
-
-
-<div>
+{{!-- <div>
   <p>Your Searched Recyclable Points history:</p>
-</div>
+</div> --}}
 {{!--
 <div class="card card-body mb-2">
   <h4>{{title}}</h4>
@@ -22,7 +13,7 @@
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" class="btn btn-danger btn-block" value="Delete">
   </form>
-</div> --}} {{else}} {{!-- what will be rendered for logged in user with no hisotry to render
+</div> --}}{{!-- what will be rendered for logged in user with no hisotry to render
 
 <p>Currently there is no search history/results stored for you</p>
 
@@ -48,7 +39,8 @@ section when routing/test is DONE --}}
 
           <p>Search for Recyclable points?</p>
 
-          <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"/"\' style='cursor:pointer;'><i class="fa fa-search" aria-hidden="true"></i>  Go to Recycling finder</button>
+          <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"\#pagelink\"' style='cursor:pointer;'>
+            <i class="fa fa-search" aria-hidden="true"></i> Go to Recycling finder</button>
 
         </div>
 
@@ -62,9 +54,23 @@ section when routing/test is DONE --}}
       <div id="searchhistory" class="text-center">
         <h9>Your latest Recyclable Points search history</h9>
 
-        <p>move this to the side bar<br> from Usage log record model</p>
+        <p>move this to the side bar
+          <br> from Usage log record model</p>
 
         <div id="mocklist">
+          {{#each searchLogs}}
+          <div id="searcheddata">Searched on: {{dateformat this.updatedAt}}
+            <br>
+            <br>
+            <strong>{{this.query}}</strong>
+            <br>
+            <id='hiddendata'>
+              <br>this data will not be shown:
+              <br>
+              <br>Longitude:{{this.location_lat}}
+              <br>Latitude:{{this.location_lng}}</id='hiddendata'>
+          </div>
+          {{/each}}
         </div>
       </div>
 
@@ -72,9 +78,9 @@ section when routing/test is DONE --}}
         <h10>Your Recycling activity recorded:</h10>
 
         <p>waste-type recycled quantity recycled</p>
-
-        <p>clothes 1 </p>
-
+        {{#each usageLogs}}
+        <p>{{this.recycle_item_name}} {{this.recycle_times}} </p>
+        {{/each}}
       </div>
 
 
@@ -89,16 +95,15 @@ section when routing/test is DONE --}}
 
       </div>
 
-      <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"/"\' style='cursor:pointer;'><span class='glyphicon glyphicon-home'></span>  Back to Home/Search Page</button>
-    </div>
-    
+      <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>
+        <span class='glyphicon glyphicon-home'></span> Back to Home/Search Page</button>
     </div>
 
   </div>
 </div>
 
 
-{{/each}}
+{{!-- {{/each}} --}}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
@@ -117,7 +122,7 @@ section when routing/test is DONE --}}
     window.onload = function () {
 
       // for result render until db is ready
-      renderMockData();
+      // renderMockData();
 
       var n = Math.floor(Math.random() * 3);
       console.log(n);

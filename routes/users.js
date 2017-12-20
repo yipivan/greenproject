@@ -6,6 +6,7 @@ const User = require("../models").user;
 const Search_log = require("../models").search_log;
 const Usage_log = require("../models").usage_log;
 const { isLoggedIn } = require("../helpers/auth");
+const dateformat = require('helper-dateformat');
 
 //user login
 router.post("/login",
@@ -100,20 +101,21 @@ router.get("/profile", isLoggedIn, (req, res) => {
       where: {
         emailOrId: req.user.emailOrId
       }
-    }).then(user => {
-      if (req.user.id !== user.id) {
-        console.log('get user Not Authorised')
-        res.redirect('/login')
-      } else {
-        //retrieve usage_log
-        return Usage_log.findAll({
-          where: {
-            userId: user.id
-          }
-        })
-        //retrieve latest 10 pieces of search_log
-      }
     })
+      .then(user => {
+        if (req.user.id !== user.id) {
+          console.log('get user Not Authorised')
+          res.redirect('/login')
+        } else {
+          //retrieve usage_log
+          return Usage_log.findAll({
+            where: {
+              userId: user.id
+            }
+          })
+          //retrieve latest 10 pieces of search_log
+        }
+      })
   const p2 =
     Search_log.findAll({
       where: {
@@ -127,7 +129,11 @@ router.get("/profile", isLoggedIn, (req, res) => {
     console.log(values.length);
     res.render('users/profile', {
       usageLogs: values[0],
-      searchLogs: values[1]
+      searchLogs: values[1],
+      user: req.user,
+      helpers: {
+        dateformat: dateformat
+      }
     });
   })
 })

@@ -69,9 +69,6 @@ app.get('/profiletest', (req, res) => {
     res.render('users/profile');
 });
 
-app.post('/search',(req,res)=>{
-})
-
 app.get('/auth/facebook',
     passport.authenticate('facebook'));
 
