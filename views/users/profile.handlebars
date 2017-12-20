@@ -25,7 +25,7 @@ section when routing/test is DONE --}}
       and Logout buttons!</p> --}}
 
 
-    <h8>Welcome back to Recycle HK, FIRSTNAME</h8>
+    <h8>Welcome back to Recycle HK, {{user.firstName}}</h8>
 
     <div id="wrap-inner" class="container">
 
@@ -37,12 +37,9 @@ section when routing/test is DONE --}}
 
             <p>Search for Recyclable points?</p>
 
-            <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = \"/\"' ; style='cursor:pointer;'>
+            <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' ; style='cursor:pointer;'>
             <i class="fa fa-search" aria-hidden="true"></i> Go to Recycling finder</button>
 
-            <a href="/">
-          <button id='tomap' class='btn btn-green btn-default btn-block' style='cursor:pointer;'>
-            <i class="fa fa-search" aria-hidden="true"></i> Go to Recycling finder</button>
           </a>
 
           </div>
@@ -59,10 +56,8 @@ section when routing/test is DONE --}}
 
           <div id="mocklist">
 
+            {{#each searchLogs}} {{#if query}}
             <div id="searcheddata">
-
-              {{#each searchLogs}} 
-              {{#if query}} 
               Searched on: {{dateformat this.updatedAt}}
               <br>
               <br>
@@ -73,14 +68,17 @@ section when routing/test is DONE --}}
                 <br>
                 <br>Longitude:{{this.location_lat}}
                 <br>Latitude:{{this.location_lng}}
-              </div> --}} {{/if}} 
-              {{else}}
-
-              <p>You currently have no search history<br>Start searching for Recyclable points!</p>
-
-              {{/each}}
-
+              </div> --}}
             </div>
+            {{/if}} {{else}}
+
+            <div id="searcheddata">
+              <p>You currently have no search history<br>Start searching for Recyclable points!</p>
+            </div>
+
+            {{/each}}
+
+
           </div>
         </div>
 
@@ -89,16 +87,45 @@ section when routing/test is DONE --}}
 
           <div id="mocklist">
 
-            <div id="searcheddata">
 
-              {{#each usageLogs}}
-              {{#if recycle_item_name}}
-              <p>waste-type recycled quantity recycled</p>
-              <p>{{this.recycle_item_name}} {{this.recycle_times}} </p>
-              {{/if}} 
+            {{#if usageLogs}}
+
+            <div id="searcheddata">
+              <table class="table">
+                <thread>
+                  <tr>
+                    <th>Waste type recycled</th>
+                    <th>quantity recycled</th>
+                  </tr>
+                </thread>
+
+                <tbody>
+                  {{#each usageLogs}}
+                  <tr>
+
+                    <td>{{this.recycle_item_name}}</td>
+                    <td>{{this.recycle_times}}</td>
+
+                  </tr>
+                  {{/each}}
+
+                </tbody>
+
+
+
+
+                {{!--
+                <p>waste-type recycled quantity recycled</p>
+                <p>{{this.recycle_item_name}} {{this.recycle_times}} </p> --}}
+
+
+              </table>
+
               {{else}}
-              <p>You currently have no Recycling activity recorded<br>Start recording your Recycling activity now!</p>
-              {{/each}}
+              <div id="searcheddata">
+                <p>You currently have no Recycling activity recorded<br>Start recording your Recycling activity now!</p>
+              </div>
+              {{/if}}
 
             </div>
           </div>
@@ -119,7 +146,7 @@ section when routing/test is DONE --}}
 
         </div>
 
-        <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>
+        <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' style='cursor:pointer;'>
         <span class='glyphicon glyphicon-home'></span> Back to Home/Search Page</button>
       </div>
 
