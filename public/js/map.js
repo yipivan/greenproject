@@ -310,11 +310,11 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     resultDisplay.insertAdjacentHTML('beforeend', backToMap);
 
     //TESTING
-    var resultOpen = document.getElementById("panelresult");
+    // var resultOpen = document.getElementById("panelresult");
     
-    var testResult = "TESTING";
-    resultOpen.insertAdjacentHTML('beforeend', testResult);
-    console.log("test success");
+    // var testResult = "TESTING";
+    // resultOpen.insertAdjacentHTML('beforeend', testResult);
+    // console.log("test success");
 
     addresses = [];
     adjustBounds();
