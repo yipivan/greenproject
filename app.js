@@ -60,6 +60,7 @@ app.use(function (req, res, next) {
 app.get('/', (req, res) => {
     res.render('index');
 });
+
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '/login.html'));
 });

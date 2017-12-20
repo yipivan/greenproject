@@ -62,12 +62,6 @@ function initMap() {
         let showLocBtn = document.getElementById('showloc');
         showLocBtn.addEventListener('click', getNearbyRecyclingPoints);
 
-        // TESTING
-        // let openBtn = document.getElementById('open');
-        // openBtn.addEventListener('click', getNearbyRecyclingPoints);
-
-
-
         //attach event listener to search button
         let searchBtn = document.getElementById('searchloc').getElementsByTagName('button')[0];
         searchBtn.addEventListener('click', searchLocationsFromUserInput);
@@ -256,9 +250,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     } else {
         console.log("no SearchQuery");
     }
-    // if (addresses.length === 0) {
 
-    // }
     
     // .filter returns the address that matches the wasteTypes selected
     // .every returns true/false 
@@ -308,13 +300,6 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     resultDisplay.insertAdjacentHTML('beforeend', listHeading);
     resultDisplay.insertAdjacentHTML('beforeend', listResult);
     resultDisplay.insertAdjacentHTML('beforeend', backToMap);
-
-    //TESTING
-    // var resultOpen = document.getElementById("panelresult");
-    
-    // var testResult = "TESTING";
-    // resultOpen.insertAdjacentHTML('beforeend', testResult);
-    // console.log("test success");
 
     addresses = [];
     adjustBounds();
@@ -374,18 +359,6 @@ function getDirection() {
             window.alert('Directions request failed due to ' + status);
         }
     })
-}
-
-let wasteTypeColor = {
-    "Barbeque Fork"                        : "#FF0000", // red
-    "Clothes"                              : "#FFA500", // orange
-    "Electrical and Electronic Equipment"  : "#800080", // purple
-    "Fluorescent Lamp"                     : "#ADD8E6", // light blue
-    "Glass Bottles"                        : "#008000", // green
-    "Metals"                               : "#FFFF00", // yellow
-    "Paper"                                : "#0000FF", // blue
-    "Plastics"                             : "#8B4513", // brown
-    "Rechargeable Batteries"               : "#999999"  // grey
 }
 
 // render search result list - current location search

@@ -12,6 +12,10 @@
     
 }
 
+#usergreeting {
+    color: green;
+}
+
 /* .navbar-nav li a {
     /* border: 2px solid white;  
 } */
@@ -213,7 +217,7 @@ h7 {
 /* CSS for profile/dashboard page - User greeting/info */
 
 h8, h9, h10 {
-    font-size: 3vw;
+    font-size: 2vw;
     font-weight: 700;
 }
 
@@ -227,12 +231,12 @@ h8, h9, h10 {
 #actionhistory {
     background-color: lightgreen;
     margin: 20px 0;
-    padding: 10px 10px 80px 10px;
+    padding: 20px 10px 20px 10px;
 }
 
-#userinfo {
+/* #userinfo {
     padding: 10px 0 20px 10px;
-}
+} */
 
 /* CSS for profile/dashboard page - Random display section */
 
@@ -309,4 +313,37 @@ img {
     padding: 10px 20px;
 }
 
+/* CSS for profile/dashboard page - Recycling activity section */
+th {
+    text-align: center;
+    
+}
 
+tbody {
+    font-weight: 700;
+}
+
+td {
+    text-align: center;
+    height: 36px;
+    border-top: none;
+}
+
+.itemcolor {
+    font-size: 2vw;
+    line-height: 36px;
+}
+
+.quantity{
+    margin: 0 auto;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%; 
+    line-height: 36px;
+    font-weight: 900;
+    font-size: 2vw;
+} 
+
+table, th, td, .table>tbody+tbody {
+    border-style:none!important;
+}
