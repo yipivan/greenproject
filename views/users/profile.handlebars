@@ -23,15 +23,18 @@ section when routing/test is DONE --}}
 <div>
   <div id="wrap" class="container">
 
-    <p>
-      <strong>IGNORE</strong> the nabvar above, different version of navbar is already set for logged in user with Profile and Logout
-      buttons!</p>
+    {{!-- <p><strong>IGNORE</strong> the nabvar above, different version of navbar is already set for logged in user with Profile
+      and Logout buttons!</p> --}}
 
-    <div id="wrap-inner">
+    
+    <h8>Welcome back to Recycle HK, FIRSTNAME</h8>
+
+    <div id="wrap-inner" class="container">
+
+      <div id="inner" class="container">
 
       <div id="userinfo">
-        <h8>Welcome back to Recycle HK, {{user.firstName}}</h8>
-
+        
         <div class="text-center">
 
           <p>Search for Recyclable points?</p>
@@ -44,10 +47,10 @@ section when routing/test is DONE --}}
       </div>
 
       <div id="randomgenerator">
-        {{!--
-        <p>TEST</p> --}}
+       
       </div>
 
+      
       <div id="searchhistory" class="text-center">
         <h9>Your latest Recyclable Points search history</h9>
 
@@ -79,7 +82,6 @@ section when routing/test is DONE --}}
         <p>{{this.recycle_item_name}} {{this.recycle_times}} </p>
         {{/each}}
       </div>
-
 
 
       <div id="panel-wrapper">
