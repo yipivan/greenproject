@@ -11,8 +11,8 @@ var travelMode;
 var destinationAddress;
 
 //sync waste-types to user submit form
-$('#waste-type input').each(function() {
-    $(this).on('change', function() {
+$('#waste-type input').each(function () {
+    $(this).on('change', function () {
         let wasteType = $(this).val();
         let x = this.checked;
         $(`#recycle-form input[value="${wasteType}"]`).prop('checked', x);
@@ -45,11 +45,11 @@ $('#recycle-form').on('submit', function (e) {
         latlng: [destination.lat(), destination.lng()]
     }
     $.post('/users/search', data).then((data) => {
-        alert(data); 
+        alert(data);
     })
-    .catch(err => {
-        alert(err);
-    })
+        .catch(err => {
+            alert(err);
+        })
     $('#modal-form').modal('hide');
 });
 
@@ -80,6 +80,10 @@ function initMap() {
             animation: google.maps.Animation.DROP,
             icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
         });
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
     }).catch(err => {
         console.log(err);
     })
@@ -235,9 +239,9 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
     const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'><span class='glyphicon glyphicon-map-marker'></span> Back to Map</button>";
     let noSearchResult = "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
-    "<strong>There is currently no Recyclable Points available<br>that accept the waste types you have selected</strong><br>" +
-    "<br><br>" +
-    "<strong>Search again with different waste-type selection</strong><br>" + "</div>";
+        "<strong>There is currently no Recyclable Points available<br>that accept the waste types you have selected</strong><br>" +
+        "<br><br>" +
+        "<strong>Search again with different waste-type selection</strong><br>" + "</div>";
     let listResult = "";
 
     var searchQuery = document.getElementById('searchloc').getElementsByTagName('input')[0].value;
@@ -251,18 +255,18 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
         console.log("no SearchQuery");
     }
 
-    
+
     // .filter returns the address that matches the wasteTypes selected
     // .every returns true/false 
     let filteredList = addresses.filter((e) => selectedOptions.every(option => {
-            return e["wasteTypes"].includes(option);
-        }));
+        return e["wasteTypes"].includes(option);
+    }));
     //console.log("filteredList.length: ", filteredList.length);
     // if no search result that matches the condition of the search criteria
     if (filteredList.length === 0) {
-        clearResult();   
-        resultDisplay.insertAdjacentHTML('beforeend', noSearchResult);   
-        console.log("there is no result that matches search criteria to render");
+        clearResult();
+        resultDisplay.insertAdjacentHTML('beforeend', noSearchResult);
+        alert("there is no result that matches search criteria to render");
         // clear location/places user typed in as searchQuery
         clearField();
         // clear selectedOptions to default status (nothing selected)
@@ -275,24 +279,24 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
         // if (selectedOptions.every(option => {
         //     return address["wasteTypes"].includes(option);
         // })) {
-            let marker = new google.maps.Marker({
-                position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
-                map: map,
-                title: address["address1-zh-hant"],
-                animation: google.maps.Animation.DROP
-            });
-            createInfoWindow(marker, address);
-            markers.push(marker);
+        let marker = new google.maps.Marker({
+            position: { lat: address["lat-long"][0], lng: address["lat-long"][1] },
+            map: map,
+            title: address["address1-zh-hant"],
+            animation: google.maps.Animation.DROP
+        });
+        createInfoWindow(marker, address);
+        markers.push(marker);
 
-            //render the address/result filtered into the list
+        //render the address/result filtered into the list
 
-            clearResult();
-            listResult += renderResult(address);
-            //console.log("address:" + address);
-            //console.log(Object.keys(addresses).length);
-            //console.log(Object.keys(address).length);
-            // console.log(address);  // 3 objects returned
-            //var length = Object.keys(address).length;
+        clearResult();
+        listResult += renderResult(address);
+        //console.log("address:" + address);
+        //console.log(Object.keys(addresses).length);
+        //console.log(Object.keys(address).length);
+        // console.log(address);  // 3 objects returned
+        //var length = Object.keys(address).length;
 
 
         //}
@@ -306,9 +310,9 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
 }
 
 // to reset selectedOptions to default if no search result to display
-function clearSelectedOptions(){
-   $('#waste-type input[type="checkbox"]:checked').prop('checked', false);
-   $('#recycle-form input').prop('checked',false);
+function clearSelectedOptions() {
+    $('#waste-type input[type="checkbox"]:checked').prop('checked', false);
+    $('#recycle-form input').prop('checked', false);
 }
 
 //create infowindow helper
@@ -318,13 +322,13 @@ function createInfoWindow(marker, address) {
                         Address :${address["address1-en"]} <br>
                         Recycling Type: ${address["waste-type"]} <br>
                         <input type="button" value="Show route" onclick="getDirection(); closeInfoWindows()" data-toggle="modal" data-target="#modal-form"></input>
-                        `; 
+                        `;
     // data-toggle="modal" data-target="#myModal"
     let infowindow = new google.maps.InfoWindow({
         content: contentString
     });
     infowindows.push(infowindow);
-    
+
     google.maps.event.addListener(marker, "click", function (event) {
         destinationAddress = address['address1-en'];
         destination = this.position;
@@ -372,7 +376,7 @@ function renderResult(address) {
         wasteType = address["waste-type"];
 
     let wasteColoredType = wasteType.split(",").map(type => {
-        return "<span style='padding: 5px; background-color: " + wasteTypeColor[type] + "'>" + type+ "</span>"; ;
+        return "<span style='padding: 5px; background-color: " + wasteTypeColor[type] + "'>" + type + "</span>";;
     });
     // console.log(wasteColoredType);
 
@@ -382,13 +386,13 @@ function renderResult(address) {
         "<strong>" + "recyclable waste-type accepted:" + "</strong><br><br>" +
         wasteColoredType.join(" ") + "</p>" + "</div>";
     return listResult;
-   /* if (address != 0) {
-        
-        console.log("there is result matched to render");
-    } else {
-        return errorMessage;
-        console.log("return error message");
-    }*/
+    /* if (address != 0) {
+         
+         console.log("there is result matched to render");
+     } else {
+         return errorMessage;
+         console.log("return error message");
+     }*/
 
 }
 

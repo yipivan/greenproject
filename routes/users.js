@@ -21,7 +21,7 @@ router.post("/login",
 router.post("/register",
   passport.authenticate("local-signup", {
     successRedirect: "/",
-    failureRedirect: "/login",
+    failureRedirect: "/login#pageid",
     failureFlash: true
   }),
 );
