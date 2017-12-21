@@ -69,6 +69,15 @@ h1+p {
     margin-bottom: 0;
 }
 
+/* for Google Map Autocomplete to show upwards*/
+
+.pac-container
+{
+	position:fixed;
+	display:block;
+	margin-top: -210px;
+}
+
 #navbar ul {
     min-width: 50%;
 }
