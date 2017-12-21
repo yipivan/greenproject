@@ -10,9 +10,9 @@ module.exports = passport => {
   passport.use(
     new FacebookStrategy(
       {
-        clientID: process.env.FACEBOOK_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "/auth/facebook/callback"
+        clientID: '1748847835417344',
+        clientSecret: '5b904a3df91a1bf7359948a70bc711ab',
+        callbackURL: process.env.CALLBACKURL || "www.greenlifehk.com/auth/facebook/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
         User.findOrCreate({
