@@ -170,6 +170,8 @@ section when routing/test is DONE --}}
 
         </div>
 
+        <div id="shareBtn" class="btn btn-success clearfix center-block" >FB Share</div>
+
         <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' style='cursor:pointer;'>
         <span class='glyphicon glyphicon-home'></span> Back to Home/Search Page</button>
       </div>
@@ -183,6 +185,50 @@ section when routing/test is DONE --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
+
+  
+  <script>
+  //Facebook Share Button
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '1748847835417344',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.11'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+  <script>
+  document.getElementById('shareBtn').onclick = function() {
+    console.log("clicked")
+    FB.ui({
+      method: 'share',
+      display: 'popup',
+      href: 'https://www.greenlifehk.com/',
+      quote:`I have recycled ${result} of items with this app, lets join and help saving mother earth together`  }, function(response){});
+      console.log(result);
+  }
+
+  </script>
+
+  <script>
+    
+    let result = 0
+    let usage = document.getElementsByClassName("quantity")
+    for (let i of usage){result+=parseInt(i.innerHTML)}
+    console.log(result);
+    
+   
+
+  </script>
 
   <script>
     // for left side panel

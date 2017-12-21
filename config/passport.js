@@ -60,7 +60,7 @@ module.exports = passport => {
                   newUser.password = hash;
                   newUser
                     .save()
-                    .then(newUser=>{done(null,newUser)})
+                    .then(newUser=>{done(null,newUser,req.flash("register_complete","User Sucessfully Registered And Logged-In"))})
                 });
               });
             } else {
