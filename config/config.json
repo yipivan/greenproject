@@ -14,10 +14,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "ellqmtpo",
-    "password": "v7RYEcj5f1GIvXKMpxDUxoVzPldXYmB4",
-    "database": "ellqmtpo",
-    "host": "baasu.db.elephantsql.com",
+    "username": "postgres",
+    "password": null,
+    "database": "greenProejct",
+    "host": "localhost",
     "dialect": "postgres"
   }
 }
