@@ -12,7 +12,7 @@ module.exports = passport => {
       {
         clientID: '1748847835417344',
         clientSecret: '5b904a3df91a1bf7359948a70bc711ab',
-        callbackURL: process.env.CALLBACKURL || "www.greenlifehk.com/auth/facebook/callback"
+        callbackURL: process.env.CALLBACKURL || "https://www.greenlifehk.com/auth/facebook/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
         User.findOrCreate({
