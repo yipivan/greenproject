@@ -38,7 +38,7 @@ section when routing/test is DONE --}}
 
 
         <div id="searchhistory" class="text-center">
-          <h9>Your latest Recyclable Points search history</h9>
+          <h9><span id="usergreeting">{{user.firstName}}'s</span> latest Recyclable Points search history</h9>
 
           <div id="mocklist">
 
@@ -136,8 +136,7 @@ section when routing/test is DONE --}}
 
               <h11><span id="usergreeting">{{user.firstName}}</span><br>
 
-              has waste types below<br>
-              recycled so far:</h11>
+              has recycled following waste types below so far:</h11>
               
               {{#each usageLogs}}
 
@@ -145,23 +144,23 @@ section when routing/test is DONE --}}
               
               {{/each}} 
 
-                <p>our Reycling Points Locator also shows what recyclabe waste types are accepted at each points<br><br>
-                You can also filter the search with waste type selection<br></p>
+                <h11>our Reycling Points Locator also shows what recyclabe waste types are accepted at each points<br><br>
+                You can also filter the search with waste type selection<br><br></h11>
 
               {{else}}
               <div id="searcheddata">
 
-                <h11><span id="usergreeting">{{user.firstName}}</span></h11><br>
-                <p>currently has no Recycling activity/Waste types recycled recorded<br><br><br>
-                Start recording your Recycling activity now!</p>
+                <h11><span id="usergreeting">{{user.firstName}}</span><br>
+                currently has no Recycling activity/Waste types recycled recorded<br><br><br>
+                Start recording your Recycling activity now!<br><br></h11>
 
-                </div>
+              </div>
               
               {{/if}}
 
               <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' ; style='cursor:pointer;'>
               <i class="fa fa-search" aria-hidden="true"></i> Search Now!</button>
-
+            
               
 
             </div>

@@ -237,7 +237,7 @@ h8, h9, h10, h11 {
 }
 
 #userinfo > div {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
     padding: 20px 0;
 }
@@ -285,9 +285,9 @@ img {
 
 #panel
 {
-     height: 1000px;
+     height: 100%;
      width: 300px;
-    padding:20px;
+     padding:20px;
      background: #eee;
      float: left;
      display: none;    
@@ -374,4 +374,22 @@ td {
 
 table, th, td, .table>tbody+tbody {
     border-style:none!important;
+}
+
+
+@media only screen and (max-width: 767px) {
+
+    .container {
+        padding: 0;
+    }
+
+    #mocklist {
+        width: 100%;
+    }
+
+    #searchdata {
+        margin: 20px 0;
+        padding: 10px 0;
+    }
+
 }
