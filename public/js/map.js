@@ -57,11 +57,9 @@ $('#recycle-form').on('submit', function (e) {
         query: destinationAddress,
         latlng: [destination.lat(), destination.lng()]
     }
-    $.post('/users/search', data).then((data) => {
-        alert(data);
-    })
+    $.post('/users/search', data)
         .catch(err => {
-            alert(err);
+            console.log("Something went wrong! data is not saved!");
         }).done(()=> {
             clearSelectedOptions();
         })
