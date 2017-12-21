@@ -55,6 +55,7 @@ app.use(function (req, res, next) {
     res.locals.user = req.user || null;
     res.locals.login_error = req.flash("login_error")
     res.locals.register_error = req.flash("register_error")
+    res.locals.register_complete = req.flash("register_complete")
     next();
 });
 
