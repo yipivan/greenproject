@@ -53,7 +53,8 @@ app.use(flash())
 // Create user object for global access
 app.use(function (req, res, next) {
     res.locals.user = req.user || null;
-    res.locals.error = req.flash("error");
+    res.locals.login_error = req.flash("login_error")
+    res.locals.register_error = req.flash("register_error")
     next();
 });
 
@@ -61,9 +62,9 @@ app.use(function (req, res, next) {
 app.get('/', (req, res) => {
     res.render('index');
 });
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '/login.html'));
+app.get('/login',(req, res) => {
+    //res.sendFile(__dirname + '/login.html');
+    res.render('users/login');
 });
 
 // test route only added for test, to be deleted once test done

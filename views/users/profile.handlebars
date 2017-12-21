@@ -1,16 +1,7 @@
 {{!-- {{#each users}} --}} {{!--
 <div>
   <p>Your Searched Recyclable Points history:</p>
-</div> --}} {{!--
-<div class="card card-body mb-2">
-  <h4>{{title}}</h4>
-  <p>{{details}}</p>
-  <a class="btn btn-dark btn-block mb-2" href="/ideas/edit/{{id}}">Edit</a>
-  <form method="post" action="/ideas/{{id}}?_method=DELETE">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="submit" class="btn btn-danger btn-block" value="Delete">
-  </form>
-</div> --}}{{!-- what will be rendered for logged in user with no hisotry to render
+</div> --}} {{!-- what will be rendered for logged in user with no hisotry to render
 
 <p>Currently there is no search history/results stored for you</p>
 
@@ -252,36 +243,6 @@ section when routing/test is DONE --}}
       function clearDisplay() {
         resultDisplay.innerHTML = "";
       }
-
-
-
-
-      // delete once db data is ready and rendered
-      /* var mockDataDisplay = document.getElementById("mocklist");
-
-      function renderMockData() {
-
-        var listResult = "";
-
-        var mockData = {
-          "Address": "Junction of Hollywood Road and Aberdeen Street",
-          "Searched on": "19 December 2017",
-          "Longitude": "XXX",
-          "Latitude": "YYY"
-        };
-
-        for (i = 0; i < 5; i++) {
-          listResult += "<div id='searcheddata'>" +
-            "Searched on: " + mockData["Searched on"] + "<br><br>" +
-            "<strong>" + mockData.Address + "</strong><br>" +
-            "<id='hiddendata'><br>this data will not be shown:<br><br>Longitude:" + mockData.Longitude + "<br>Latitude:" +
-            mockData.Latitude + "</div>";
-        }
-
-        mockDataDisplay.insertAdjacentHTML('beforeend', listResult);
-      } */
-
-
 
     })();
   </script>

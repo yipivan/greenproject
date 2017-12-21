@@ -54,7 +54,7 @@ h1+p {
 }
 
 #map-container .navbar-default {
-    background-color: white;
+    background-color:#8BC63E;
 }
 
 #map-container .navbar {
@@ -75,6 +75,14 @@ h1+p {
     height: 400px;
     width: 100%;
     margin-bottom: 20px;
+}
+
+.container-fluid {
+    padding: 0 60px;
+}
+
+.navbar-default {
+    border: none;
 }
 
 h1 {
