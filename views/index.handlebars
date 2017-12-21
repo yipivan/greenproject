@@ -1,5 +1,5 @@
 <div>
-<div id="wrap" class="container">
+    <div id="wrap" class="container">
 
 <div class="text-center">
     <h1><i class="fa fa-search" aria-hidden="true"></i> Recyclable Points Locator</h1>
@@ -12,31 +12,35 @@
             {{>_map}}
             <div id="search" class="container">
 
-                <button id="showloc" class="btn btn-green btn-default btn-block" onClick="clearField()"><i class="fa fa-map-marker" aria-hidden="true"></i> Search for nearest Recycling Points</button>
-                <br>
-                <div class="input-group" id="searchloc">
-                    <div>
-                        <h4>Search for Recycling points near...</h4>
+        <div class="tab-content text-center">
+            <div id="current" class="tab-pane fade in active">
+                {{>_map}}
+                <div id="search" class="container">
+
+                    <button id="showloc" class="btn btn-green btn-default btn-block" onClick="clearField()">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> Search for nearest Recycling Points</button>
+                    <br>
+                    <div class="input-group" id="searchloc">
+                        <div>
+                            <h4>Search for Recycling points near...</h4>
+                        </div>
+
+                        <input type="text" class="form-control" id="location" placeholder="District, Street Name or Building" aria-label="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </span>
                     </div>
-
-                    <input type="text" class="form-control" id="location" placeholder="District, Street Name or Building" aria-label="Search for...">
-                    <span class="input-group-btn">  
-                        <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </span>
+                    <div id="list"></div>
                 </div>
-
-                <div id="list"></div>
-
             </div>
-
-        </div>
-
-        <div id="type" class="tab-pane fade">
-            <h3>Leave this tab and section for now for optional/additional function</h3>
+            <div id="type" class="tab-pane fade">
+                <h3>Leave this tab and section for now for optional/additional function</h3>
+            </div>
         </div>
     </div>
 </div>
-</div>
-<script src="/js/map.js"></script> 
-    <script src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyAukIcOBd5XzTyDZBhDhSOOFHqONrH_vzk&callback=initMap" async 
-        defer></script>
+<script src="/js/map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyAukIcOBd5XzTyDZBhDhSOOFHqONrH_vzk&libraries=places&callback=initMap"
+    async defer></script>>
