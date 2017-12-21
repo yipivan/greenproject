@@ -1,4 +1,6 @@
-/* navbar */
+#wrap {
+    min-height: calc(100vh - 50px);
+}
 
 .navbar {
     margin-bottom: 0;
@@ -6,23 +8,24 @@
     border-radius: 0;
 }
 
-.navbar a {
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
     color: white;
     font-weight: 800;
-    
+  }
+
+.navbar-custom {
+    color: white;
+    font-weight: 800;
 }
 
 #usergreeting {
     color: green;
 }
 
-/* .navbar-nav li a {
-    /* border: 2px solid white;  
-} */
-
-.navbar-brand {
+/* .navbar-brand {
     pointer-events:none;
-}
+} */
 
 #wrap {
     border: 1px solid lightgray;
@@ -43,6 +46,11 @@ h1+p {
     margin-bottom: 20px;
 }
 
+#showloc {
+    margin-bottom: 1em;
+    width: 50vw;
+}
+
 
 #map-container {
     width: 100%;
@@ -54,27 +62,97 @@ h1+p {
 }
 
 #map-container .navbar-default {
-    background-color: white;
+    background-color:#8BC63E;
 }
 
 #map-container .navbar {
-    padding:0;
+    padding: 0 1em;
     margin-bottom: 0;
 }
 
-#map-container .dropdown, #map-container .dropdown-menu {
-    min-width: 24vw;
+#routebtn {
+    margin: 5px 0;
+    padding: 5px 10px;
+}
+
+
+#mapbox {
+    background: lightgreen;
+    padding: 10px 10px 0 10px;
+}
+
+#travel-mode > li:first-child  {
+    /* background-color: green; */
+}
+
+#travel-mode > li:nth-child(2)  {
+    background-color: blue;
+}
+
+#travel-mode > li:nth-child(3)  {
+    background-color: yellow;
+}
+
+/* for Google Map Autocomplete to show upwards*/
+
+.pac-container
+{
+	position:fixed;
+	display:block;
+	margin-top: -210px;
+}
+
+#navbar ul {
+    min-width: 50%;
+}
+
+#navbar ul li {
+    width: 100%;
+}
+
+#navbar ul li ul {
+    width: 100%;
+}
+
+#navbar ul li ul .active a {
+    background: #008000;
+    color: white;
+    font-weight: 700;  
+}
+
+#navbar ul li ul a {
+    font-weight: 700;
+    background: white;
+    cursor: pointer;
+}
+
+#map-menu nav .container-fluid {
+    width: 100%;
+    padding: 0;
 }
 
 .dropdown-menu {
     padding: 0;
 }
 
+.dropdown-menu > li > a {
+    font-weight: 500;
+}
+
 /* Map and search query section */
 #map {
-    height: 400px;
+    height: 50vh;
     width: 100%;
     margin-bottom: 20px;
+}
+
+.container-fluid {
+    padding: 0 60px;
+}
+
+
+.navbar-default {
+    border: none;
 }
 
 h1 {
@@ -94,10 +172,23 @@ h1 {
     padding-bottom: 20px;
 }
 
-.input-group-btn {
-   height: 34px;
-   vertical-align: bottom;
-   padding-top: 0;
+.btn-default {
+  background-color: green;
+  color: white;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+    background:#8BC63E;
+}
+
+.btn-default:active {
+    background:lightgreen;
+    }
+
+.searchform {
+    /* %of the screen width */
+    width: 50vw;
 }
 
 /* Waste Type filter section */
@@ -145,6 +236,8 @@ h1 {
     border: none;
     color: white;
     font-weight: 700;
+    font-size: 2vmin;
+    white-space: normal;
 }
 
 .btn-secondary {
@@ -170,7 +263,8 @@ h4, h5 {
 
 h3 {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 900;
+    text-align: center;
 }
 
 #listBox {
@@ -222,7 +316,7 @@ h8, h9, h10, h11 {
 }
 
 #userinfo > div {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
     padding: 20px 0;
 }
@@ -270,9 +364,9 @@ img {
 
 #panel
 {
-     height: 1000px;
+     height: 100%;
      width: 300px;
-    padding:20px;
+     padding:20px;
      background: #eee;
      float: left;
      display: none;    
@@ -359,4 +453,22 @@ td {
 
 table, th, td, .table>tbody+tbody {
     border-style:none!important;
+}
+
+
+@media only screen and (max-width: 767px) {
+
+    .container {
+        padding: 0;
+    }
+
+    #mocklist {
+        width: 100%;
+    }
+
+    #searchdata {
+        margin: 20px 0;
+        padding: 10px 0;
+    }
+
 }

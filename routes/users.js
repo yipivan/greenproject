@@ -60,26 +60,28 @@ router.post("/search", isLoggedIn, (req, res) => {
     }))
   //create or update recycle_times data whenever confirm recycle
   wasteTypes = data.wasteTypes;
-  for (wasteType of wasteTypes) {
-    promises.push(Usage_log.findOrCreate({
-      where: {
-        userId: req.user.id,
-        recycle_item_name: wasteType
-      },
-      defaults: {
-        recycle_item_name: wasteType,
-        recycle_times: 0
-      }
-    }).then(usage => {
-      usage[0]["recycle_times"] += 1;
-      usage[0].save();
-    })
-      // .then(() => {
-      //   Usage_log.increment("recycle_times", { by: 1, where: { userId: req.user.id, recycle_item_name: wasteType } });
-      // })
-      .catch(err => {
-        console.log(err)
-      }))
+  if (wasteTypes) {
+    for (wasteType of wasteTypes) {
+      promises.push(Usage_log.findOrCreate({
+        where: {
+          userId: req.user.id,
+          recycle_item_name: wasteType
+        },
+        defaults: {
+          recycle_item_name: wasteType,
+          recycle_times: 0
+        }
+      }).then(usage => {
+        usage[0]["recycle_times"] += 1;
+        usage[0].save();
+      })
+        // .then(() => {
+        //   Usage_log.increment("recycle_times", { by: 1, where: { userId: req.user.id, recycle_item_name: wasteType } });
+        // })
+        .catch(err => {
+          console.log(err)
+        }))
+    }
   }
 
   Promise.all(promises).then(() => {
@@ -106,7 +108,7 @@ router.get("/profile", isLoggedIn, (req, res) => {
     })
       .then(user => {
         if (req.user.id !== user.id) {
-          req.flash('login_error','Access Not Authorised')
+          req.flash('login_error', 'Access Not Authorised')
           res.redirect('/login')
         } else {
           //retrieve usage_log
@@ -128,7 +130,7 @@ router.get("/profile", isLoggedIn, (req, res) => {
     })
   //res.render(template,{usage_log: value[0], search_log: value[1]})
   Promise.all([p1, p2]).then(values => {
-    console.log(values.length);
+    // console.log(values.length);
     res.render('users/profile', {
       usageLogs: values[0],
       searchLogs: values[1],
