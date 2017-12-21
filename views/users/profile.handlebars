@@ -20,12 +20,7 @@ section when routing/test is DONE --}}
 <div>
   <div id="wrap" class="container">
 
-    {{!--
-    <p><strong>IGNORE</strong> the nabvar above, different version of navbar is already set for logged in user with Profile
-      and Logout buttons!</p> --}}
-
-
-    <h8>Welcome back to Recycle HK, {{user.firstName}}</h8>
+    <h8>Welcome back to GREENlife HK,<span id="usergreeting"> {{user.firstName}}</span></h8>
 
     <div id="wrap-inner" class="container">
 
@@ -35,12 +30,12 @@ section when routing/test is DONE --}}
 
           <div class="text-center">
 
-            <p>Search for Recyclable points?</p>
+            <strong><p>Search for Recyclable points?</p></strong>
 
             <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' ; style='cursor:pointer;'>
             <i class="fa fa-search" aria-hidden="true"></i> Go to Recycling finder</button>
 
-          </a>
+            </a>
 
           </div>
 
@@ -90,7 +85,7 @@ section when routing/test is DONE --}}
 
             {{#if usageLogs}}
 
-            <div id="searcheddata">
+            <div id="searcheddata" class="table-responsive">
               <table class="table">
                 <thread>
                   <tr>
@@ -103,8 +98,12 @@ section when routing/test is DONE --}}
                   {{#each usageLogs}}
                   <tr>
 
-                    <td>{{this.recycle_item_name}}</td>
-                    <td>{{this.recycle_times}}</td>
+                    <td>
+                      <p class="itemcolor">{{this.recycle_item_name}}</p>
+                    </td>
+                    <td>
+                      <p class="quantity">{{this.recycle_times}}</p>
+                    </td>
 
                   </tr>
                   {{/each}}
@@ -133,13 +132,38 @@ section when routing/test is DONE --}}
 
 
         <div id="panel-wrapper">
-          <div id='panel'>
-            <p>More user details or another user history section or overall usage data</p>
+          
+          <div id='panel' class="container text-center">
+
+            <h11>You are GREENlife HK<br>user since:</h11>
+
+            <p id="usersince">userLog created data?</p>
 
             <div id="panelresult">
+
+              <h11>Waste types you have<br>recycled so far:</h11>
+
+              
+
+              {{#if usageLogs}} {{#each usageLogs}}
+
+                
+              
+                <p class="panelitem">{{this.recycle_item_name}}</p>
+              
+
+              {{/each}} {{else}}
+              <div id="searcheddata">
+                <p>You currently have no Recycling activity/Waste types recycled recorded<br>Start recording your Recycling activity now!</p>
+              </div>
+              {{/if}}
+
+
+
             </div>
 
           </div>
+
           <div id='open'>
             <p>Open</p>
           </div>
@@ -166,7 +190,21 @@ section when routing/test is DONE --}}
       $("#panel").animate({
         width: 'toggle'
       }, 300);
+
     });
+
+    // for applying colours to different wasteType in Recycling activity record section
+
+    let items = document.getElementsByClassName("itemcolor");
+    let resultQuantity = document.getElementsByClassName("quantity");
+
+    let panelWasteType = document.getElementsByClassName("panelitem");
+    for (var i = 0; i < items.length; i++) {
+      items[i].style.color = wasteTypeColor[items[i].innerHTML];
+      resultQuantity[i].style.backgroundColor = wasteTypeColor[items[i].innerHTML];
+      panelWasteType[i].style.backgroundColor = wasteTypeColor[items[i].innerHTML];
+    }
+
 
     (function () {
 
@@ -214,6 +252,8 @@ section when routing/test is DONE --}}
       function clearDisplay() {
         resultDisplay.innerHTML = "";
       }
+
+
 
 
       // delete once db data is ready and rendered
