@@ -81,6 +81,10 @@ h1+p {
     width: 100%;
 }
 
+#navbar ul li ul .active a {
+    background: #008000;
+    color: white;
+}
 
 #map-menu nav .container-fluid {
     width: 100%;
