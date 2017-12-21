@@ -1,4 +1,6 @@
-/* navbar */
+#wrap {
+    min-height: calc(100vh - 50px);
+}
 
 .navbar {
     margin-bottom: 0;
