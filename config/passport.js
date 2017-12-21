@@ -64,7 +64,7 @@ module.exports = passport => {
                 });
               });
             } else {
-              done(null , false,{message: "This e-mail is already registered"})
+              done(null , false, req.flash("register_error", "This e-mail is already registered"))
             }
           })
           .catch(err => {
@@ -81,16 +81,17 @@ module.exports = passport => {
       {
         //setup to use non default form name field
         usernameField: "UserEmail",
-        passwordField: "UserPassword"
+        passwordField: "UserPassword",
+        passReqToCallback: true
       },
-      function(email, password, done) {
+      function(req, email, password, done) {
         User.findOne({
           where: { emailOrId: email }
         })
           .then(user => {
             // check if user exist
             if (!user) {
-              return done(null, false, { message: "User does not exist" });
+              return done(null, false, req.flash("login_error","User does not exists"));
             }
             // check if password match hash
             bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -105,7 +106,7 @@ module.exports = passport => {
                 console.log("user and pw match");
                 return done(null, user);
               } else {
-                return done(null, false,{message: "User or Password invalid"})
+                return done(null, false, req.flash("login_error","Either Email or Password Does Not Match"))
               }
             });
           })

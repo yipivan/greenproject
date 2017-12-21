@@ -100,9 +100,14 @@
           </div>
         </div>
       </form>
-{{#each error}}
-    <ul class="flash_msg">{{this}}</ul>
-{{/each}}
+
+      <script id="address-template" type="text/x-handlebars-template">
+        {{#if error}}
+            <ul class="flash_msg">{{this}}</ul>
+        {{/if}}
+      </script>
+      <div class="content-placeholder"></div>
+      
       <div class="login-footer">
         <div class="row">
           <div class="col-xs-6 col-md-6">

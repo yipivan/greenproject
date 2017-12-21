@@ -21,7 +21,7 @@ router.post("/login",
 router.post("/register",
   passport.authenticate("local-signup", {
     successRedirect: "/",
-    failureRedirect: "/login",
+    failureRedirect: "/login#pageid",
     failureFlash: true
   }),
 );
@@ -106,7 +106,7 @@ router.get("/profile", isLoggedIn, (req, res) => {
     })
       .then(user => {
         if (req.user.id !== user.id) {
-          req.flash('error','Access Not Authorised')
+          req.flash('login_error','Access Not Authorised')
           res.redirect('/login')
         } else {
           //retrieve usage_log
