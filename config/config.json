@@ -14,8 +14,8 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": null,
+    "username": "ivan",
+    "password": "password",
     "database": "greenProejct",
     "host": "localhost",
     "dialect": "postgres"
