@@ -30,6 +30,11 @@ $('.dropdown-menu').on('click', function (e) {
 $('#travel-mode li').on('click', function () {
     $('#travel-mode li').removeClass("active");
     $(this).addClass('active');
+    if (travelMode) {
+        if ($(this).attr('data-id').toUpperCase() !== travelMode) {
+            getDirection();
+        }
+    }
 });
 
 //submit user search form to server
@@ -134,7 +139,7 @@ function adjustBounds() {
     for (marker of markers) {
         bounds.extend(marker.position);
     }
-    bounds.extend(originMarker.position);
+    // bounds.extend(originMarker.position);
     map.fitBounds(bounds);
 }
 // function adjustBounds(center,zoom=15) {
@@ -408,3 +413,4 @@ function clearRoutes() {
         directionsDisplay.setMap(null);
     }
 }
+

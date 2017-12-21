@@ -106,6 +106,13 @@
 
     // Login/Registration forms show and hide
     //when Register is clicked disable active class on login-form
+    if (window.location.hash.substr(1) == "pageid") {
+       $('.show-login-form').removeClass('active');
+       $('.show-register-form').addClass('active');
+       $('.login-form').fadeOut('fast', function () {
+         $('.register-form').fadeIn('fast');
+       });
+     }
     $('.show-register-form').on('click', function () {
         if (!$(this).hasClass('active')) {
             $('.show-login-form').removeClass('active');

@@ -128,7 +128,7 @@ router.get("/profile", isLoggedIn, (req, res) => {
     })
   //res.render(template,{usage_log: value[0], search_log: value[1]})
   Promise.all([p1, p2]).then(values => {
-    console.log(values.length);
+    // console.log(values.length);
     res.render('users/profile', {
       usageLogs: values[0],
       searchLogs: values[1],
