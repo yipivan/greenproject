@@ -232,7 +232,7 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
     infoWindows = [];
 
     // for search result list rendering
-    var listHeading = "<br><h5>" + "Recycling Points near <br> your current/selected location:" + "</h5>";
+    var listHeading = "<br><h5>" + "Recycling Points near your current location:" + "</h5>";
     const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'><span class='glyphicon glyphicon-map-marker'></span> Back to Map</button>";
     let noSearchResult = "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
     "<strong>There is currently no Recyclable Points available<br>that accept the waste types you have selected</strong><br>" +

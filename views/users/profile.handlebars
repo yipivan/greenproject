@@ -126,26 +126,28 @@ section when routing/test is DONE --}}
           
           <div id='panel' class="container text-center">
 
-            <h11>You are GREENlife HK<br>user since:</h11>
+            {{!-- <h11>You are GREENlife HK<br>user since:</h11> --}}
 
-            <p id="usersince">userLog created data?</p>
+            {{!-- <p id="usersince">userLog created data?</p> --}}
 
             <div id="panelresult">
 
-              <h11>Waste types you have<br>recycled so far:</h11>
-
-              
-
               {{#if usageLogs}} {{#each usageLogs}}
 
-                
-              
+              <h11><span id="usergreeting">{{user.firstName}}</span><br>
+
+              has waste types below<br>
+              recycled so far:</h11>
+
                 <p class="panelitem">{{this.recycle_item_name}}</p>
               
 
               {{/each}} {{else}}
               <div id="searcheddata">
-                <p>You currently have no Recycling activity/Waste types recycled recorded<br>Start recording your Recycling activity now!</p>
+
+                <h11><span id="usergreeting">{{user.firstName}}</span></h11><br>
+                <p>currently has no Recycling activity/Waste types recycled recorded<br><br><br>
+                Start recording your Recycling activity now!</p>
               </div>
               {{/if}}
 

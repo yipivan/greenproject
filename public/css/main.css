@@ -6,19 +6,20 @@
     border-radius: 0;
 }
 
-.navbar a {
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
     color: white;
     font-weight: 800;
-    
+  }
+
+.navbar-custom {
+    color: white;
+    font-weight: 800;
 }
 
 #usergreeting {
     color: green;
 }
-
-/* .navbar-nav li a {
-    /* border: 2px solid white;  
-} */
 
 .navbar-brand {
     pointer-events:none;
@@ -80,6 +81,7 @@ h1+p {
 .container-fluid {
     padding: 0 60px;
 }
+
 
 .navbar-default {
     border: none;
@@ -178,7 +180,8 @@ h4, h5 {
 
 h3 {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 900;
+    text-align: center;
 }
 
 #listBox {
