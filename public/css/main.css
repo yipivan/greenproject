@@ -175,6 +175,8 @@ h1 {
     border: none;
     color: white;
     font-weight: 700;
+    font-size: 3vmin;
+    white-space: normal;
 }
 
 .btn-secondary {

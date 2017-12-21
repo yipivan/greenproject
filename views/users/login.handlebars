@@ -1,86 +1,88 @@
 <link href="css/login.css" rel="stylesheet">
 <div class="container">
-<div class="form-signin">
-    <h3 class="heading-desc">Welcome to GREENlife HK</h3>
-    
-    <div class="row">
-    <div class="show-forms text-center">
-        <span class="show-login-form active">Login</span>
-        <span class="show-forms-divider">/</span>
-        <span class="show-register-form">Register</span>
-    </div>
-    </div>
+    <div class="form-signin">
+        <h3 class="heading-desc">Welcome to GREENlife HK</h3>
 
-    <form name="loginform" action="/users/login" method="post" onsubmit="event.preventDefault(); Login();">
-
-    <div class="row login-form">
-        <div class="main text-center">
-
-        <input type="text" class="form-control" name="UserEmail" value="" placeholder="Email" autofocus>
-        <div id="errorBox5"></div>
-        <input type="password" class="form-control" name="UserPassword" value="" placeholder="Password">
-        <div id="errorBox6"></div>
-        <button type="submit" class="btn btn-green">Login</button>
-        <p>OR</p>
-        <span class="clearfix"></span>
+        <div class="row">
+            <div class="show-forms text-center">
+                <span class="show-login-form active">Login</span>
+                <span class="show-forms-divider">/</span>
+                <span class="show-register-form">Register</span>
+            </div>
         </div>
 
-        <div class="social-box">
-        <div class="row mg-btm">
-            <div class="col-md-12">
-            <a href="/auth/facebook" class="btn btn-primary btn-block">
+        <form name="loginform" action="/users/login" method="post" onsubmit="event.preventDefault(); Login();">
+
+            <div class="row login-form">
+                <div class="main text-center">
+
+                    <input type="text" class="form-control" name="UserEmail" value="" placeholder="Email" autofocus>
+                    <div id="errorBox5"></div>
+                    <input type="password" class="form-control" name="UserPassword" value="" placeholder="Password">
+                    <div id="errorBox6"></div>
+                    {{#each login_error}}
+                    <ul class="flash_msg">{{this}}</ul>
+                    {{/each}}
+                    <button type="submit" class="btn btn-green">Login</button>
+                    <p>OR</p>
+                    <span class="clearfix"></span>
+                </div>
+
+                <div class="social-box">
+                    <div class="row mg-btm">
+                        <div class="col-md-12">
+                            <a href="/auth/facebook" class="btn btn-primary btn-block">
                     <i class="icon-facebook"></i> &nbsp;&nbsp;&nbsp;Login with Facebook
                 </a>
+                        </div>
+
+
+                    </div>
+                    <div class="left-section">
+                        <a href="mailto:admin@greenlifehk.com?subject=Enquiry on my user password&amp;body=Please send me temporary password to reset my password for GREENlife HK">Forgot your password?</a>
+                    </div>
+                </div>
             </div>
+        </form>
 
+        <form name="registerform" id="pageid" action="/users/register" method="post" onsubmit="event.preventDefault(); Register();">
 
+            <div class="row register-form">
+                <div class="main text-center">
+
+                    <input type="text" class="form-control" name="Firstname" value="" placeholder="Firstname" autofocus>
+                    <div id="errorBox1"></div>
+                    <input type="text" class="form-control" name="Email" value="" placeholder="Email">
+                    <div id="errorBox2"></div>
+                    <input type="password" class="form-control" name="Password" value="" placeholder="Password" data-toggle="tooltip" data-container="body"
+                        title="Password must be more than 6 characters and contain at least 1 number and a Capital letter">
+                    <div id="errorBox3"></div>
+                    <input type="password" class="form-control" name="ConfirmPassword" value="" placeholder="Confirm Password">
+                    <div id="errorBox4"></div>
+
+                    {{#each register_error}}
+                    <ul class="flash_msg">{{this}}</ul>
+                    {{/each}}
+
+                    <button type="submit" class="btn btn-green">Register</button>
+                    <div id="successmsg"></div>
+
+                    <span class="clearfix"></span>
+                </div>
+            </div>
+        </form>
+
+        <div class="login-footer">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="left-section">
+                        <a href="/">Back to Home/Search</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="left-section">
-            <a href="mailto:admin@greenlifehk.com?subject=Enquiry on my user password&amp;body=Please send me temporary password to reset my password for GREENlife HK">Forgot your password?</a>
-        </div>
-        </div>
+
     </div>
-    </form>
-
-    <form name="registerform" action="/users/register" method="post" onsubmit="event.preventDefault(); Register();">
-
-    <div class="row register-form">
-        <div class="main text-center">
-
-        <input type="text" class="form-control" name="Firstname" value="" placeholder="Firstname" autofocus>
-        <div id="errorBox1"></div>
-        <input type="text" class="form-control" name="Email" value="" placeholder="Email">
-        <div id="errorBox2"></div>
-        <input type="password" class="form-control" name="Password" value="" placeholder="Password" data-toggle="tooltip" data-container="body" title="Password must be more than 6 characters and contain at least 1 number and a Capital letter">
-        <div id="errorBox3"></div>
-        <input type="password" class="form-control" name="ConfirmPassword" value="" placeholder="Confirm Password">
-        <div id="errorBox4"></div>
-        <button type="submit" class="btn btn-green">Register</button>
-        <div id="successmsg"></div>
-
-        <span class="clearfix"></span>
-        </div>
-    </div>
-    </form>
-
-    {{#each login_error}}
-        <ul class="flash_msg">{{this}}</ul>
-    {{/each}}
-    {{#each register_error}}
-        <ul class="flash_msg">{{this}}</ul>
-    {{/each}}
-    
-    <div class="login-footer">
-    <div class="row">
-        <div class="col-xs-6 col-md-6">
-        <div class="left-section">
-            <a href="/">Back to Home/Search</a>
-        </div>
-        </div>
-    </div>
-    </div>
-
-</div>    
 </div>
 
 <!-- Optional JavaScript -->
@@ -88,9 +90,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous">
-</script>
+
+    </script>
 
 <script>
+
+    // to show the register form if the registertation error message is shown
+    // location.hash = takes parameters of URL after #
+    if (window.location.hash.substr(1) == "pageid") {
+        $('.show-login-form').removeClass('active');
+        $('.show-register-form').addClass('active');
+        $('.login-form').hide();
+        $('.register-form').show();
+    };
+
     // Login/Registration forms show and hide
     //when Register is clicked disable active class on login-form
     if (window.location.hash.substr(1) == "pageid") {
@@ -101,118 +114,122 @@
        });
      }
     $('.show-register-form').on('click', function () {
-    if (!$(this).hasClass('active')) {
-        $('.show-login-form').removeClass('active');
-        $(this).addClass('active');
-        $('.login-form').fadeOut('fast', function () {
-        $('.register-form').fadeIn('fast');
-        });
-    }
+        if (!$(this).hasClass('active')) {
+            $('.show-login-form').removeClass('active');
+            $(this).addClass('active');
+            $('.login-form').fadeOut('fast', function () {
+                $('.register-form').fadeIn('fast');
+            });
+        }
     });
     //when Login is clicked disable active class on register-form
     $('.show-login-form').on('click', function () {
-    if (!$(this).hasClass('active')) {
-        $('.show-register-form').removeClass('active');
-        $(this).addClass('active');
-        $('.register-form').fadeOut('fast', function () {
-        $('.login-form').fadeIn('fast');
-        });
-    }
+        if (!$(this).hasClass('active')) {
+            $('.show-register-form').removeClass('active');
+            $(this).addClass('active');
+            $('.register-form').fadeOut('fast', function () {
+                $('.login-form').fadeIn('fast');
+            });
+        }
     });
 
+
     // tooltip message for password condition
-    $(document).tooltip({ selector: "[title]",
-                            placement: "bottom",
-                            trigger: "focus",
-                            animation: false}); 
+    $(document).tooltip({
+        selector: "[title]",
+        placement: "bottom",
+        trigger: "focus",
+        animation: false
+    });
 
     // Login Form valiadtion
 
     function Login() {
-    var email = document.loginform.UserEmail.value,
-        password = document.loginform.UserPassword.value,
-        emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
+        var email = document.loginform.UserEmail.value,
+            password = document.loginform.UserPassword.value,
+            emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
 
-    if (email == "") {
-        // .focus will highlight the input form
-        document.loginform.UserEmail.focus();
-        document.getElementById("errorBox5").innerHTML = "Please enter the email";
-        return false;
-    } else if (!emailRegex.test(email)) {
-        document.loginform.UserEmail.focus();
-        document.getElementById("errorBox5").innerHTML = "Please enter the valid email";
-        return false;
-    } else {
-        document.getElementById("errorBox5").innerHTML = "";
+        if (email == "") {
+            // .focus will highlight the input form
+            document.loginform.UserEmail.focus();
+            document.getElementById("errorBox5").innerHTML = "Please enter the email";
+            return false;
+        } else if (!emailRegex.test(email)) {
+            document.loginform.UserEmail.focus();
+            document.getElementById("errorBox5").innerHTML = "Please enter the valid email";
+            return false;
+        } else {
+            document.getElementById("errorBox5").innerHTML = "";
 
-    } if (password == "") {
-        document.loginform.UserPassword.focus();
-        document.getElementById("errorBox6").innerHTML = "Please enter the password";
-        return false;
-    } else {
-        document.getElementById("errorBox6").innerHTML = "";
+        } if (password == "") {
+            document.loginform.UserPassword.focus();
+            document.getElementById("errorBox6").innerHTML = "Please enter the password";
+            return false;
+        } else {
+            document.getElementById("errorBox6").innerHTML = "";
 
-    }
-    document.forms['loginform'].submit();
-    return true;
+        }
+        document.forms['loginform'].submit();
+        return true;
     }
 
     // Registration Form valiadtion
 
     function Register() {
-    console.log("register");
-    var fname = document.registerform.Firstname.value,
-        emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/,
-        email = document.registerform.Email.value,
-        password = document.registerform.Password.value,
-        confirmPassword = document.registerform.ConfirmPassword.value,
-        passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        console.log("register");
+        var fname = document.registerform.Firstname.value,
+            emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/,
+            email = document.registerform.Email.value,
+            password = document.registerform.Password.value,
+            confirmPassword = document.registerform.ConfirmPassword.value,
+            passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
 
-    if (fname == "") {
-        // .focus will highlight the input form
-        document.registerform.Firstname.focus();
-        document.getElementById("errorBox1").innerHTML = "Please enter the Firstname";
-        return false;
-    } else {
-        document.getElementById("errorBox1").innerHTML = "";
+        if (fname == "") {
+            // .focus will highlight the input form
+            document.registerform.Firstname.focus();
+            document.getElementById("errorBox1").innerHTML = "Please enter the Firstname";
+            return false;
+        } else {
+            document.getElementById("errorBox1").innerHTML = "";
+        }
+        if (email == "") {
+            document.registerform.Email.focus();
+            document.getElementById("errorBox2").innerHTML = "Please enter the email";
+            return false;
+        } else if (!emailRegex.test(email)) {
+            document.registerform.Email.focus();
+            document.getElementById("errorBox2").innerHTML = "Please enter the valid email";
+            return false;
+        } else {
+            document.getElementById("errorBox2").innerHTML = "";
+        } if (password == "") {
+            document.registerform.Password.focus();
+            document.getElementById("errorBox3").innerHTML = "Please enter the password";
+            return false;
+        } else {
+            document.getElementById("errorBox3").innerHTML = "";
+        } if (confirmPassword == "") {
+            document.registerform.ConfirmPassword.focus();
+            document.getElementById("errorBox4").innerHTML = "Please re-enter the password to confirm";
+            return false;
+        } if (password != confirmPassword) {
+            document.registerform.ConfirmPassword.focus();
+            document.getElementById("errorBox4").innerHTML = "Passwords do not match, please re-enter";
+            return false;
+        } else if (!passwordValidation.test(password)) {
+            document.registerform.Password.focus();
+            document.getElementById("errorBox3").innerHTML = "Password must be more than 6 characters and contain at least 1 number and a Capital letter";
+            return false;
+        } else {
+            document.getElementById("errorBox4").innerHTML = "";
+        } if (fname != "" && email != "" && password != "" && confirmPassword != "") {
+            // document.getElementById("successmsg").innerHTML = "Your User Registration is complete!"; 
+            document.forms['registerform'].submit();
+            //console.log(['registerform']);
+            return true;
+        }
+        $.ajax.post
     }
-    if (email == "") {
-        document.registerform.Email.focus();
-        document.getElementById("errorBox2").innerHTML = "Please enter the email";
-        return false;
-    } else if (!emailRegex.test(email)) {
-        document.registerform.Email.focus();
-        document.getElementById("errorBox2").innerHTML = "Please enter the valid email";
-        return false;
-    } else {
-        document.getElementById("errorBox2").innerHTML = "";
-    } if (password == "") {
-        document.registerform.Password.focus();
-        document.getElementById("errorBox3").innerHTML = "Please enter the password";
-        return false;
-    } else {
-        document.getElementById("errorBox3").innerHTML = "";
-    } if (confirmPassword == "") {
-        document.registerform.ConfirmPassword.focus();
-        document.getElementById("errorBox4").innerHTML = "Please re-enter the password to confirm";
-        return false;
-    } if (password != confirmPassword) {
-        document.registerform.ConfirmPassword.focus();
-        document.getElementById("errorBox4").innerHTML = "Passwords do not match, please re-enter";
-        return false;
-    } else if (!passwordValidation.test(password)) {
-        document.registerform.Password.focus();
-        document.getElementById("errorBox3").innerHTML = "Password must be more than 6 characters and contain at least 1 number and a Capital letter";
-        return false;
-    } else {
-        document.getElementById("errorBox4").innerHTML = "";
-    } if (fname != "" && email != "" && password != "" && confirmPassword != "") {
-        document.getElementById("successmsg").innerHTML = "Your User Registration is complete!";
-        document.forms['registerform'].submit();
-        //console.log(['registerform']);
-        return true;
-    }
-    $.ajax.post
-    }
+
 </script>
