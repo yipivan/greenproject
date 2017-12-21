@@ -46,6 +46,10 @@ h1+p {
     margin-bottom: 20px;
 }
 
+#showloc {
+    margin-bottom: 1em;
+}
+
 
 #map-container {
     width: 100%;
@@ -61,12 +65,26 @@ h1+p {
 }
 
 #map-container .navbar {
-    padding:0;
+    padding: 0 1em;
     margin-bottom: 0;
 }
 
-#map-container .dropdown, #map-container .dropdown-menu {
-    min-width: 24vw;
+#navbar ul {
+    min-width: 50%;
+}
+
+#navbar ul li {
+    width: 100%;
+}
+
+#navbar ul li ul {
+    width: 100%;
+}
+
+
+#map-menu nav .container-fluid {
+    width: 100%;
+    padding: 0;
 }
 
 .dropdown-menu {
@@ -75,7 +93,7 @@ h1+p {
 
 /* Map and search query section */
 #map {
-    height: 400px;
+    height: 50vh;
     width: 100%;
     margin-bottom: 20px;
 }
