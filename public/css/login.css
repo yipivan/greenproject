@@ -155,10 +155,15 @@ p {
 /* Validation Messages  */
 
 /* apply to any id with "errorBox" */
-div[id*="errorBox"] {
+div[id*="errorBox"],
+.flash_msg {
   color:#F00;
   font-weight: 700;
   margin-bottom: 10px;
+}
+
+.flash_msg {
+  padding-left: 0;
 }
 
 #successmsg {
