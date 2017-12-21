@@ -1,11 +1,11 @@
 <div id="outer-container">
     <div id="wrap" class="container">
 
-<div class="text-center">
-    <h1><i class="fa fa-search" aria-hidden="true"></i> Recyclable Points Locator</h1>
-    <p>Search for Recyclable collection points<br>near where you are or for your preferred location<br> for where and what you
-        can recycle to make Hong Kong a greener place!</p>
-</div>
+        <div class="text-center">
+            <h1><i class="fa fa-search" aria-hidden="true"></i> Recyclable Points Locator</h1>
+            <p>Search for Recyclable collection points<br>near where you are or for your preferred location<br> for where and
+                what you can recycle to make Hong Kong a greener place!</p>
+        </div>
 
         <div class="tab-content text-center">
             <div id="current" class="tab-pane fade in active">
@@ -19,12 +19,22 @@
                             <h4>Search for Recycling points near...</h4>
                         </div>
 
-                        <input type="text" class="form-control" id="location" placeholder="District, Street Name or Building" aria-label="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </span>
+                        {{!-- <div class="input-group"> --}}
+                            {{!-- <input type="text" class="form-control" id="location" placeholder="District, Street Name or Building" aria-label="Search for..."> --}}
+                            {{!-- <span class="input-group-btn"> --}}
+                            {{!-- <button class="btn btn-secondary" type="button"> --}}
+                                {{!-- <i class="fa fa-search" aria-hidden="true"></i> --}}
+                            {{!-- </button> --}}
+                        {{!-- </span> --}}
+                        {{!-- </div> --}}
+
+                        <div class="input-group searchform">
+                            <input type="text" class="form-control" id="location" placeholder="District, Street Name or Building" aria-label="Search for...">
+                            <span class="input-group-btn">
+		                <button type="button" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+	                    </span>
+                        </div>
+
                     </div>
                     <div id="list"></div>
                 </div>

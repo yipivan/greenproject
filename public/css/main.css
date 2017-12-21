@@ -23,9 +23,9 @@
     color: green;
 }
 
-.navbar-brand {
+/* .navbar-brand {
     pointer-events:none;
-}
+} */
 
 #wrap {
     border: 1px solid lightgray;
@@ -48,6 +48,7 @@ h1+p {
 
 #showloc {
     margin-bottom: 1em;
+    width: 50vw;
 }
 
 
@@ -67,6 +68,29 @@ h1+p {
 #map-container .navbar {
     padding: 0 1em;
     margin-bottom: 0;
+}
+
+#routebtn {
+    margin: 5px 0;
+    padding: 5px 10px;
+}
+
+
+#mapbox {
+    background: lightgreen;
+    padding: 10px 10px 0 10px;
+}
+
+#travel-mode > li:first-child  {
+    /* background-color: green; */
+}
+
+#travel-mode > li:nth-child(2)  {
+    background-color: blue;
+}
+
+#travel-mode > li:nth-child(3)  {
+    background-color: yellow;
 }
 
 /* for Google Map Autocomplete to show upwards*/
@@ -93,6 +117,13 @@ h1+p {
 #navbar ul li ul .active a {
     background: #008000;
     color: white;
+    font-weight: 700;  
+}
+
+#navbar ul li ul a {
+    font-weight: 700;
+    background: white;
+    cursor: pointer;
 }
 
 #map-menu nav .container-fluid {
@@ -102,6 +133,10 @@ h1+p {
 
 .dropdown-menu {
     padding: 0;
+}
+
+.dropdown-menu > li > a {
+    font-weight: 500;
 }
 
 /* Map and search query section */
@@ -137,10 +172,23 @@ h1 {
     padding-bottom: 20px;
 }
 
-.input-group-btn {
-   height: 34px;
-   vertical-align: bottom;
-   padding-top: 0;
+.btn-default {
+  background-color: green;
+  color: white;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+    background:#8BC63E;
+}
+
+.btn-default:active {
+    background:lightgreen;
+    }
+
+.searchform {
+    /* %of the screen width */
+    width: 50vw;
 }
 
 /* Waste Type filter section */
@@ -188,7 +236,7 @@ h1 {
     border: none;
     color: white;
     font-weight: 700;
-    font-size: 3vmin;
+    font-size: 2vmin;
     white-space: normal;
 }
 

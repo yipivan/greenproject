@@ -324,10 +324,10 @@ function clearSelectedOptions() {
 function createInfoWindow(marker, address) {
 
     let contentString = `
-                        Address :${address["address1-en"]} <br>
+                        <div id="mapbox"> Address :${address["address1-en"]} <br>
                         Recycling Type: ${address["waste-type"]} <br>
-                        <input type="button" value="Show route" onclick="getDirection(); closeInfoWindows()" data-toggle="modal" data-target="#modal-form"></input>
-                        `;
+                        <input type="button" class="btn-green" id="routebtn" value="Show route" onclick="getDirection(); closeInfoWindows()" data-toggle="modal" data-target="#modal-form"></input>
+                        </div>`;
     // data-toggle="modal" data-target="#myModal"
     let infowindow = new google.maps.InfoWindow({
         content: contentString
