@@ -14,6 +14,10 @@
     font-weight: 800;
   }
 
+a {
+    /* float: right; */
+}
+
 .navbar-custom {
     color: white;
     font-weight: 800;
@@ -81,20 +85,11 @@ h1+p {
     padding: 10px 10px 0 10px;
 }
 
-#travel-mode > li:first-child  {
-    /* background-color: green; */
-}
-
-#travel-mode > li:nth-child(2)  {
-    background-color: blue;
-}
-
-#travel-mode > li:nth-child(3)  {
-    background-color: yellow;
+h4 {
+    color: green;
 }
 
 /* for Google Map Autocomplete to show upwards*/
-
 .pac-container
 {
 	position:fixed;
@@ -193,39 +188,54 @@ h1 {
 
 /* Waste Type filter section */
 
-#waste-type > li:first-child {
-    background-color: #FF0000;
+.checkbox * {
+    color: white;
+    font-weight: bold;
 }
 
-#waste-type > li:nth-child(2) {
+#waste-type > li:first-child,
+.checkbox:first-child {
+    background-color: #FF0000;
+    
+}
+
+#waste-type > li:nth-child(2),
+.checkbox:nth-child(2) {
     background-color: #FFA500;
 }
 
-#waste-type > li:nth-child(3) {
+#waste-type > li:nth-child(3),
+.checkbox:nth-child(3) {
     background-color: #800080;
 }
 
-#waste-type > li:nth-child(4) {
+#waste-type > li:nth-child(4),
+.checkbox:nth-child(4) {
     background-color: #ADD8E6;
 }
 
-#waste-type > li:nth-child(5) {
+#waste-type > li:nth-child(5),
+.checkbox:nth-child(5) {
     background-color: #008000;
 }
 
-#waste-type > li:nth-child(6) {
+#waste-type > li:nth-child(6),
+.checkbox:nth-child(6) {
     background-color: #FFFF00;
 }
 
-#waste-type > li:nth-child(7) {
+#waste-type > li:nth-child(7),
+.checkbox:nth-child(7) {
     background-color: #0000FF;
 }
 
-#waste-type > li:nth-child(8) {
+#waste-type > li:nth-child(8),
+.checkbox:nth-child(8) {
     background-color: #8B4513;
 }
 
-#waste-type > li:nth-child(9) {
+#waste-type > li:nth-child(9),
+.checkbox:nth-child(9) {
     background-color: #999999;
 }
 
@@ -416,7 +426,7 @@ img {
 
 #searcheddata {
     background:#8BC63E;
-    margin: 20px 10px;
+    margin: 20px 0;
     padding: 10px 20px;
 }
 
