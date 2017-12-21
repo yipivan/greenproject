@@ -24,7 +24,7 @@ section when routing/test is DONE --}}
             <strong><p>Search for Recyclable points?</p></strong>
 
             <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' ; style='cursor:pointer;'>
-            <i class="fa fa-search" aria-hidden="true"></i> Go to Recycling finder</button>
+            <i class="fa fa-search" aria-hidden="true"></i> Go to Recycling Points Locator</button>
 
             </a>
 
@@ -132,26 +132,37 @@ section when routing/test is DONE --}}
 
             <div id="panelresult">
 
-              {{#if usageLogs}} {{#each usageLogs}}
+              {{#if usageLogs}} 
 
               <h11><span id="usergreeting">{{user.firstName}}</span><br>
 
               has waste types below<br>
               recycled so far:</h11>
+              
+              {{#each usageLogs}}
 
                 <p class="panelitem">{{this.recycle_item_name}}</p>
               
+              {{/each}} 
 
-              {{/each}} {{else}}
+                <p>our Reycling Points Locator also shows what recyclabe waste types are accepted at each points<br><br>
+                You can also filter the search with waste type selection<br></p>
+
+              {{else}}
               <div id="searcheddata">
 
                 <h11><span id="usergreeting">{{user.firstName}}</span></h11><br>
                 <p>currently has no Recycling activity/Waste types recycled recorded<br><br><br>
                 Start recording your Recycling activity now!</p>
-              </div>
+
+                </div>
+              
               {{/if}}
 
+              <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' ; style='cursor:pointer;'>
+              <i class="fa fa-search" aria-hidden="true"></i> Search Now!</button>
 
+              
 
             </div>
 
