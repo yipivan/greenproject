@@ -19,6 +19,14 @@ $('#waste-type input').each(function () {
     })
 })
 
+$('#recycle-form input').each(function () {
+    $(this).on('change', function () {
+        let wasteType = $(this).val();
+        let x = this.checked;
+        $(`#waste-type input[value="${wasteType}"]`).prop('checked', x);
+    })
+})
+
 //prevent dropdown menu from closing itself by clicking
 $('.dropdown-menu').on('click', function (e) {
     if ($(this).hasClass('dropdown-menu-form')) {
@@ -49,13 +57,14 @@ $('#recycle-form').on('submit', function (e) {
         query: destinationAddress,
         latlng: [destination.lat(), destination.lng()]
     }
-    $.post('/users/search', data).then((data) => {
-        alert(data);
-    })
+    $.post('/users/search', data)
         .catch(err => {
-            alert(err);
+            console.log("Something went wrong! data is not saved!");
+        }).done(()=> {
+            clearSelectedOptions();
         })
     $('#modal-form').modal('hide');
+    
 });
 
 function initMap() {
