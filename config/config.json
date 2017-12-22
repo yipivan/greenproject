@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "ellqmtpo",
-    "password": "v7RYEcj5f1GIvXKMpxDUxoVzPldXYmB4",
-    "database": "ellqmtpo",
-    "host": "baasu.db.elephantsql.com",
+    "username": "ivan",
+    "password": "password",
+    "database": "greenProject",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
