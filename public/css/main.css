@@ -387,8 +387,7 @@ img {
 
 /* CSS for profile/dashboard page - panel section */
 
-#panel
-{
+#panel {
      height: 100%;
      width: 300px;
      padding:20px;
@@ -399,16 +398,15 @@ img {
      font-size: 1vw;
 }
 
-#open
-{
+#open {
      height: 20px;
      width: 70px;
      background: green;
-    padding:20px 55px 40px 20px;
-     float: left; 
+     padding: 20px 65px 40px 20px;
+     float: left;
      margin: 200px 0 20px 0;
-    color:#fff;
-    cursor: pointer;
+     color:#fff;
+     cursor: pointer;
 }
 
 #panelresult {

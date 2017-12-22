@@ -123,57 +123,54 @@ section when routing/test is DONE --}}
 
 
         <div id="panel-wrapper">
-          
+
           <div id='panel' class="container text-center">
 
-            {{!-- <h11>You are GREENlife HK<br>user since:</h11> --}}
-
-            {{!-- <p id="usersince">userLog created data?</p> --}}
+            {{!--
+            <h11>You are GREENlife HK<br>user since:</h11> --}} {{!--
+            <p id="usersince">userLog created data?</p> --}}
 
             <div id="panelresult">
 
-              {{#if usageLogs}} 
+              {{#if usageLogs}}
 
-              <h11><span id="usergreeting">{{user.firstName}}</span><br>
+              <h11><span id="usergreeting">{{user.firstName}}</span><br> has recycled following waste types below so far:</h11>
 
-              has recycled following waste types below so far:</h11>
-              
               {{#each usageLogs}}
 
-                <p class="panelitem">{{this.recycle_item_name}}</p>
-              
-              {{/each}} 
+              <p class="panelitem">{{this.recycle_item_name}}</p>
 
-                <h11>our Reycling Points Locator also shows what recyclabe waste types are accepted at each points<br><br>
-                You can also filter the search with waste type selection<br><br></h11>
+              {{/each}}
+
+              <h11>our Reycling Points Locator also shows what recyclabe waste types are accepted at each points<br><br> You can
+                also filter the search with waste type selection<br><br></h11>
 
               {{else}}
               <div id="searcheddata">
 
-                <h11><span id="usergreeting">{{user.firstName}}</span><br>
-                currently has no Recycling activity/Waste types recycled recorded<br><br><br>
-                Start recording your Recycling activity now!<br><br></h11>
+                <h11><span id="usergreeting">{{user.firstName}}</span><br> currently has no Recycling activity/Waste types recycled
+                  recorded<br><br><br> Start recording your Recycling activity now!<br><br></h11>
 
               </div>
-              
+
               {{/if}}
 
               <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' ; style='cursor:pointer;'>
               <i class="fa fa-search" aria-hidden="true"></i> Search Now!</button>
-            
-              
+
+
 
             </div>
 
           </div>
 
           <div id='open'>
-            <p>Open</p>
+            <p>OPEN</p>
           </div>
 
         </div>
 
-        <div id="shareBtn" class="btn btn-success clearfix center-block" >FB Share</div>
+        <div id="shareBtn" class="btn btn-success clearfix center-block">FB Share</div>
 
         <button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href = "/"' style='cursor:pointer;'>
         <span class='glyphicon glyphicon-home'></span> Back to Home/Search Page</button>
@@ -189,57 +186,63 @@ section when routing/test is DONE --}}
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
 
-  
-  <script>
-  //Facebook Share Button
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '1748847835417344',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v2.11'
-    });
-  };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
   <script>
-  document.getElementById('shareBtn').onclick = function() {
-    console.log("clicked")
-    FB.ui({
-      method: 'share',
-      display: 'popup',
-      href: 'https://www.greenlifehk.com/',
-      quote:`I have recycled ${result} of items with this app, lets join and help saving mother earth together`  }, function(response){});
+    //Facebook Share Button
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1748847835417344',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v2.11'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+  <script>
+    document.getElementById('shareBtn').onclick = function () {
+      console.log("clicked")
+      FB.ui({
+        method: 'share',
+        display: 'popup',
+        href: 'https://www.greenlifehk.com/',
+        quote: `I have recycled ${result} of items with this app, lets join and help saving mother earth together`
+      }, function (response) { });
       console.log(result);
-  }
-
+    }
   </script>
 
   <script>
-    
     let result = 0
     let usage = document.getElementsByClassName("quantity")
-    for (let i of usage){result+=parseInt(i.innerHTML)}
+    for (let i of usage) { result += parseInt(i.innerHTML) }
     console.log(result);
-    
-   
-
   </script>
 
   <script>
     // for left side panel
+    var flg = "default";
     $('#open').click(function () {
       $("#panel").animate({
         width: 'toggle'
       }, 300);
 
+      // for OPEN and CLOSE on the Open tab
+      if (flg == "default") {
+        $('#open').text("CLOSE");
+        flg = "changed";
+      } else {
+        $('#open').text("OPEN");
+        flg = "default";
+      }
     });
 
     // for applying colours to different wasteType in Recycling activity record section
