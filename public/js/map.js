@@ -333,8 +333,8 @@ function clearSelectedOptions() {
 function createInfoWindow(marker, address) {
 
     let contentString = `
-                        <div id="mapbox"> Address :${address["address1-en"]} <br>
-                        Recycling Type: ${address["waste-type"]} <br>
+                        <div id="mapbox"> <p>Address: ${address["address1-en"]} <br>
+                        Recycling Type: ${address["waste-type"]} <br></p>
                         <input type="button" class="btn-green" id="routebtn" value="Show route" onclick="getDirection(); closeInfoWindows()" data-toggle="modal" data-target="#modal-form"></input>
                         </div>`;
     // data-toggle="modal" data-target="#myModal"

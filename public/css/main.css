@@ -18,8 +18,13 @@
     float: right;
 }
 
-a {
-    /* float: right; */
+#navmenu.navbar-toggle {
+    border-color: #8BC63E;
+    border-width: 3px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
 }
 
 .navbar-custom {
@@ -62,6 +67,7 @@ h1+p {
 
 #searchloc.input-group {
     margin: 0 auto;
+    width: 50vw;
 }
 
 
@@ -83,15 +89,27 @@ h1+p {
     margin-bottom: 0;
 }
 
+#mapnavbar.navbar-toggle.collapsed {
+    /* border-color: green; */
+    border-width: 3px;
+}
+
+span.icon-bar {
+    background-color: lightgreen;
+}
+
 #routebtn {
     margin: 5px 0;
     padding: 5px 10px;
 }
 
-
 #mapbox {
     background: lightgreen;
     padding: 10px 10px 0 10px;
+}
+
+#mapbox:first-child {
+    font-weight: bold;
 }
 
 h4 {
@@ -172,7 +190,7 @@ h1 {
 
 #search {
     width: 70vw;
-    /* width: 70%; */
+    width: 90%;
     margin: 0 auto;
     padding-bottom: 20px;
 }
@@ -198,7 +216,7 @@ h1 {
 
 .searchform {
     /* %of the screen width */
-    width: 50vw;
+    width: 100%;
 }
 
 /* Waste Type filter section */
@@ -261,7 +279,7 @@ h1 {
     border: none;
     color: white;
     font-weight: 700;
-    font-size: 2vmin;
+    font-size: 3vmin;
     white-space: normal;
 }
 
@@ -294,7 +312,7 @@ h3 {
 
 #listBox {
     margin: 20px 0;
-    background-color: lightgreen; 
+    background-color: lightgreen;
     padding: 10px 20px;
     text-decoration: none;
     color: black;
@@ -478,6 +496,11 @@ table, th, td, .table>tbody+tbody {
     border-style:none!important;
 }
 
+#shareBtn {
+    margin-bottom: 20px;
+    font-size: 3vmin;
+    font-weight: 700;
+}
 
 @media only screen and (max-width: 767px) {
 
@@ -494,4 +517,17 @@ table, th, td, .table>tbody+tbody {
         padding: 10px 0;
     }
 
+    #listBox {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    #search {
+        width: 90%;
+    }
+
+    #showloc,
+    #searchloc {
+        width: 80vw;
+    }
 }
