@@ -61,13 +61,13 @@ h1+p {
 
 #showloc {
     margin-bottom: 1em;
-    width: 50vw;
+    width: 80%;
     margin: 0 auto;
 }
 
 #searchloc.input-group {
     margin: 0 auto;
-    width: 50vw;
+    width: 80%;
 }
 
 
