@@ -251,8 +251,8 @@ function createMarkerAndInfoWindows(response, selectedOptions) {
 
     // for search result list rendering
     var listHeading = "<br><h5>" + "Recycling Points near your current location:" + "</h5>";
-    const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'><span class='glyphicon glyphicon-map-marker'></span> Back to Map</button>";
-    let noSearchResult = "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+    const backToMap = "<button id='tomap' class='btn btn-green btn-default btn-block' onclick='location.href=\"#map-container\"' style='cursor:pointer;'><span class='glyphicon glyphicon-map-marker'></span> Back to Map</button>";
+    let noSearchResult = "<div id='listBox' onclick='location.href=\"#map-container\"' style='cursor:pointer;'>" +
         "<strong>There is currently no Recyclable Points available<br>that accept the waste types you have selected</strong><br>" +
         "<br><br>" +
         "<strong>Search again with different waste-type selection</strong><br>" + "</div>";
@@ -394,7 +394,7 @@ function renderResult(address) {
     });
     // console.log(wasteColoredType);
 
-    listResult += "<div id='listBox' onclick='location.href=\"#pagelink\"' style='cursor:pointer;'>" +
+    listResult += "<div id='listBox' onclick='location.href=\"#map-container\"' style='cursor:pointer;'>" +
         "<strong>" + addressEn + "</strong><br>" +
         "<p>" + addressCh + "<br><br>" +
         "<strong>" + "recyclable waste-type accepted:" + "</strong><br><br>" +
