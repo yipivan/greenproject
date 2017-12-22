@@ -33,8 +33,19 @@ router.post("/search", isLoggedIn, (req, res) => {
   query: '155 Hollywood Road (opposite to Man Mo Miu)',
   'latlng[]': [ '22.284153', '114.15022999999997' ] }
   */
+  /*
+  $('#waste-type input[type="checkbox"]:checked').map(function () {
+        return $(this).val();
+    }).get();
+    */
+
+    /*
+    { 'wasteTypes[]': 'Glass Bottles',
+  query: 'Central District Kai Fong Welfare Association Ltd. - 1 Gough Street, Central, Hong Kong',
+  'latlng[]': [ '22.284153', '114.15301799999997' ] }
+  */
   data = {
-    wasteTypes: req.body['wasteTypes[]'],
+    wasteTypes: typeof(req.body['wasteTypes[]']) == "String" ? Array(req.body['wasteTypes[]']) : req.body['wasteTypes[]'],
     query: req.body.query,
     latlng: [parseFloat(req.body['latlng[]'][0]), parseFloat(req.body['latlng[]'][1])]
   }
@@ -59,6 +70,7 @@ router.post("/search", isLoggedIn, (req, res) => {
       // }
     }))
   //create or update recycle_times data whenever confirm recycle
+  
   wasteTypes = data.wasteTypes;
   if (wasteTypes) {
     for (wasteType of wasteTypes) {
